@@ -1,0 +1,484 @@
+return {
+    Quests = {
+        ["Wandering Swordsman"] = {
+            Title = "Why are you even here?",
+            Requirements = {
+                ["Fury Ruler"] = 2,
+            },
+            Rewards = {
+                ["Sharpened Blade"] = 1,
+            },
+        },
+        ["Unknown King"] = {
+            Title = "The Test of Strength.",
+            Requirements = {
+                ["Flaron"] = 1,
+            },
+            Rewards = {
+                ["Royal Sword"] = 1,
+                ["Gold"] = 20000,
+                ["Exp"] = 8000,
+            },
+        },
+        ["Shady Gentleman"] = {
+            Title = "Shady Business",
+            Requirements = {
+                ["Abaddon"] = 1,
+            },
+            Rewards = {
+                ["Royal Sword"] = 1,
+                ["Gold"] = 1500,
+                ["Exp"] = 5000,
+            },
+        },
+        ["Hallow Ruler"] = {
+            Title = "Jittery Jittery, your Soul is Terrified.",
+            Requirements = {
+                ["Jittery Jacko"] = 75,
+            },
+            Rewards = {
+                ["Jittered Core"] = 1,
+            },
+        },
+        ["Mexious"] = {
+            Title = "??????",
+            Requirements = {
+                ["Victory Embelliment"] = 12,
+            },
+            Rewards = {
+                ["no"] = 1,
+            },
+        },
+        ["Sprit The Joyful"] = {
+            Title = "Joy to the World, Ascensia has reigned!",
+            Requirements = {
+                ["Presented Brute"] = 40,
+                ["Abaddon"] = 2,
+                ["Fury Destructive Overlord"] = 2,
+                ["Fury Ruler"] = 2,
+            },
+            Rewards = {
+                ["Joyful Presence"] = 1,
+            },
+        },
+        ["The Shadowed One"] = {
+            Title = "??????",
+            Requirements = {
+                ["King Solomon"] = 1,
+            },
+            Rewards = {
+                ["Shadow Key"] = 1,
+            },
+        },
+        ["Fritz the Night Guard"] = {
+            Title = "Statues Roaming Round",
+            Requirements = {
+                ["Roaming Statue"] = 50,
+            },
+            Rewards = {
+                ["Ancient Artifact"] = 1,
+            },
+        },
+        ["Pearl the Storyteller"] = {
+            Title = "??????",
+            Requirements = {
+                ["Victory Embelliment"] = 12,
+            },
+            Rewards = {
+                ["no"] = 1,
+            },
+        },
+        ["Evoi The Warmed"] = {
+            Title = "A warming embrace to unfrost the snow.",
+            Requirements = {
+                ["Giftwrapped Brawler"] = 80,
+                ["Uriah the Snowflake Conductor"] = 1,
+                ["Incyclite Elite"] = 80,
+            },
+            Rewards = {
+                ["Warming Presence"] = 1,
+            },
+        },
+        ["bigwhip89"] = {
+            Title = "Collect My Whips Hero.",
+            Requirements = {
+                ["Victory Embelliment"] = 12,
+            },
+            Rewards = {
+                ["no"] = 1,
+            },
+        },
+        ["Van Helsing The Dracula Hunter"] = {
+            Title = "Dracula Is Raiding The Church",
+            Requirements = {
+                ["Dracula"] = 2,
+            },
+            Rewards = {
+                ["Dracula Fangs"] = 1,
+            },
+        },
+        ["Luigi the Inspector"] = {
+            Title = "Oooooo.... Rare Ghosts? Hunt Poltergeists!",
+            Requirements = {
+                ["Poltergeist"] = 7,
+            },
+            Rewards = {
+                ["Bottled Specter"] = 1,
+            },
+        },
+        ["Bloodthirsty Sprit"] = {
+            Title = "Mmmm Blood...",
+            Requirements = {
+                ["Vampire"] = 100,
+            },
+            Rewards = {
+                ["Vampire Blood"] = 1,
+            },
+        },
+        ["Shedletsky, Manor Owner"] = {
+            Title = "Assasination Foiled!",
+            Requirements = {
+                ["Shadow Hunter"] = 75,
+            },
+            Rewards = {
+                ["Mayor Badge"] = 1,
+            },
+        },
+        ["Boom, Treasure Gatherer"] = {
+            Title = "The power of Treasure!",
+            Requirements = {
+                ["UnlockTerrorChests"] = ?,
+            },
+            Rewards = {
+                ["Shadowy Treasure"] = 1,
+            },
+        },
+        ["Cergtified Treasure Hunter"] = {
+            Title = "Wrap it up. DA Movie: Mummies!!",
+            Requirements = {
+                ["Mummy"] = 50,
+            },
+            Rewards = {
+                ["Cursed Crystal"] = 1,
+            },
+        },
+        ["Angel"] = {
+            Title = "Gaining Experience to get stronger!",
+            Requirements = {
+                ["Exp"] = 100000,
+            },
+            Rewards = {
+                ["Good Prism"] = 1,
+                ["Gold"] = 20000,
+            },
+        },
+        ["Endonio The Priest"] = {
+            Title = "Thou Shalt be Saved!",
+            Requirements = {
+                ["Bloody Priest"] = 100,
+            },
+            Rewards = {
+                ["Broken Cross"] = 1,
+            },
+        },
+        ["Commander of the Freezing"] = {
+            Title = "A chilling sensation of Cold.... He needs Christmas Fuel!",
+            Requirements = {
+                ["Mimic"] = 40,
+                ["Fire Serpent"] = 2,
+                ["Firecrystal Guard"] = 75,
+            },
+            Rewards = {
+                ["Chilling Presence"] = 1,
+            },
+        },
+        ["The Jolly Man"] = {
+            Title = "The search for the best cooking materials!",
+            Requirements = {
+                ["Cosmic Brownie Pest"] = 5,
+                ["Ginger-boomz"] = 10,
+            },
+            Rewards = {
+                ["Piping Bag"] = 1,
+            },
+        },
+        ["Mexious Dungeon Master"] = {
+            Title = "??????",
+            Requirements = {
+                ["Victory Embelliment"] = 12,
+            },
+            Rewards = {
+                ["no"] = 1,
+            },
+        },
+        ["Mr Chuckles"] = {
+            Title = "??????",
+            Requirements = {
+                ["Victory Embelliment"] = 12,
+            },
+            Rewards = {
+                ["no"] = 1,
+            },
+        },
+        ["Happly Witch"] = {
+            Title = "Collect the 8 Glorbs",
+            Requirements = {
+                ["Bloody Priest"] = 120,
+            },
+            Rewards = {
+                ["no"] = 1,
+            },
+        },
+        ["Christmas Baker"] = {
+            Title = "A failed Baker Experiment",
+            Requirements = {
+                ["Candy Cane Archer"] = 25,
+                ["Candy Cane Knight"] = 25,
+                ["Snow Golem"] = 1,
+            },
+            Rewards = {
+                ["Melted Sugar"] = 1,
+            },
+        },
+        ["Viktuhen"] = {
+            Title = "I'm such a respectable NPC.",
+            Requirements = {
+                ["Victory Embelliment"] = 12,
+            },
+            Rewards = {
+                ["no"] = 1,
+            },
+        },
+        ["Demon"] = {
+            Title = "Payday",
+            Requirements = {
+                ["Abaddon"] = 1,
+                ["Gold"] = 80000,
+            },
+            Rewards = {
+                ["Darkness"] = 1,
+                ["Exp"] = 10000,
+            },
+        },
+        ["Loyal Starman"] = {
+            Title = "Searching for the Royal King",
+            Requirements = {
+                ["Space King"] = 2,
+            },
+            Rewards = {
+                ["Fractured Fragment"] = 1,
+            },
+        },
+        ["Kianami Star Topper"] = {
+            Title = "Light up the night sky!",
+            Requirements = {
+                ["CollectStarSnippets"] = ?,
+            },
+            Rewards = {
+                ["Star Topper"] = 1,
+            },
+        },
+        ["Tricko Berg"] = {
+            Title = "Ghost Party!",
+            Requirements = {
+                ["Ghost"] = 125,
+            },
+            Rewards = {
+                ["Ghastly Gem"] = 1,
+            },
+        },
+        ["Pap the Skeleton"] = {
+            Title = "A Bone to pick with you!",
+            Requirements = {
+                ["Skeleton"] = 100,
+            },
+            Rewards = {
+                ["Skeletal Skull"] = 2,
+            },
+        },
+        ["Mrs. Boorg"] = {
+            Title = "Boorg Boorg...",
+            Requirements = {
+                ["Bloody Priest"] = 120,
+            },
+            Rewards = {
+                ["no"] = 1,
+            },
+        },
+        ["Angelene The Nun"] = {
+            Title = "Great Hero, Free the Nuns!",
+            Requirements = {
+                ["Possessed Nun"] = 120,
+            },
+            Rewards = {
+                ["Evil Spirit"] = 3,
+            },
+        },
+        ["Frost the Pumpkinteer"] = {
+            Title = "Fuel the Energy..",
+            Requirements = {
+                ["Firecrystal Guard"] = 30,
+                ["Lava Mob"] = 30,
+                ["Oiled Hissler"] = 20,
+            },
+            Rewards = {
+                ["Pumpko Core"] = 1,
+            },
+        },
+        ["Pink Thief"] = {
+            Title = "Getting my stuff back",
+            Requirements = {
+                ["Zombie"] = 7518,
+                ["Possessed Nun"] = 6122,
+                ["Vampire"] = 6816,
+                ["Elite Vampire"] = 285,
+                ["Poltergeist"] = 752,
+                ["Roaming Statue"] = 3415,
+                ["Jittery Jacko"] = 1000,
+                ["Phantom Raider"] = 1000,
+                ["Nightmaric Jacko"] = 800,
+                ["Umbral Monstrosity"] = 900,
+                ["Solar Giant"] = 250,
+                ["Dracula"] = 150,
+            },
+            Rewards = {
+                ["Ultra Candy"] = 1,
+            },
+        },
+        ["TV Host"] = {
+            Title = "GET THOSE SKINS!!",
+            Requirements = {
+                ["Umbral Monstrosity"] = 120,
+            },
+            Rewards = {
+                ["Umbral Skin"] = 1,
+            },
+        },
+        ["Catalystic Complainer"] = {
+            Title = "Catalyst Hunt",
+            Requirements = {
+                ["Nightmaric Jacko"] = 120,
+            },
+            Rewards = {
+                ["Nightmaric Catalyst"] = 1,
+            },
+        },
+        ["Baguette, Shadow Hunter"] = {
+            Title = "A Shadow Hunter is here to save the day.",
+            Requirements = {
+                ["Phantom Raider"] = 100,
+            },
+            Rewards = {
+                ["Phantomic Force"] = 1,
+            },
+        },
+        ["The Pizza Hitman"] = {
+            Title = "??????",
+            Requirements = {
+                ["Victory Embelliment"] = 12,
+            },
+            Rewards = {
+                ["no"] = 1,
+            },
+        },
+        ["Cleansed Being"] = {
+            Title = "Cleansing your Soul",
+            Requirements = {
+                ["Fury Destructive Overlord"] = 2,
+                ["Fury Ruler"] = 1,
+            },
+            Rewards = {
+                ["Purity"] = 1,
+                ["Gold"] = 10000,
+                ["Exp"] = 10000,
+            },
+        },
+        ["Faze, the Memorable"] = {
+            Title = "I'm such a respectable NPC.",
+            Requirements = {
+                ["Victory Embelliment"] = 12,
+            },
+            Rewards = {
+                ["no"] = 1,
+            },
+        },
+        ["Cinnamon The Alchemist"] = {
+            Title = "Braaaaaains!",
+            Requirements = {
+                ["Zombie"] = 100,
+            },
+            Rewards = {
+                ["Rotten Flesh"] = 2,
+            },
+        },
+        ["Void Overseer"] = {
+            Title = "The Dangers of the Abyss",
+            Requirements = {
+                ["Abyssfisher"] = 50,
+                ["Devil Palm"] = 30,
+                ["Ancient Straggler"] = 10,
+            },
+            Rewards = {
+                ["Void's Outrage"] = 1,
+                ["Gold"] = 40000,
+                ["Exp"] = 50000,
+            },
+        },
+        ["Shadow Wizard Master"] = {
+            Title = "Mage Assistance",
+            Requirements = {
+                ["Shadow Wizard"] = 75,
+            },
+            Rewards = {
+                ["Apprentice Wand"] = 1,
+            },
+        },
+        ["Candy Jack"] = {
+            Title = "Collect the 8 Glorbs",
+            Requirements = {
+                ["Bloody Priest"] = 120,
+            },
+            Rewards = {
+                ["no"] = 1,
+            },
+        },
+        ["The Lonely One"] = {
+            Title = "??????",
+            Requirements = {
+                ["Celia"] = 2,
+            },
+            Rewards = {
+                ["Voidshard"] = 1,
+            },
+        },
+        ["Embodiment of Evil"] = {
+            Title = "A Verdict of Vengeance ",
+            Requirements = {
+                ["Alpha Destructive Overlord"] = 3,
+            },
+            Rewards = {
+                ["Evil Prism"] = 1,
+                ["Gold"] = 15000,
+                ["Exp"] = 7000,
+            },
+        },
+        ["Drew (Candy Pest Quest)"] = {
+            Title = "This Gamer NEEDS to clean his house!",
+            Requirements = {
+                ["Candy Coated Pest"] = 100,
+            },
+            Rewards = {
+                ["Candy Blend"] = 1,
+            },
+        },
+        ["Suspicious Noob"] = {
+            Title = "??????",
+            Requirements = {
+                ["Victory Embelliment"] = 12,
+            },
+            Rewards = {
+                ["no"] = 1,
+            },
+        },
+    },
+}
