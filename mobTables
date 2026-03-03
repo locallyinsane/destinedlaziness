@@ -1,0 +1,2718 @@
+return {
+
+    BossDropTables = {
+        ["Fury Ruler"] = {
+            LvlReq = 20, Gold = 5000, Exp = 12500, SetType = "Multiple",
+            Drops = {
+                -- 1/2           "Energized Bits"
+                { chance = 2, item = "Energized Bits" },
+                -- 1/2           { "Fury Scythe" or "Rage Potion" }
+                { chance = 2, item = {"Fury Scythe", "Rage Potion"} },
+                -- 1/20          "Hidden Rage"  (Lvl 10+)  [Rare]
+                { chance = 20, item = "Hidden Rage", lvlReq = 10, rarity = "Rare" },
+            },
+        },
+        ["Wind Amalgamation"] = {
+            LvlReq = 25, Gold = 15000, Exp = 15000, SetType = "Multiple",
+            Drops = {
+                -- Guaranteed    "Piled Air"
+                { chance = 1, item = "Piled Air" },
+                -- 1/25          "Wind Horn"  [Rare]
+                { chance = 25, item = "Wind Horn", rarity = "Rare" },
+            },
+        },
+        ["Fire Serpent"] = {
+            LvlReq = 25, Gold = 20000, Exp = 20000, SetType = "Multiple",
+            Drops = {
+                -- Guaranteed    "Serpentine Scale"
+                { chance = 1, item = "Serpentine Scale" },
+                -- 1/50          "Serpent's Wrath"  [Legendary]
+                { chance = 50, item = "Serpent's Wrath", rarity = "Legendary" },
+            },
+        },
+        ["Voltage"] = {
+            LvlReq = 25, Gold = 15000, Exp = 15000, SetType = "Multiple",
+            Drops = {
+                -- Guaranteed    "Voltage Charge"
+                { chance = 1, item = "Voltage Charge" },
+                -- 1/5           "Thunderous Glaive"
+                { chance = 5, item = "Thunderous Glaive" },
+                -- 1/25          "Lightning Hammer"  [Rare]
+                { chance = 25, item = "Lightning Hammer", rarity = "Rare" },
+            },
+        },
+        ["Earth Golem"] = {
+            LvlReq = 25, Gold = 15000, Exp = 15000, SetType = "Multiple",
+            Drops = {
+                -- Guaranteed    "Earth Formation"
+                { chance = 1, item = "Earth Formation" },
+                -- 1/25          "Earth Scepter"  [Rare]
+                { chance = 25, item = "Earth Scepter", rarity = "Rare" },
+            },
+        },
+        ["Neptune"] = {
+            LvlReq = 25, Gold = 15000, Exp = 15000, SetType = "Multiple",
+            Drops = {
+                -- Guaranteed    "Neptune's Tear"
+                { chance = 1, item = "Neptune's Tear" },
+                -- 1/25          "Riptide"  [Rare]
+                { chance = 25, item = "Riptide", rarity = "Rare" },
+            },
+        },
+        ["Alpha Ruler"] = {
+            LvlReq = 50, Gold = 7000, Exp = 15000, SetType = "Multiple",
+            Drops = {
+                -- Guaranteed    "Alpha Crystal"
+                { chance = 1, item = "Alpha Crystal", lvlReq = 0 },
+                -- 1/4           "Alpha Bow"  (Lvl 50+)
+                { chance = 4, item = "Alpha Bow", lvlReq = 50 },
+                -- 1/4           "Heal Potion"  (Lvl 50+)
+                { chance = 4, item = "Heal Potion", lvlReq = 50 },
+                -- 1/10          "Alpha Crystal"  (Lvl 50+)
+                { chance = 10, item = "Alpha Crystal", lvlReq = 50 },
+                -- 1/25          "True Alpha Bow"  (Lvl 50+)  [Rare]
+                { chance = 25, item = "True Alpha Bow", lvlReq = 50, rarity = "Rare" },
+            },
+        },
+        ["Dhurke The Forsaken Golem"] = {
+            LvlReq = 80, Gold = 12000, Exp = 25000, SetType = "Multiple",
+            Drops = {
+                -- Guaranteed    "Mercurite Crystal"  x5
+                { chance = 1, item = "Mercurite Crystal", lvlReq = 0, quantity = 5 },
+                -- 1/2           "Purpulite Ball"  x4
+                { chance = 2, item = "Purpulite Ball", lvlReq = 0, quantity = 4 },
+                -- 1/2           "Copper Ore"  x3
+                { chance = 2, item = "Copper Ore", lvlReq = 0, quantity = 3 },
+                -- 1/2           "Iron Chunk"  x3
+                { chance = 2, item = "Iron Chunk", lvlReq = 0, quantity = 3 },
+                -- 1/2           "Fire Crystal"  x3
+                { chance = 2, item = "Fire Crystal", lvlReq = 0, quantity = 3 },
+                -- 1/5           "Mixed Ore"
+                { chance = 5, item = "Mixed Ore", lvlReq = 0, quantity = 1 },
+                -- 1/5           "Purpulite Ball"  x4
+                { chance = 5, item = "Purpulite Ball", lvlReq = 0, quantity = 4 },
+                -- 1/5           "Copper Ore"  x3
+                { chance = 5, item = "Copper Ore", lvlReq = 0, quantity = 3 },
+                -- 1/5           "Iron Chunk"  x3
+                { chance = 5, item = "Iron Chunk", lvlReq = 0, quantity = 3 },
+                -- 1/5           "Fire Crystal"  x3
+                { chance = 5, item = "Fire Crystal", lvlReq = 0, quantity = 3 },
+                -- 1/10          "Mixed Ore"
+                { chance = 10, item = "Mixed Ore", lvlReq = 0, quantity = 1 },
+                -- 1/33          "Dhurke Fists"  [Rare]
+                { chance = 33, item = "Dhurke Fists", lvlReq = 0, rarity = "Rare" },
+            },
+        },
+        ["Alpha Destructive Overlord"] = {
+            LvlReq = 120, Gold = 20000, Exp = 40000, SetType = "Multiple",
+            Drops = {
+                -- Guaranteed    "Mega Alpha Crystal"
+                { chance = 1, item = "Mega Alpha Crystal" },
+                -- 1/2           "Alpha Crystal"
+                { chance = 2, item = "Alpha Crystal" },
+                -- 1/2           "Alpha Crystal"
+                { chance = 2, item = "Alpha Crystal" },
+                -- 1/2           "Alpha Crystal"
+                { chance = 2, item = "Alpha Crystal" },
+                -- 1/3           "Alpha's Rage"
+                { chance = 3, item = "Alpha's Rage" },
+                -- 1/75          "Alphite Sniper"  (Lvl 50+)  [Legendary]
+                { chance = 75, item = "Alphite Sniper", lvlReq = 50, rarity = "Legendary" },
+            },
+        },
+        ["Fury Destructive Overlord"] = {
+            LvlReq = 200, Gold = 35000, Exp = 60000, SetType = "Multiple",
+            Drops = {
+                -- Guaranteed    "Energized Fury Bits"
+                { chance = 1, item = "Energized Fury Bits" },
+                -- 1/2           "Energized Bits"
+                { chance = 2, item = "Energized Bits" },
+                -- 1/3           "The Scourge of Fury"
+                { chance = 3, item = "The Scourge of Fury" },
+                -- 1/75          "Destructive Gearworks"  [Legendary]
+                { chance = 75, item = "Destructive Gearworks", lvlReq = 0, rarity = "Legendary" },
+                -- 1/100         "Galea Irae"  [Legendary]
+                { chance = 100, item = "Galea Irae", lvlReq = 0, rarity = "Legendary" },
+            },
+        },
+        ["Abaddon"] = {
+            LvlReq = 200, Gold = 60000, Exp = 75000, SetType = "Multiple",
+            Drops = {
+                -- Guaranteed    "Flamekeeper's Skull"
+                { chance = 1, item = "Flamekeeper's Skull" },
+                -- 1/5           "Hell Tommy Gun"
+                { chance = 5, item = "Hell Tommy Gun" },
+                -- 1/33          "Darkness"  (Lvl 500+)  [Rare]
+                { chance = 33, item = "Darkness", lvlReq = 500, rarity = "Rare" },
+                -- 1/50          "Cobra's Grudge"  (Lvl 50+)  [Rare]
+                { chance = 50, item = "Cobra's Grudge", lvlReq = 50, rarity = "Rare" },
+            },
+        },
+        ["Flaron"] = {
+            LvlReq = 300, Gold = 120000, Exp = 125000, SetType = "Multiple",
+            Drops = {
+                -- Guaranteed    "Mixed Energy Crystal"
+                { chance = 1, item = "Mixed Energy Crystal" },
+                -- 1/3           "Mixed Energy Crystal"
+                { chance = 3, item = "Mixed Energy Crystal" },
+                -- 1/3           "Mixed Energy Crystal"
+                { chance = 3, item = "Mixed Energy Crystal" },
+                -- 1/7           "Mixed Potion"
+                { chance = 7, item = "Mixed Potion" },
+                -- 1/33          "Royal Sword"  (Lvl 800+)  [Rare]
+                { chance = 33, item = "Royal Sword", lvlReq = 800, rarity = "Rare" },
+                -- 1/50          "Flaron's Blades"  (Lvl 300+)  [Rare]
+                { chance = 50, item = "Flaron's Blades", lvlReq = 300, rarity = "Rare" },
+            },
+        },
+        ["Fallen Mage"] = {
+            LvlReq = 500, Gold = 300000, Exp = 350000, SetType = "Multiple",
+            Drops = {
+                -- Guaranteed    "Halloween Essence"  x3
+                { chance = 1, item = "Halloween Essence", lvlReq = 0, quantity = 3 },
+                -- Guaranteed    "Necromancer's Shard"
+                { chance = 1, item = "Necromancer's Shard" },
+                -- Guaranteed    "Magic Book"
+                { chance = 1, item = "Magic Book" },
+                -- Guaranteed    "Dark Energy Crystal"
+                { chance = 1, item = "Dark Energy Crystal" },
+                -- 1/5           "Cryllophyll"
+                { chance = 5, item = "Cryllophyll" },
+                -- 1/5           "Incyclite"
+                { chance = 5, item = "Incyclite" },
+                -- 1/5           "Granulite"
+                { chance = 5, item = "Granulite" },
+                -- 1/25          "Rotten Flesh"
+                { chance = 25, item = "Rotten Flesh" },
+                -- 1/25          "Skeletal Skull"
+                { chance = 25, item = "Skeletal Skull" },
+                -- 1/33          "Arcane Manifestation (Vanity)"  (Lvl 500+)  [Legendary]
+                { chance = 33, item = "Arcane Manifestation (Vanity)", lvlReq = 500, rarity = "Legendary" },
+                -- 1/100         "The Revenant"  (Lvl 500+)  [Legendary]
+                { chance = 100, item = "The Revenant", lvlReq = 500, rarity = "Legendary" },
+            },
+        },
+        ["Ascension Mage"] = {
+            LvlReq = 500, Gold = 200000, Exp = 275000, SetType = "Multiple",
+            Drops = {
+                -- Guaranteed    "Necromancer's Shard"
+                { chance = 1, item = "Necromancer's Shard" },
+                -- 1/4           "Magic Book"
+                { chance = 4, item = "Magic Book" },
+                -- 1/75          "Arcane Manifestation (Vanity)"  (Lvl 500+)  [Legendary]
+                { chance = 75, item = "Arcane Manifestation (Vanity)", lvlReq = 500, rarity = "Legendary" },
+                -- 1/150         "The Revenant"  (Lvl 500+)  [Legendary]
+                { chance = 150, item = "The Revenant", lvlReq = 500, rarity = "Legendary" },
+            },
+        },
+        ["Matt the Ruler of Fedoras"] = {
+            LvlReq = 800, Gold = 250000, Exp = 350000, SetType = "Multiple",
+            Drops = {
+                -- Guaranteed    "Slime"
+                { chance = 1, item = "Slime" },
+                -- 1/5           "Matt's Clothes"
+                { chance = 5, item = "Matt's Clothes" },
+                -- 1/5           "Emerald Necklace"
+                { chance = 5, item = "Emerald Necklace" },
+                -- 1/50          "Matt's Spear"  [Rare]
+                { chance = 50, item = "Matt's Spear", lvlReq = 0, rarity = "Rare" },
+                -- 1/2500        "Matt's Katana"  (Lvl 2000+)  [Mythical]
+                { chance = 2500, item = "Matt's Katana", lvlReq = 2000, rarity = "Mythical" },
+            },
+        },
+        ["Supreme Gamer"] = {
+            LvlReq = 800, Gold = 250000, Exp = 350000, SetType = "Multiple",
+            Drops = {
+                -- Guaranteed    "Gaming Controller"
+                { chance = 1, item = "Gaming Controller" },
+                -- 1/3           "Glitched Rose"
+                { chance = 3, item = "Glitched Rose" },
+                -- 1/3           "Supreme's Clothes"
+                { chance = 3, item = "Supreme's Clothes" },
+                -- 1/50          "Supreme's SSniper"  [Rare]
+                { chance = 50, item = "Supreme's SSniper", lvlReq = 0, rarity = "Rare" },
+            },
+        },
+        ["Rainbow Zack"] = {
+            LvlReq = 800, Gold = 250000, Exp = 350000, SetType = "Multiple",
+            Drops = {
+                -- Guaranteed    "Rainbow Chunk"
+                { chance = 1, item = "Rainbow Chunk" },
+                -- 1/3           "Zack's Clothes"
+                { chance = 3, item = "Zack's Clothes" },
+                -- 1/3           "Rainbow Flute"
+                { chance = 3, item = "Rainbow Flute" },
+                -- 1/12          "Zack's Rainbow Harp"
+                { chance = 12, item = "Zack's Rainbow Harp" },
+            },
+        },
+        ["Zay the Galaxy Pear"] = {
+            LvlReq = 800, Gold = 250000, Exp = 350000, SetType = "Multiple",
+            Drops = {
+                -- Guaranteed    "Galactic Shard"
+                { chance = 1, item = "Galactic Shard" },
+                -- 1/50          "Zay's Armor"  [Rare]
+                { chance = 50, item = "Zay's Armor", lvlReq = 0, rarity = "Rare" },
+                -- 1/50          "Nebula Piercer"  [Rare]
+                { chance = 50, item = "Nebula Piercer", lvlReq = 0, rarity = "Rare" },
+                -- 1/1000        "Cosmic Durag"  [Mythical]
+                { chance = 1000, item = "Cosmic Durag", lvlReq = 0, rarity = "Mythical" },
+                -- 1/2500        "Blue Cosmic Durag"  [Mythical]
+                { chance = 2500, item = "Blue Cosmic Durag", lvlReq = 0, rarity = "Mythical" },
+            },
+        },
+        ["Pearl the Omega"] = {
+            LvlReq = 800, Gold = 250000, Exp = 350000, SetType = "Multiple",
+            Drops = {
+                -- Guaranteed    "Herculean Pearl"
+                { chance = 1, item = "Herculean Pearl" },
+                -- 1/3           "Developer Pearl Clothes"
+                { chance = 3, item = "Developer Pearl Clothes" },
+                -- 1/3           "Sapphire Necklace (Vanity)"
+                { chance = 3, item = "Sapphire Necklace (Vanity)" },
+                -- 1/3           "Developer Shades"
+                { chance = 3, item = "Developer Shades" },
+                -- 1/3           "Pearl's Fedora (Vanity)"
+                { chance = 3, item = "Pearl's Fedora (Vanity)" },
+                -- 1/5           "Ocean Spellbook"
+                { chance = 5, item = "Ocean Spellbook" },
+                -- 1/125         "Oceanic Disintegrator"  [Legendary]
+                { chance = 125, item = "Oceanic Disintegrator", lvlReq = 0, rarity = "Legendary" },
+                -- 1/1000        "Pearl's OG Scythe"  (Lvl 2000+)  [Mythical]
+                { chance = 1000, item = "Pearl's OG Scythe", lvlReq = 2000, rarity = "Mythical" },
+                -- 1/2500        "Last Prism"  (Lvl 2000+)  [Mythical]
+                { chance = 2500, item = "Last Prism", lvlReq = 2000, rarity = "Mythical" },
+            },
+        },
+        ["True Flaron"] = {
+            LvlReq = 1000, Gold = 600000, Exp = 600000, SetType = "Multiple",
+            Drops = {
+                -- Guaranteed    "Champion's Wake"
+                { chance = 1, item = "Champion's Wake" },
+                -- 1/100         "True Flaron's Blades"  (Lvl 1000+)  [Legendary]
+                { chance = 100, item = "True Flaron's Blades", lvlReq = 1000, rarity = "Legendary" },
+            },
+        },
+        ["Jack the Master of Scares"] = {
+            LvlReq = 1000, Gold = 450000, Exp = 800000, SetType = "Multiple",
+            Candy = 1000,
+            Drops = {
+                -- Guaranteed    "Shadow Invitation"  (Lvl 2000+)
+                { chance = 1, item = "Shadow Invitation", lvlReq = 2000 },
+                -- Guaranteed    "Halloween Essence"
+                { chance = 1, item = "Halloween Essence" },
+                -- Guaranteed    "Halloween Essence"
+                { chance = 1, item = "Halloween Essence" },
+                -- Guaranteed    "Halloween Essence"
+                { chance = 1, item = "Halloween Essence" },
+                -- Guaranteed    "Hallow Token"
+                { chance = 1, item = "Hallow Token" },
+                -- Guaranteed    "Hallow Token"
+                { chance = 1, item = "Hallow Token" },
+                -- Guaranteed    "Hallow Token"
+                { chance = 1, item = "Hallow Token" },
+                -- Guaranteed    "Hallow Token"
+                { chance = 1, item = "Hallow Token" },
+                -- Guaranteed    "Hallow Token"
+                { chance = 1, item = "Hallow Token" },
+                -- Guaranteed    "Gigantic Pumpkin"
+                { chance = 1, item = "Gigantic Pumpkin" },
+                -- 1/5           "Halloween Essence"
+                { chance = 5, item = "Halloween Essence" },
+                -- 1/5           "Halloween Essence"
+                { chance = 5, item = "Halloween Essence" },
+                -- 1/8           "Developer Trick"  [Exotic]
+                { chance = 8, item = "Developer Trick", lvlReq = 0, rarity = "Exotic" },
+                -- 1/8           "Cog Trick"  [Exotic]
+                { chance = 8, item = "Cog Trick", lvlReq = 0, rarity = "Exotic" },
+                -- 1/8           "Capybara Trick"  [Exotic]
+                { chance = 8, item = "Capybara Trick", lvlReq = 0, rarity = "Exotic" },
+                -- 1/10          "Gigantic Pumpkin"
+                { chance = 10, item = "Gigantic Pumpkin" },
+                -- 1/33          "The Overloader"  (Lvl 4000+)  [Rare]
+                { chance = 33, item = "The Overloader", lvlReq = 4000, rarity = "Rare" },
+                -- 1/40          "Jittered Core"  [Legendary]
+                { chance = 40, item = "Jittered Core", lvlReq = 0, rarity = "Legendary" },
+                -- 1/44          "Jack's Wrath V2"  (Lvl 2500+)  [Mythical]
+                { chance = 44, item = "Jack's Wrath V2", lvlReq = 2500, rarity = "Mythical" },
+                -- 1/50          "Hallow's Grasp"  [Exotic]
+                { chance = 50, item = "Hallow's Grasp", lvlReq = 0, rarity = "Exotic" },
+                -- 1/125         "Vengeful Spirit"  [Exotic]
+                { chance = 125, item = "Vengeful Spirit", lvlReq = 0, rarity = "Exotic" },
+                -- 1/150         "Nightmaric Soup"  [Exotic]
+                { chance = 150, item = "Nightmaric Soup", lvlReq = 0, rarity = "Exotic" },
+                -- 1/200         "Salt"  [Exotic]
+                { chance = 200, item = "Salt", lvlReq = 0, rarity = "Exotic" },
+                -- 1/500         "Terrifying Soup"  [Mythical]
+                { chance = 500, item = "Terrifying Soup", lvlReq = 0, rarity = "Mythical" },
+            },
+        },
+        ["Bobby"] = {
+            LvlReq = 1000, Gold = 125000, Exp = 250000, SetType = "Multiple",
+            XPLock = { Level = 1200, Type = "if" },
+            Drops = {
+                -- Guaranteed    "Snowflake"  x300
+                { chance = 1, item = "Snowflake", lvlReq = 0, quantity = 300 },
+                -- Guaranteed    "Silver Branch"
+                { chance = 1, item = "Silver Branch" },
+                -- Guaranteed    "Broken Bauble"
+                { chance = 1, item = "Broken Bauble" },
+            },
+        },
+        ["Space King"] = {
+            LvlReq = 1000, Gold = 525000, Exp = 525000, SetType = "Multiple",
+            Drops = {
+                -- Guaranteed    "Heated Energy Core"
+                { chance = 1, item = "Heated Energy Core" },
+                -- 1/3           "Powercell"
+                { chance = 3, item = "Powercell" },
+                -- 1/3           "Empty Space"
+                { chance = 3, item = "Empty Space" },
+                -- 1/3           "Planet Sphere"
+                { chance = 3, item = "Planet Sphere" },
+                -- 1/4           "Space King Crown"  (Lvl 1000+)
+                { chance = 4, item = "Space King Crown", lvlReq = 1000 },
+                -- 1/12          "Star Matrix"  (Lvl 1000+)
+                { chance = 12, item = "Star Matrix", lvlReq = 1000 },
+                -- 1/25          "The Planet Annihilator"  (Lvl 1000+)  [Uncommon]
+                { chance = 25, item = "The Planet Annihilator", lvlReq = 1000, rarity = "Uncommon" },
+                -- 1/33          "Fractured Fragment"  (Lvl 1500+)  [Rare]
+                { chance = 33, item = "Fractured Fragment", lvlReq = 1500, rarity = "Rare" },
+                -- 1/150         "The Galaxy's Embrace"  [Legendary]
+                { chance = 150, item = "The Galaxy's Embrace", lvlReq = 0, rarity = "Legendary" },
+            },
+        },
+        ["Roaming Statue"] = {
+            LvlReq = 1300, Gold = 6000, Exp = 6000, SetType = "Multiple",
+            XPLock = { Level = 3000, Type = "if" },
+            Candy = 70,
+            Drops = {
+                -- 1/15          "Halloween Essence"
+                { chance = 15, item = "Halloween Essence" },
+                -- 1/3000        "Vengeful Spirit"  [Exotic]
+                { chance = 3000, item = "Vengeful Spirit", lvlReq = 0, rarity = "Exotic" },
+            },
+        },
+        ["Victory Embelliment"] = {
+            LvlReq = 1350, Gold = 600000, Exp = 500000, SetType = "Multiple",
+            Badge = 3916673611121565,
+            Drops = {
+                -- Guaranteed    "Victergy"
+                { chance = 1, item = "Victergy" },
+                -- Guaranteed    "Victergy"
+                { chance = 1, item = "Victergy" },
+                -- Guaranteed    "Victergy"
+                { chance = 1, item = "Victergy" },
+                -- Guaranteed    "Victorious Trophy"
+                { chance = 1, item = "Victorious Trophy" },
+                -- 1/3           "Old Crown"
+                { chance = 3, item = "Old Crown" },
+                -- 1/10          "The Victor's Prestige"  (Lvl 900+)  [Uncommon]
+                { chance = 10, item = "The Victor's Prestige", lvlReq = 900, rarity = "Uncommon" },
+                -- 1/100         "Glory"  (Lvl 900+)  [Legendary]
+                { chance = 100, item = "Glory", lvlReq = 900, rarity = "Legendary" },
+            },
+        },
+        ["King Solomon"] = {
+            LvlReq = 1350, Gold = 1200000, Exp = 1200000, SetType = "Multiple",
+            Badges = { 2134135783 },
+            Drops = {
+                -- Guaranteed    "Champion Emblem"
+                { chance = 1, item = "Champion Emblem" },
+                -- 1/33          "The King's Terror"  [Legendary]
+                { chance = 33, item = "The King's Terror", lvlReq = 0, rarity = "Legendary" },
+                -- 1/125         "Salt"  (Lvl 5000+)  [Mythical]
+                { chance = 125, item = "Salt", lvlReq = 5000, rarity = "Mythical" },
+            },
+        },
+        ["Diocula"] = {
+            LvlReq = 1350, Gold = 300000, Exp = 325000, SetType = "Multiple",
+            Darkcandy = 1500,
+            Drops = {
+                -- Guaranteed    "Halloween Essence"  x25
+                { chance = 1, item = "Halloween Essence", lvlReq = 0, quantity = 25 },
+                -- Guaranteed    "Dracula Fangs"
+                { chance = 1, item = "Dracula Fangs" },
+                -- Guaranteed    "Dracula Fangs"
+                { chance = 1, item = "Dracula Fangs" },
+                -- Guaranteed    "Dracula Fangs"
+                { chance = 1, item = "Dracula Fangs" },
+                -- 1/10          "Umbral Skin"  (Lvl 1000+)  [Exotic]
+                { chance = 10, item = "Umbral Skin", lvlReq = 1000, rarity = "Exotic", quantity = 1 },
+            },
+        },
+        ["Celia"] = {
+            LvlReq = 1350, Gold = 1000000, Exp = 1000000, SetType = "Multiple",
+            Badges = { 2134136329 },
+            Drops = {
+                -- Guaranteed    "Idol's Heart"
+                { chance = 1, item = "Idol's Heart" },
+                -- Guaranteed    "Empty Space"  x3  (Lvl 1350+)
+                { chance = 1, item = "Empty Space", lvlReq = 1350, quantity = 3 },
+                -- Guaranteed    "Planet Sphere"  x3  (Lvl 1350+)
+                { chance = 1, item = "Planet Sphere", lvlReq = 1350, quantity = 3 },
+                -- 1/2           "Star Matrix"
+                { chance = 2, item = "Star Matrix" },
+                -- 1/2           "Star Matrix"
+                { chance = 2, item = "Star Matrix" },
+                -- 1/2           "Star Matrix"
+                { chance = 2, item = "Star Matrix" },
+                -- 1/25          "Solar Stone"
+                { chance = 25, item = "Solar Stone" },
+                -- 1/50          "The Blue Moon"  (Lvl 1200+)  [Rare]
+                { chance = 50, item = "The Blue Moon", lvlReq = 1200, rarity = "Rare" },
+            },
+        },
+        ["Umbral Monstrosity"] = {
+            LvlReq = 1350, Gold = 8000, Exp = 10000, SetType = "Multiple",
+            Darkcandy = 500,
+            Drops = {
+                -- 1/250         "Umbral Skin"  (Lvl 1000+)  [Exotic]
+                { chance = 250, item = "Umbral Skin", lvlReq = 1000, rarity = "Exotic", quantity = 1 },
+            },
+        },
+        ["Phantom Raider"] = {
+            LvlReq = 1350, Gold = 5000, Exp = 7500, SetType = "Multiple",
+            Candy = 200,
+            Drops = {
+                -- Guaranteed    "Halloween Essence"
+                { chance = 1, item = "Halloween Essence" },
+                -- Guaranteed    "Halloween Essence"
+                { chance = 1, item = "Halloween Essence" },
+                -- 1/20          "Phantom Orb"
+                { chance = 20, item = "Phantom Orb" },
+                -- 1/150         "Phantomic Force"  (Lvl 1000+)  [Exotic]
+                { chance = 150, item = "Phantomic Force", lvlReq = 1000, rarity = "Exotic", quantity = 1 },
+            },
+        },
+        ["Equalized Spirit"] = {
+            LvlReq = 2000, Gold = 10000, Exp = 7000, SetType = "Multiple",
+            XPLock = { Level = 2000, Type = "pow" },
+            Drops = {
+                -- 1/40          "Equalized Vessel"
+                { chance = 40, item = "Equalized Vessel", lvlReq = 0 },
+                -- 1/50000       "Aequilibrium's Apotheosis"  [Mythical]
+                { chance = 50000, item = "Aequilibrium's Apotheosis", lvlReq = 0, rarity = "Mythical" },
+            },
+        },
+        ["Equilibrium Tesseract"] = {
+            LvlReq = 2000, Gold = 2000000, Exp = 2000000, SetType = "Multiple",
+            RemoveDropOnDeath = true,
+            Badge = 279338889511658,
+            Drops = {
+                -- Guaranteed    "Construct of Equilibrium"
+                { chance = 1, item = "Construct of Equilibrium" },
+                -- Guaranteed    "Equalized Vessel"  x2
+                { chance = 1, item = "Equalized Vessel", lvlReq = 0, quantity = 2 },
+                -- Guaranteed    "Equalization Energy"  x2
+                { chance = 1, item = "Equalization Energy", lvlReq = 0, quantity = 2 },
+                -- 1/20          "Equilibrium Sovereign"  (Lvl 2000+)  [Rare]
+                { chance = 20, item = "Equilibrium Sovereign", lvlReq = 2000, rarity = "Rare" },
+                -- 1/75          "Equilibrium Prism"  (Lvl 2000+)  [Legendary]
+                { chance = 75, item = "Equilibrium Prism", lvlReq = 2000, rarity = "Legendary", quantity = 1 },
+                -- 1/100         "Aequilibrium's Apotheosis"  (Lvl 2000+)  [Mythical]
+                { chance = 100, item = "Aequilibrium's Apotheosis", lvlReq = 2000, rarity = "Mythical" },
+            },
+        },
+        ["Fusion Paladin"] = {
+            LvlReq = 2000, Gold = 10000, Exp = 10000, SetType = "Multiple",
+            XPLock = { Level = 2000, Type = "pow" },
+            Drops = {
+                -- 1/2           "Fusion Plating"
+                { chance = 2, item = "Fusion Plating", lvlReq = 0 },
+                -- 1/5000        "Aequilibrium's Apotheosis"  [Mythical]
+                { chance = 5000, item = "Aequilibrium's Apotheosis", lvlReq = 0, rarity = "Mythical" },
+            },
+        },
+        ["Equilibrium Amalgamation"] = {
+            LvlReq = 2000, Gold = 10000, Exp = 7000, SetType = "Multiple",
+            XPLock = { Level = 2000, Type = "pow" },
+            Drops = {
+                -- 1/40          "Equalization Energy"
+                { chance = 40, item = "Equalization Energy", lvlReq = 0 },
+                -- 1/50000       "Aequilibrium's Apotheosis"  [Mythical]
+                { chance = 50000, item = "Aequilibrium's Apotheosis", lvlReq = 0, rarity = "Mythical" },
+            },
+        },
+    },
+
+    EnemyDropTables = {
+        ["Aqua Reserve"] = {
+            LvlReq = 0, Gold = 200, Exp = 200, SetType = "Single",
+            Drops = {
+                -- 1/3           "Water Drop"
+                { chance = 3, item = "Water Drop" },
+                -- 1/25          "Plastic Bits"
+                { chance = 25, item = "Plastic Bits" },
+                -- 1/25          "Bloxy Cola"
+                { chance = 25, item = "Bloxy Cola" },
+                -- 1/50          "Whirlpool Summoner"
+                { chance = 50, item = "Whirlpool Summoner" },
+            },
+        },
+        ["Uncharged"] = {
+            LvlReq = 0, Gold = 200, Exp = 200, SetType = "Single",
+            Drops = {
+                -- 1/3           "Lightning Bolt"
+                { chance = 3, item = "Lightning Bolt" },
+                -- 1/25          "Plastic Bits"
+                { chance = 25, item = "Plastic Bits" },
+                -- 1/50          "Storm Threat"
+                { chance = 50, item = "Storm Threat" },
+            },
+        },
+        ["True Sun God"] = {
+            LvlReq = 0, Gold = 0, Exp = 0, SetType = "Multiple",
+            Drops = {
+                -- 1/100000      "Angelene Armor"  (Lvl 1000+)  [Exotic]
+                { chance = 100000, item = "Angelene Armor", lvlReq = 1000, rarity = "Exotic", quantity = 1 },
+            },
+        },
+        ["Earth Nativeman"] = {
+            LvlReq = 0, Gold = 200, Exp = 200, SetType = "Single",
+            Drops = {
+                -- 1/3           "Earth Core"
+                { chance = 3, item = "Earth Core" },
+                -- 1/25          "Plastic Bits"
+                { chance = 25, item = "Plastic Bits" },
+                -- 1/50          "Earthen Gauntlets"
+                { chance = 50, item = "Earthen Gauntlets" },
+            },
+        },
+        ["Mercurite Minion"] = {
+            LvlReq = 0, Gold = 85, Exp = 150, SetType = "Single",
+            XPLock = { Level = 100, Type = "if" },
+            Drops = {
+                -- 1/2           "Plastic Bits"
+                { chance = 2, item = "Plastic Bits" },
+                -- 1/3           "Mercurite Crystal"
+                { chance = 3, item = "Mercurite Crystal" },
+                -- 1/25          "Mercurite Helm"
+                { chance = 25, item = "Mercurite Helm" },
+            },
+        },
+        ["Coal Golem"] = {
+            LvlReq = 0, Gold = 0, Exp = 0, SetType = "Single",
+            Present = 5,
+            Drops = {},
+        },
+        ["Oiled Hissler"] = {
+            LvlReq = 0, Gold = 200, Exp = 200, SetType = "Single",
+            Drops = {
+                -- 1/3           "Charred Ember"
+                { chance = 3, item = "Charred Ember" },
+                -- 1/25          "Plastic Bits"
+                { chance = 25, item = "Plastic Bits" },
+                -- 1/50          "Blazing Scale-Burst"
+                { chance = 50, item = "Blazing Scale-Burst" },
+            },
+        },
+        ["Wind Spirit"] = {
+            LvlReq = 0, Gold = 200, Exp = 200, SetType = "Single",
+            Drops = {
+                -- 1/3           "Pressurized Air"
+                { chance = 3, item = "Pressurized Air" },
+                -- 1/25          "Plastic Bits"
+                { chance = 25, item = "Plastic Bits" },
+                -- 1/50          "Maelstrom"
+                { chance = 50, item = "Maelstrom" },
+            },
+        },
+        ["Discharge"] = {
+            LvlReq = 0, Gold = 200, Exp = 200, SetType = "Single",
+            Drops = {
+                -- 1/3           "Lightning Bolt"
+                { chance = 3, item = "Lightning Bolt" },
+                -- 1/25          "Plastic Bits"
+                { chance = 25, item = "Plastic Bits" },
+                -- 1/50          "Storm Threat"
+                { chance = 50, item = "Storm Threat" },
+            },
+        },
+        ["Abaddon Minion"] = {
+            LvlReq = 0, Gold = 200, Exp = 325, SetType = "Single",
+            Drops = {
+                -- 1/10          "Hell Tommy Gun"
+                { chance = 10, item = "Hell Tommy Gun" },
+            },
+        },
+        ["Skylord"] = {
+            LvlReq = 0, Gold = 800, Exp = 1500, SetType = "Single",
+            XPLock = { Level = 1000, Type = "if" },
+            Drops = {
+                -- 1/3           "Sky Plate"
+                { chance = 3, item = "Sky Plate" },
+            },
+        },
+        ["Gold Champion"] = {
+            LvlReq = 0, Gold = 300, Exp = 600, SetType = "Single",
+            XPLock = { Level = 400, Type = "if" },
+            Drops = {
+                -- 1/3           "Gold Ore"
+                { chance = 3, item = "Gold Ore" },
+            },
+        },
+        ["Ginger-boomz"] = {
+            LvlReq = 0, Gold = 0, Exp = 0, SetType = "Single",
+            Present = 5,
+            Drops = {},
+        },
+        ["Purpulite Giant"] = {
+            LvlReq = 0, Gold = 96, Exp = 210, SetType = "Single",
+            XPLock = { Level = 150, Type = "if" },
+            Drops = {
+                -- 1/3           "Purpulite Ball"
+                { chance = 3, item = "Purpulite Ball" },
+            },
+        },
+        ["Purpulite Mob"] = {
+            LvlReq = 15, Gold = 85, Exp = 160, SetType = "Single",
+            XPLock = { Level = 150, Type = "if" },
+            Drops = {
+                -- 1/4           "Purpulite Ball"
+                { chance = 4, item = "Purpulite Ball" },
+                -- 1/30          "Purpulite Helm"
+                { chance = 30, item = "Purpulite Helm" },
+            },
+        },
+        ["Copper Warrior"] = {
+            LvlReq = 30, Gold = 100, Exp = 170, SetType = "Single",
+            XPLock = { Level = 150, Type = "if" },
+            Drops = {
+                -- 1/4           "Copper Ore"
+                { chance = 4, item = "Copper Ore" },
+                -- 1/33          "Copper Helm"
+                { chance = 33, item = "Copper Helm" },
+            },
+        },
+        ["Iron Mob"] = {
+            LvlReq = 60, Gold = 115, Exp = 200, SetType = "Single",
+            XPLock = { Level = 150, Type = "if" },
+            Drops = {
+                -- 1/7           "Iron Chunk"
+                { chance = 7, item = "Iron Chunk" },
+                -- 1/33          "Iron Helm"
+                { chance = 33, item = "Iron Helm" },
+            },
+        },
+        ["Lava Mob"] = {
+            LvlReq = 80, Gold = 120, Exp = 215, SetType = "Single",
+            XPLock = { Level = 175, Type = "if" },
+            Drops = {
+                -- 1/10          "Fire Crystal"
+                { chance = 10, item = "Fire Crystal" },
+                -- 1/45          "Lava Helm"
+                { chance = 45, item = "Lava Helm" },
+            },
+        },
+        ["Purple Dhurke Jr."] = {
+            LvlReq = 80, Gold = 150, Exp = 325, SetType = "Single",
+            Drops = {
+                -- 1/999999      "Mixed Ore"
+                { chance = 999999, item = "Mixed Ore" },
+            },
+        },
+        ["Red Dhurke Jr."] = {
+            LvlReq = 80, Gold = 150, Exp = 325, SetType = "Single",
+            Drops = {
+                -- 1/999999      "Mixed Ore"
+                { chance = 999999, item = "Mixed Ore" },
+            },
+        },
+        ["Firecrystal Guard"] = {
+            LvlReq = 100, Gold = 130, Exp = 280, SetType = "Single",
+            XPLock = { Level = 225, Type = "if" },
+            Drops = {
+                -- 1/7           "Fire Crystal"
+                { chance = 7, item = "Fire Crystal" },
+                -- 1/33          "Lava Helm"
+                { chance = 33, item = "Lava Helm" },
+            },
+        },
+        ["Silver Golem"] = {
+            LvlReq = 120, Gold = 160, Exp = 350, SetType = "Single",
+            XPLock = { Level = 300, Type = "if" },
+            Drops = {
+                -- 1/10          "Silver Rock"
+                { chance = 10, item = "Silver Rock" },
+            },
+        },
+        ["Golden Warrior"] = {
+            LvlReq = 150, Gold = 250, Exp = 500, SetType = "Single",
+            XPLock = { Level = 400, Type = "if" },
+            Drops = {
+                -- 1/15          "Gold Ore"
+                { chance = 15, item = "Gold Ore" },
+            },
+        },
+        ["TUTORIAL_MOB"] = {
+            LvlReq = 200, Gold = 200, Exp = 325, SetType = "Multiple",
+            XPLock = { Level = 0, Type = "if" },
+            CustomDeath = true,
+            RemoveDropOnDeath = true,
+            Badge = nil,
+            Drops = {
+                -- 1/10          "Hell Tommy Gun"
+                { chance = 10, item = "Hell Tommy Gun", lvlReq = 0, quantity = 1 },
+            },
+        },
+        ["Cryllophyll Elite"] = {
+            LvlReq = 250, Gold = 450, Exp = 900, SetType = "Single",
+            XPLock = { Level = 650, Type = "if" },
+            Drops = {
+                -- 1/15          "Cryllophyll"
+                { chance = 15, item = "Cryllophyll" },
+            },
+        },
+        ["Incyclite Elite"] = {
+            LvlReq = 375, Gold = 500, Exp = 950, SetType = "Single",
+            XPLock = { Level = 650, Type = "if" },
+            Drops = {
+                -- 1/15          "Incyclite"
+                { chance = 15, item = "Incyclite" },
+            },
+        },
+        ["Cosmic Brownie Pest"] = {
+            LvlReq = 400, Gold = 725, Exp = 1425, SetType = "Single",
+            XPLock = { Level = 600, Type = "if" },
+            Drops = {
+                -- Guaranteed    "Snowflake"  x5
+                { chance = 1, item = "Snowflake", lvlReq = 0, quantity = 5 },
+            },
+        },
+        ["Bloody Priest"] = {
+            LvlReq = 400, Gold = 600, Exp = 1200, SetType = "Multiple",
+            XPLock = { Level = 1500, Type = "if" },
+            Candy = 30,
+            Drops = {
+                -- 1/25          "Halloween Essence"
+                { chance = 25, item = "Halloween Essence" },
+                -- 1/4500        "Vengeful Spirit"  [Exotic]
+                { chance = 4500, item = "Vengeful Spirit", lvlReq = 0, rarity = "Exotic" },
+            },
+        },
+        ["Possessed Nun"] = {
+            LvlReq = 400, Gold = 600, Exp = 1200, SetType = "Multiple",
+            XPLock = { Level = 1500, Type = "if" },
+            Candy = 30,
+            Drops = {
+                -- 1/25          "Halloween Essence"
+                { chance = 25, item = "Halloween Essence" },
+                -- 1/4500        "Vengeful Spirit"  [Exotic]
+                { chance = 4500, item = "Vengeful Spirit", lvlReq = 0, rarity = "Exotic" },
+                -- 1/100000      "Angelene Armor"  (Lvl 1000+)  [Exotic]
+                { chance = 100000, item = "Angelene Armor", lvlReq = 1000, rarity = "Exotic", quantity = 1 },
+            },
+        },
+        ["Granulite Elite"] = {
+            LvlReq = 450, Gold = 700, Exp = 1400, SetType = "Single",
+            XPLock = { Level = 650, Type = "if" },
+            Drops = {
+                -- 1/15          "Granulite"
+                { chance = 15, item = "Granulite" },
+            },
+        },
+        ["Sky Servant"] = {
+            LvlReq = 600, Gold = 825, Exp = 2000, SetType = "Single",
+            XPLock = { Level = 1000, Type = "if" },
+            Drops = {
+                -- 1/20          "Sky Plate"
+                { chance = 20, item = "Sky Plate" },
+                -- 1/200         "Skyfall"
+                { chance = 200, item = "Skyfall" },
+                -- 1/200         "Sky Burst"
+                { chance = 200, item = "Sky Burst" },
+                -- 1/350         "Skyplate Armor"
+                { chance = 350, item = "Skyplate Armor" },
+            },
+        },
+        ["Hemaglobium Eradicator"] = {
+            LvlReq = 700, Gold = 950, Exp = 2500, SetType = "Single",
+            XPLock = { Level = 1000, Type = "if" },
+            Drops = {
+                -- 1/5           "Hemaglobium Cube"
+                { chance = 5, item = "Hemaglobium Cube" },
+                -- 1/5           "Hemaglobium Sphere"
+                { chance = 5, item = "Hemaglobium Sphere" },
+            },
+        },
+        ["Invigorite Emancipator"] = {
+            LvlReq = 700, Gold = 950, Exp = 2500, SetType = "Single",
+            XPLock = { Level = 1000, Type = "if" },
+            Drops = {
+                -- 1/5           "Invigorite Cube"
+                { chance = 5, item = "Invigorite Cube" },
+                -- 1/5           "Invigorite Sphere"
+                { chance = 5, item = "Invigorite Sphere" },
+            },
+        },
+        ["Cobalium Protector"] = {
+            LvlReq = 700, Gold = 950, Exp = 2500, SetType = "Single",
+            XPLock = { Level = 1000, Type = "if" },
+            Drops = {
+                -- 1/5           "Cobalium Cube"
+                { chance = 5, item = "Cobalium Cube" },
+                -- 1/5           "Cobalium Sphere"
+                { chance = 5, item = "Cobalium Sphere" },
+            },
+        },
+        ["Pearl Minion"] = {
+            LvlReq = 800, Gold = 1000, Exp = 3000, SetType = "Single",
+            XPLock = { Level = 1100, Type = "if" },
+            Drops = {
+                -- 1/16          "Pearl's Presence"
+                { chance = 16, item = "Pearl's Presence" },
+            },
+        },
+        ["Rainbow Minion"] = {
+            LvlReq = 800, Gold = 1000, Exp = 3000, SetType = "Single",
+            XPLock = { Level = 1100, Type = "if" },
+            Drops = {
+                -- 1/16          "Zack's Presence"
+                { chance = 16, item = "Zack's Presence" },
+            },
+        },
+        ["Gaming Minion"] = {
+            LvlReq = 800, Gold = 1000, Exp = 3000, SetType = "Single",
+            XPLock = { Level = 1100, Type = "if" },
+            Drops = {
+                -- 1/16          "Supreme's Presence"
+                { chance = 16, item = "Supreme's Presence" },
+            },
+        },
+        ["Smooth Criminal"] = {
+            LvlReq = 800, Gold = 0, Exp = 0, SetType = "Multiple",
+            Drops = {
+                -- Guaranteed    "Slime"
+                { chance = 1, item = "Slime" },
+                -- 1/5           "Matt's Clothes"
+                { chance = 5, item = "Matt's Clothes" },
+                -- 1/5           "Emerald Necklace"
+                { chance = 5, item = "Emerald Necklace" },
+                -- 1/50          "Matt's Spear"  [Rare]
+                { chance = 50, item = "Matt's Spear", lvlReq = 0, rarity = "Rare" },
+                -- 1/250         "Matt's Katana"  (Lvl 2000+)  [Mythical]
+                { chance = 250, item = "Matt's Katana", lvlReq = 2000, rarity = "Mythical" },
+            },
+        },
+        ["Ancient Straggler"] = {
+            LvlReq = 800, Gold = 1500, Exp = 3250, SetType = "Multiple",
+            XPLock = { Level = 1100, Type = "if" },
+            Drops = {
+                -- 1/3           "Creepy Mask"
+                { chance = 3, item = "Creepy Mask" },
+                -- 1/1000        "Void Claws"
+                { chance = 1000, item = "Void Claws" },
+            },
+        },
+        ["Fedora Minion"] = {
+            LvlReq = 800, Gold = 1000, Exp = 3000, SetType = "Single",
+            XPLock = { Level = 1100, Type = "if" },
+            Drops = {
+                -- 1/16          "Matt's Presence"
+                { chance = 16, item = "Matt's Presence" },
+            },
+        },
+        ["Abyssfisher"] = {
+            LvlReq = 800, Gold = 1000, Exp = 3000, SetType = "Single",
+            XPLock = { Level = 1100, Type = "if" },
+            CustomDeath = true,
+            Drops = {
+                -- 1/12          "Abyssal Eyes"
+                { chance = 12, item = "Abyssal Eyes" },
+                -- 1/1000        "Void Claws"
+                { chance = 1000, item = "Void Claws" },
+            },
+        },
+        ["Devil Palm"] = {
+            LvlReq = 800, Gold = 1000, Exp = 3000, SetType = "Single",
+            XPLock = { Level = 1100, Type = "if" },
+            Drops = {
+                -- 1/15          "Eldritch Palm"
+                { chance = 15, item = "Eldritch Palm" },
+                -- 1/1000        "Void Claws"
+                { chance = 1000, item = "Void Claws" },
+            },
+        },
+        ["Galaxy Minion"] = {
+            LvlReq = 800, Gold = 1000, Exp = 3000, SetType = "Single",
+            XPLock = { Level = 1100, Type = "if" },
+            Drops = {
+                -- 1/16          "Zay's Presence"
+                { chance = 16, item = "Zay's Presence" },
+            },
+        },
+        ["Victory Warrior"] = {
+            LvlReq = 900, Gold = 1500, Exp = 4000, SetType = "Multiple",
+            Drops = {
+                -- 1/20          "Victergy"
+                { chance = 20, item = "Victergy" },
+            },
+        },
+        ["Victory King"] = {
+            LvlReq = 900, Gold = 1500, Exp = 4000, SetType = "Multiple",
+            Drops = {
+                -- 1/20          "Victergy"
+                { chance = 20, item = "Victergy" },
+            },
+        },
+        ["Planet Minion"] = {
+            LvlReq = 1000, Gold = 1200, Exp = 3750, SetType = "Single",
+            XPLock = { Level = 1600, Type = "if" },
+            Drops = {
+                -- 1/10          "Planet Sphere"
+                { chance = 10, item = "Planet Sphere" },
+            },
+        },
+        ["Spatial Extrusion"] = {
+            LvlReq = 1000, Gold = 1200, Exp = 3750, SetType = "Single",
+            XPLock = { Level = 1600, Type = "if" },
+            Drops = {
+                -- 1/10          "Empty Space"
+                { chance = 10, item = "Empty Space" },
+            },
+        },
+        ["Planet Giant"] = {
+            LvlReq = 1000, Gold = 2600, Exp = 5000, SetType = "Single",
+            XPLock = { Level = 1600, Type = "if" },
+            Drops = {
+                -- 1/3           "Planet Sphere"
+                { chance = 3, item = "Planet Sphere" },
+                -- 1/3           "Empty Space"
+                { chance = 3, item = "Empty Space" },
+            },
+        },
+        ["Shining Star"] = {
+            LvlReq = 1000, Gold = 1200, Exp = 3750, SetType = "Single",
+            XPLock = { Level = 1600, Type = "if" },
+            Drops = {
+                -- 1/100         "Star Matrix"
+                { chance = 100, item = "Star Matrix" },
+            },
+        },
+        ["Endarkening Warrior"] = {
+            LvlReq = 1100, Gold = 1400, Exp = 4500, SetType = "Single",
+            XPLock = { Level = 1600, Type = "if" },
+            Drops = {
+                -- 1/30          "Endarkening Matter"
+                { chance = 30, item = "Endarkening Matter" },
+            },
+        },
+        ["Ultrabeast"] = {
+            LvlReq = 1100, Gold = 2880, Exp = 6300, SetType = "Single",
+            XPLock = { Level = 1600, Type = "if" },
+            Drops = {
+                -- 1/10          "Endarkening Matter"
+                { chance = 10, item = "Endarkening Matter" },
+            },
+        },
+        ["The Destined"] = {
+            LvlReq = 1300, Gold = 1600, Exp = 5000, SetType = "Single",
+            XPLock = { Level = 2000, Type = "if" },
+            Drops = {
+                -- 1/25          "Memory Fragment"
+                { chance = 25, item = "Memory Fragment" },
+                -- 1/40          "Destinium"
+                { chance = 40, item = "Destinium" },
+            },
+        },
+        ["Ascender's Protector"] = {
+            LvlReq = 1300, Gold = 3500, Exp = 9000, SetType = "Single",
+            XPLock = { Level = 2000, Type = "if" },
+            Drops = {
+                -- 1/8           "Memory Fragment"
+                { chance = 8, item = "Memory Fragment" },
+                -- 1/15          "Destinium"
+                { chance = 15, item = "Destinium" },
+            },
+        },
+        ["Solar Giant"] = {
+            LvlReq = 1300, Gold = 5000, Exp = 13000, SetType = "Single",
+            XPLock = { Level = 2000, Type = "if" },
+            Drops = {
+                -- 1/20          "Heated Energy Core"
+                { chance = 20, item = "Heated Energy Core" },
+                -- 1/1000        "Solar Storm (Vanity)"  [Rare]
+                { chance = 1000, item = "Solar Storm (Vanity)", lvlReq = 0, rarity = "Rare" },
+            },
+        },
+        ["Frozen Fountain"] = {
+            LvlReq = 1350, Gold = 2500, Exp = 5000, SetType = "Multiple",
+            Drops = {
+                -- Guaranteed    "Champion Fragment"
+                { chance = 1, item = "Champion Fragment" },
+                -- 1/5           "Champion Fragment"
+                { chance = 5, item = "Champion Fragment" },
+                -- 1/13554       "Champion Fragment"
+                { chance = 13554, item = "Champion Fragment" },
+                -- 1/14344       "Champion Fragment"
+                { chance = 14344, item = "Champion Fragment" },
+            },
+        },
+        ["Shadow Wizard"] = {
+            LvlReq = 1350, Gold = 3000, Exp = 3000, SetType = "Multiple",
+            Darkcandy = 30,
+            Drops = {},
+        },
+        ["Corrupted Statue"] = {
+            LvlReq = 1350, Gold = 4000, Exp = 6000, SetType = "Multiple",
+            Darkcandy = 150,
+            Drops = {
+                -- 1/75          "Corrupted Cross"
+                { chance = 75, item = "Corrupted Cross" },
+            },
+        },
+        ["Shadow Hunter"] = {
+            LvlReq = 1350, Gold = 3000, Exp = 3000, SetType = "Multiple",
+            Darkcandy = 15,
+            Drops = {},
+        },
+        ["Golden Statue"] = {
+            LvlReq = 1350, Gold = 2500, Exp = 5000, SetType = "Multiple",
+            Drops = {
+                -- 1/175         "Champion Fragment"
+                { chance = 175, item = "Champion Fragment" },
+            },
+        },
+        ["Honourable Knight"] = {
+            LvlReq = 1350, Gold = 2500, Exp = 5000, SetType = "Multiple",
+            Drops = {
+                -- 1/175         "Champion Fragment"
+                { chance = 175, item = "Champion Fragment" },
+            },
+        },
+        ["Royal Elder"] = {
+            LvlReq = 1350, Gold = 2500, Exp = 5000, SetType = "Multiple",
+            Drops = {
+                -- 1/175         "Champion Fragment"
+                { chance = 175, item = "Champion Fragment" },
+            },
+        },
+        ["Solar Minion"] = {
+            LvlReq = 1350, Gold = 2000, Exp = 6000, SetType = "Single",
+            XPLock = { Level = 2000, Type = "if" },
+            Drops = {
+                -- 1/40          "Heated Energy Core"
+                { chance = 40, item = "Heated Energy Core" },
+                -- 1/1000        "Solar Storm (Vanity)"  [Rare]
+                { chance = 1000, item = "Solar Storm (Vanity)", lvlReq = 0, rarity = "Rare" },
+            },
+        },
+        ["Shade Boxer"] = {
+            LvlReq = 1350, Gold = 3000, Exp = 3000, SetType = "Multiple",
+            Darkcandy = 15,
+            Drops = {},
+        },
+        ["Shadow Jailer"] = {
+            LvlReq = 1350, Gold = 3000, Exp = 3000, SetType = "Multiple",
+            Darkcandy = 20,
+            Drops = {},
+        },
+        ["Triumphant Gladiator"] = {
+            LvlReq = 1350, Gold = 2500, Exp = 5000, SetType = "Multiple",
+            Drops = {
+                -- 1/15          "Champion Fragment"
+                { chance = 15, item = "Champion Fragment" },
+            },
+        },
+        ["Ultra Starmob"] = {
+            LvlReq = 1350, Gold = 2500, Exp = 6000, SetType = "Single",
+            XPLock = { Level = 2000, Type = "if" },
+            Drops = {
+                -- 1/80          "Star Matrix"
+                { chance = 80, item = "Star Matrix" },
+            },
+        },
+        ["Champ Winner"] = {
+            LvlReq = 1350, Gold = 2500, Exp = 5000, SetType = "Multiple",
+            Drops = {
+                -- 1/175         "Champion Fragment"
+                { chance = 175, item = "Champion Fragment" },
+            },
+        },
+        ["Royal Mage"] = {
+            LvlReq = 1350, Gold = 2500, Exp = 5000, SetType = "Multiple",
+            Drops = {
+                -- 1/175         "Champion Fragment"
+                { chance = 175, item = "Champion Fragment" },
+            },
+        },
+        ["C@R1UPTGR@Y"] = {
+            LvlReq = 4000, Gold = 1337, Exp = 7331, SetType = "Single",
+            Drops = {
+                -- 1/2           "GL1TCH3D FR@GM3NT"
+                { chance = 2, item = "GL1TCH3D FR@GM3NT" },
+            },
+        },
+        ["Chocolate Mutant"] = {
+            LvlReq = 4000, Gold = 100000, Exp = 100000, SetType = "Single",
+            Drops = {
+                -- 1/500         "Angry Shard"
+                { chance = 500, item = "Angry Shard" },
+            },
+        },
+    },
+
+    EventDropTables = {
+        ["Classy Turkeyman"] = {
+            LvlReq = 0, Gold = 200, Exp = 200, SetType = "Multiple",
+            Drops = {
+                -- Guaranteed    "Fire Crystal"
+                { chance = 1, item = "Fire Crystal" },
+                -- Guaranteed    "Fire Crystal"
+                { chance = 1, item = "Fire Crystal" },
+                -- Guaranteed    "Fire Crystal"
+                { chance = 1, item = "Fire Crystal" },
+                -- Guaranteed    "Turkey Drumstick"
+                { chance = 1, item = "Turkey Drumstick" },
+                -- Guaranteed    "Sweet Potato"
+                { chance = 1, item = "Sweet Potato" },
+                -- 1/100         "Classic Thanksgiving Summoner"  (Lvl 300+)  [Legendary]
+                { chance = 100, item = "Classic Thanksgiving Summoner", lvlReq = 300, rarity = "Legendary" },
+            },
+        },
+        ["Santa's Helper"] = {
+            LvlReq = 0, Gold = 0, Exp = 0, SetType = "Multiple",
+            Present = 25,
+            Drops = {
+                -- Guaranteed    "Jolly Helper's Presence"
+                { chance = 1, item = "Jolly Helper's Presence" },
+            },
+        },
+        ["Gingerbread Protector"] = {
+            LvlReq = 0, Gold = 0, Exp = 0, SetType = "Single",
+            Present = 10,
+            Drops = {},
+        },
+        ["Frostling Imp"] = {
+            LvlReq = 0, Gold = 0, Exp = 0, SetType = "Single",
+            Present = 5,
+            Drops = {},
+        },
+        ["Penguin Archer"] = {
+            LvlReq = 0, Gold = 0, Exp = 0, SetType = "Single",
+            Present = 5,
+            Drops = {},
+        },
+        ["Turkor 23"] = {
+            LvlReq = 0, Gold = 2500, Exp = 5000, SetType = "Multiple",
+            Drops = {
+                -- 1/50          "Turkey Drumstick"
+                { chance = 50, item = "Turkey Drumstick" },
+            },
+        },
+        ["Turkor 500"] = {
+            LvlReq = 0, Gold = 2500, Exp = 5000, SetType = "Multiple",
+            Drops = {
+                -- 1/3           "Turkey Drumstick"
+                { chance = 3, item = "Turkey Drumstick" },
+            },
+        },
+        ["Gingerbread House"] = {
+            LvlReq = 0, Gold = 2500, Exp = 5000, SetType = "Multiple",
+            Drops = {
+                -- 1/3           "Plastic Bits"
+                { chance = 3, item = "Plastic Bits" },
+            },
+        },
+        ["Native Turkeyman"] = {
+            LvlReq = 0, Gold = 200, Exp = 200, SetType = "Multiple",
+            Drops = {
+                -- Guaranteed    "Fire Crystal"
+                { chance = 1, item = "Fire Crystal" },
+                -- 1/20          "Turkey Drumstick"
+                { chance = 20, item = "Turkey Drumstick" },
+                -- 1/40          "Sweet Potato"
+                { chance = 40, item = "Sweet Potato" },
+                -- 1/8000        "Classic Thanksgiving Summoner"  (Lvl 2000+)  [Legendary]
+                { chance = 8000, item = "Classic Thanksgiving Summoner", lvlReq = 2000, rarity = "Legendary" },
+            },
+        },
+        ["Kamikaze Snowman"] = {
+            LvlReq = 15, Gold = 125, Exp = 200, SetType = "Single",
+            XPLock = { Level = 400, Type = "if" },
+            Drops = {
+                -- 1/1000        "Snowflake"
+                { chance = 1000, item = "Snowflake" },
+                -- 1/1000        "Snowman Piece"
+                { chance = 1000, item = "Snowman Piece" },
+            },
+        },
+        ["Winter Spirit"] = {
+            LvlReq = 15, Gold = 10000, Exp = 9000, SetType = "Multiple",
+            XPLock = { Level = 4000, Type = "if" },
+            Drops = {
+                -- 1/4           "Snowflake"  x30
+                { chance = 4, item = "Snowflake", lvlReq = 0, quantity = 30 },
+                -- 1/8           "Yulewood Log"
+                { chance = 8, item = "Yulewood Log" },
+                -- 1/33          "Scented Candles"
+                { chance = 33, item = "Scented Candles" },
+                -- 1/45          "Sanctified Soul"
+                { chance = 45, item = "Sanctified Soul" },
+            },
+        },
+        ["Angry Snowman"] = {
+            LvlReq = 15, Gold = 200, Exp = 250, SetType = "Single",
+            XPLock = { Level = 400, Type = "if" },
+            Drops = {
+                -- 1/5           "Snowflake"
+                { chance = 5, item = "Snowflake" },
+                -- 1/20          "Snowman Piece"
+                { chance = 20, item = "Snowman Piece" },
+            },
+        },
+        ["Cool Snowman"] = {
+            LvlReq = 15, Gold = 200, Exp = 250, SetType = "Single",
+            XPLock = { Level = 300, Type = "if" },
+            Drops = {
+                -- 1/5           "Snowflake"
+                { chance = 5, item = "Snowflake" },
+                -- 1/20          "Snowman Piece"
+                { chance = 20, item = "Snowman Piece" },
+            },
+        },
+        ["Snow Devil"] = {
+            LvlReq = 15, Gold = 10000, Exp = 9000, SetType = "Multiple",
+            XPLock = { Level = 4000, Type = "if" },
+            Drops = {
+                -- 1/4           "Snowflake"  x30
+                { chance = 4, item = "Snowflake", lvlReq = 0, quantity = 30 },
+                -- 1/8           "Yulewood Log"
+                { chance = 8, item = "Yulewood Log" },
+                -- 1/33          "Glittering Snow"
+                { chance = 33, item = "Glittering Snow" },
+                -- 1/45          "Frozen Wreath"
+                { chance = 45, item = "Frozen Wreath" },
+            },
+        },
+        ["Aurora Ballista"] = {
+            LvlReq = 15, Gold = 10000, Exp = 9000, SetType = "Multiple",
+            XPLock = { Level = 4000, Type = "if" },
+            Drops = {
+                -- 1/4           "Snowflake"  x30
+                { chance = 4, item = "Snowflake", lvlReq = 0, quantity = 30 },
+                -- 1/8           "Yulewood Log"
+                { chance = 8, item = "Yulewood Log" },
+                -- 1/33          "Aurora Ribbons"
+                { chance = 33, item = "Aurora Ribbons" },
+            },
+        },
+        ["Grand Aurora Ballista"] = {
+            LvlReq = 15, Gold = 20000, Exp = 20000, SetType = "Multiple",
+            XPLock = { Level = 4000, Type = "if" },
+            Drops = {
+                -- Guaranteed    "Snowflake"  x250
+                { chance = 1, item = "Snowflake", lvlReq = 0, quantity = 250 },
+                -- Guaranteed    "Yulewood Log"  x10
+                { chance = 1, item = "Yulewood Log", lvlReq = 0, quantity = 10 },
+                -- Guaranteed    "Borealis Star"
+                { chance = 1, item = "Borealis Star" },
+                -- 1/3           "Sanctified Soul"
+                { chance = 3, item = "Sanctified Soul" },
+                -- 1/3           "Frozen Wreath"
+                { chance = 3, item = "Frozen Wreath" },
+            },
+        },
+        ["Snow Golem"] = {
+            LvlReq = 40, Gold = 10000, Exp = 30000, SetType = "Multiple",
+            XPLock = { Level = 500, Type = "if" },
+            Drops = {
+                -- Guaranteed    "Icycle"
+                { chance = 1, item = "Icycle" },
+                -- Guaranteed    "Snowflake"  x10
+                { chance = 1, item = "Snowflake", lvlReq = 0, quantity = 10 },
+                -- 1/4           "Snowman Piece"  x2
+                { chance = 4, item = "Snowman Piece", lvlReq = 0, quantity = 2 },
+                -- 1/5           "Incyclite"  x5  (Lvl 375+)
+                { chance = 5, item = "Incyclite", lvlReq = 375, quantity = 5 },
+                -- 1/40          "Icycle"  x2  (Lvl 500+)
+                { chance = 40, item = "Icycle", lvlReq = 500, quantity = 2 },
+            },
+        },
+        ["Skeleton"] = {
+            LvlReq = 80, Gold = 200, Exp = 1000, SetType = "Multiple",
+            XPLock = { Level = 800, Type = "if" },
+            Candy = 20,
+            Drops = {
+                -- 1/25          "Halloween Essence"
+                { chance = 25, item = "Halloween Essence" },
+                -- 1/5000        "Vengeful Spirit"  [Exotic]
+                { chance = 5000, item = "Vengeful Spirit", lvlReq = 0, rarity = "Exotic" },
+            },
+        },
+        ["Zombie"] = {
+            LvlReq = 80, Gold = 200, Exp = 1000, SetType = "Multiple",
+            XPLock = { Level = 800, Type = "if" },
+            Candy = 20,
+            Drops = {
+                -- 1/25          "Halloween Essence"
+                { chance = 25, item = "Halloween Essence" },
+                -- 1/5000        "Vengeful Spirit"  [Exotic]
+                { chance = 5000, item = "Vengeful Spirit", lvlReq = 0, rarity = "Exotic" },
+            },
+        },
+        ["Candy Cane Archer"] = {
+            LvlReq = 100, Gold = 400, Exp = 160, SetType = "Single",
+            XPLock = { Level = 500, Type = "if" },
+            Drops = {
+                -- 1/5           "Snowflake"  x5
+                { chance = 5, item = "Snowflake", lvlReq = 0, quantity = 5 },
+                -- 1/10          "Blueberry Cane"
+                { chance = 10, item = "Blueberry Cane" },
+                -- 1/10          "Green Apple Cane"
+                { chance = 10, item = "Green Apple Cane" },
+                -- 1/10          "Peppermint Cane"
+                { chance = 10, item = "Peppermint Cane" },
+            },
+        },
+        ["Candy Cane Knight"] = {
+            LvlReq = 100, Gold = 400, Exp = 160, SetType = "Single",
+            XPLock = { Level = 500, Type = "if" },
+            Drops = {
+                -- 1/5           "Snowflake"  x5
+                { chance = 5, item = "Snowflake", lvlReq = 0, quantity = 5 },
+                -- 1/10          "Blueberry Cane"
+                { chance = 10, item = "Blueberry Cane" },
+                -- 1/10          "Green Apple Cane"
+                { chance = 10, item = "Green Apple Cane" },
+                -- 1/10          "Peppermint Cane"
+                { chance = 10, item = "Peppermint Cane" },
+            },
+        },
+        ["Peppermint Mutant"] = {
+            LvlReq = 120, Gold = 40000, Exp = 80000, SetType = "Multiple",
+            XPLock = { Level = 800, Type = "if" },
+            Drops = {
+                -- Guaranteed    "Snowflake"  x25
+                { chance = 1, item = "Snowflake", lvlReq = 0, quantity = 25 },
+                -- Guaranteed    "Blueberry Cane"  x3  (Lvl 100+)
+                { chance = 1, item = "Blueberry Cane", lvlReq = 100, quantity = 3 },
+                -- Guaranteed    "Green Apple Cane"  x3  (Lvl 100+)
+                { chance = 1, item = "Green Apple Cane", lvlReq = 100, quantity = 3 },
+                -- Guaranteed    "Peppermint Cane"  x3  (Lvl 100+)
+                { chance = 1, item = "Peppermint Cane", lvlReq = 100, quantity = 3 },
+                -- Guaranteed    "Peppermint Wheel"
+                { chance = 1, item = "Peppermint Wheel" },
+                -- 1/10          "Melted Sugar"
+                { chance = 10, item = "Melted Sugar" },
+                -- 1/25          "Peppermint Core"
+                { chance = 25, item = "Peppermint Core" },
+            },
+        },
+        ["Candy Coated Pest"] = {
+            LvlReq = 400, Gold = 725, Exp = 1425, SetType = "Single",
+            XPLock = { Level = 600, Type = "if" },
+            Drops = {
+                -- 1/10          "Snowflake"  x4
+                { chance = 10, item = "Snowflake", lvlReq = 0, quantity = 4 },
+            },
+        },
+        ["Chef Cinnarend"] = {
+            LvlReq = 425, Gold = 325000, Exp = 300000, SetType = "Multiple",
+            Badge = 154889556678373,
+            Drops = {
+                -- Guaranteed    "Snowflake"  x200
+                { chance = 1, item = "Snowflake", lvlReq = 0, quantity = 200 },
+                -- Guaranteed    "Gingerbread Home"
+                { chance = 1, item = "Gingerbread Home" },
+                -- 1/33          "Piping Bag"
+                { chance = 33, item = "Piping Bag" },
+                -- 1/33          "Candy Blend"
+                { chance = 33, item = "Candy Blend" },
+                -- 1/75          "Candy Cane Summoner"
+                { chance = 75, item = "Candy Cane Summoner" },
+                -- 1/100         "Cinnarend's Gift of Terrifying Confection"  (Lvl 425+)  [Legendary]
+                { chance = 100, item = "Cinnarend's Gift of Terrifying Confection", lvlReq = 425, rarity = "Legendary" },
+            },
+        },
+        ["Ornament Pawn"] = {
+            LvlReq = 650, Gold = 1250, Exp = 2750, SetType = "Multiple",
+            XPLock = { Level = 1200, Type = "if" },
+            Drops = {
+                -- 1/10          "Snowflake"  x10
+                { chance = 10, item = "Snowflake", lvlReq = 0, quantity = 10 },
+                -- 1/20          "Silver Branch"
+                { chance = 20, item = "Silver Branch" },
+                -- 1/25          "Broken Bauble"
+                { chance = 25, item = "Broken Bauble" },
+            },
+        },
+        ["Glitter Wraith"] = {
+            LvlReq = 650, Gold = 1500, Exp = 3250, SetType = "Multiple",
+            XPLock = { Level = 1200, Type = "if" },
+            Drops = {
+                -- 1/10          "Snowflake"  x15
+                { chance = 10, item = "Snowflake", lvlReq = 0, quantity = 15 },
+                -- 1/10          "Glitter"
+                { chance = 10, item = "Glitter" },
+                -- 1/20          "Silver Branch"
+                { chance = 20, item = "Silver Branch" },
+            },
+        },
+        ["Restless Tinsel"] = {
+            LvlReq = 650, Gold = 1500, Exp = 3250, SetType = "Multiple",
+            XPLock = { Level = 1200, Type = "if" },
+            Drops = {
+                -- 1/10          "Snowflake"  x15
+                { chance = 10, item = "Snowflake", lvlReq = 0, quantity = 15 },
+                -- 1/8           "Tinsel"
+                { chance = 8, item = "Tinsel" },
+                -- 1/20          "Silver Branch"
+                { chance = 20, item = "Silver Branch" },
+            },
+        },
+        ["Elite Vampire"] = {
+            LvlReq = 700, Gold = 0, Exp = 0, SetType = "Multiple",
+            Drops = {
+                -- 1/125         "Bloodshot Eye"  (Lvl 1300+)
+                { chance = 125, item = "Bloodshot Eye", lvlReq = 1300 },
+            },
+        },
+        ["Vampire"] = {
+            LvlReq = 700, Gold = 1200, Exp = 2750, SetType = "Multiple",
+            XPLock = { Level = 2000, Type = "if" },
+            Candy = 40,
+            Drops = {
+                -- 1/20          "Halloween Essence"
+                { chance = 20, item = "Halloween Essence" },
+                -- 1/175         "Bloodshot Eye"  (Lvl 1300+)
+                { chance = 175, item = "Bloodshot Eye", lvlReq = 1300 },
+                -- 1/250         "Vampire Clothing"
+                { chance = 250, item = "Vampire Clothing" },
+                -- 1/4000        "Vengeful Spirit"  [Exotic]
+                { chance = 4000, item = "Vengeful Spirit", lvlReq = 0, rarity = "Exotic" },
+            },
+        },
+        ["Pumpkin Punk"] = {
+            LvlReq = 700, Gold = 1200, Exp = 2750, SetType = "Multiple",
+            XPLock = { Level = 2000, Type = "if" },
+            Candy = 40,
+            Drops = {
+                -- 1/20          "Halloween Essence"
+                { chance = 20, item = "Halloween Essence" },
+                -- 1/20          "Pumpkin Spice"
+                { chance = 20, item = "Pumpkin Spice" },
+                -- 1/30          "Pumpkin Candy"
+                { chance = 30, item = "Pumpkin Candy" },
+                -- 1/200         "Pumpkin Head"
+                { chance = 200, item = "Pumpkin Head" },
+                -- 1/4000        "Vengeful Spirit"  [Exotic]
+                { chance = 4000, item = "Vengeful Spirit", lvlReq = 0, rarity = "Exotic" },
+            },
+        },
+        ["Uriah the Snowflake Conductor"] = {
+            LvlReq = 800, Gold = 250000, Exp = 350000, SetType = "Multiple",
+            Drops = {
+                -- Guaranteed    "Unique Snowflake"
+                { chance = 1, item = "Unique Snowflake" },
+                -- 1/3           "Uriah's Clothes"
+                { chance = 3, item = "Uriah's Clothes" },
+                -- 1/50          "Permafrost Blade"  (Lvl 800+)  [Rare]
+                { chance = 50, item = "Permafrost Blade", lvlReq = 800, rarity = "Rare" },
+            },
+        },
+        ["Presented Brute"] = {
+            LvlReq = 800, Gold = 3000, Exp = 7000, SetType = "Multiple",
+            XPLock = { Level = 2000, Type = "if" },
+            Drops = {
+                -- 1/8           "Snowflake"  x25
+                { chance = 8, item = "Snowflake", lvlReq = 0, quantity = 25 },
+                -- 1/25          "Stocking"
+                { chance = 25, item = "Stocking" },
+                -- 1/40          "Wrapping Paper"
+                { chance = 40, item = "Wrapping Paper" },
+                -- 1/95          "Empty Present"
+                { chance = 95, item = "Empty Present" },
+            },
+        },
+        ["Snowflake Conductor Minion"] = {
+            LvlReq = 800, Gold = 1000, Exp = 3000, SetType = "Single",
+            XPLock = { Level = 1100, Type = "if" },
+            Drops = {
+                -- 1/16          "Uriah's Presence"
+                { chance = 16, item = "Uriah's Presence" },
+            },
+        },
+        ["Giftwrapped Brawler"] = {
+            LvlReq = 800, Gold = 3000, Exp = 6000, SetType = "Multiple",
+            XPLock = { Level = 2000, Type = "if" },
+            Drops = {
+                -- 1/10          "Snowflake"  x25
+                { chance = 10, item = "Snowflake", lvlReq = 0, quantity = 25 },
+                -- 1/25          "Stocking"
+                { chance = 25, item = "Stocking" },
+                -- 1/40          "Wrapping Paper"
+                { chance = 40, item = "Wrapping Paper" },
+                -- 1/95          "Empty Present"
+                { chance = 95, item = "Empty Present" },
+            },
+        },
+        ["Mimic"] = {
+            LvlReq = 800, Gold = 3000, Exp = 6000, SetType = "Multiple",
+            XPLock = { Level = 2000, Type = "if" },
+            Drops = {
+                -- 1/10          "Snowflake"  x25
+                { chance = 10, item = "Snowflake", lvlReq = 0, quantity = 25 },
+                -- 1/25          "Stocking"
+                { chance = 25, item = "Stocking" },
+                -- 1/40          "Wrapping Paper"
+                { chance = 40, item = "Wrapping Paper" },
+                -- 1/95          "Empty Present"
+                { chance = 95, item = "Empty Present" },
+            },
+        },
+        ["Angry Fungus"] = {
+            LvlReq = 900, Gold = 1500, Exp = 4000, SetType = "Multiple",
+            Drops = {
+                -- 1/40          "Smushed Mush"  (Lvl 900+)  [Rare]
+                { chance = 40, item = "Smushed Mush", lvlReq = 900, rarity = "Rare" },
+                -- 1/125         "Angry Fungus Cap"  (Lvl 1200+)
+                { chance = 125, item = "Angry Fungus Cap", lvlReq = 1200 },
+            },
+        },
+        ["Normal Fungus"] = {
+            LvlReq = 900, Gold = 1500, Exp = 4000, SetType = "Multiple",
+            Drops = {
+                -- 1/40          "Smushed Mush"  (Lvl 900+)  [Rare]
+                { chance = 40, item = "Smushed Mush", lvlReq = 900, rarity = "Rare" },
+                -- 1/125         "Normal Fungus Cap"  (Lvl 1200+)
+                { chance = 125, item = "Normal Fungus Cap", lvlReq = 1200 },
+            },
+        },
+        ["Dracula"] = {
+            LvlReq = 1000, Gold = 450000, Exp = 575000, SetType = "Multiple",
+            Candy = 250,
+            Drops = {
+                -- Guaranteed    "Halloween Essence"  x5
+                { chance = 1, item = "Halloween Essence", lvlReq = 0, quantity = 5 },
+                -- 1/3           "Dracula Clothing"
+                { chance = 3, item = "Dracula Clothing" },
+                -- 1/5           "Halloween Essence"
+                { chance = 5, item = "Halloween Essence" },
+                -- 1/5           "Halloween Essence"
+                { chance = 5, item = "Halloween Essence" },
+                -- 1/5           "Dracula Fangs"
+                { chance = 5, item = "Dracula Fangs" },
+                -- 1/8           "Vampiric Grimoire"
+                { chance = 8, item = "Vampiric Grimoire" },
+                -- 1/8           "Vampire Slayer"
+                { chance = 8, item = "Vampire Slayer" },
+                -- 1/8           "Vampiric Bow"
+                { chance = 8, item = "Vampiric Bow" },
+                -- 1/8           "Blood Pact (Vanity)"
+                { chance = 8, item = "Blood Pact (Vanity)" },
+                -- 1/15          "Vampire Blood"
+                { chance = 15, item = "Vampire Blood" },
+                -- 1/20          "Bloodshot Eye"
+                { chance = 20, item = "Bloodshot Eye" },
+                -- 1/100         "Cog Trick"  [Exotic]
+                { chance = 100, item = "Cog Trick", lvlReq = 0, rarity = "Exotic" },
+                -- 1/100         "Developer Trick"  [Exotic]
+                { chance = 100, item = "Developer Trick", lvlReq = 0, rarity = "Exotic" },
+                -- 1/100         "Capybara Trick"  [Exotic]
+                { chance = 100, item = "Capybara Trick", lvlReq = 0, rarity = "Exotic" },
+                -- 1/125         "Bloodletter"  [Exotic]
+                { chance = 125, item = "Bloodletter", lvlReq = 0, rarity = "Exotic" },
+                -- 1/444         "Blighted Eyeball"  [Exotic]
+                { chance = 444, item = "Blighted Eyeball", lvlReq = 0, rarity = "Exotic" },
+                -- 1/500         "Vengeful Spirit"  [Exotic]
+                { chance = 500, item = "Vengeful Spirit", lvlReq = 0, rarity = "Exotic" },
+            },
+        },
+        ["Ghost"] = {
+            LvlReq = 1200, Gold = 1600, Exp = 4500, SetType = "Multiple",
+            XPLock = { Level = 3000, Type = "if" },
+            Candy = 50,
+            Drops = {
+                -- 1/20          "Halloween Essence"
+                { chance = 20, item = "Halloween Essence" },
+                -- 1/250         "Ghostly Soul"
+                { chance = 250, item = "Ghostly Soul" },
+                -- 1/3500        "Vengeful Spirit"  [Exotic]
+                { chance = 3500, item = "Vengeful Spirit", lvlReq = 0, rarity = "Exotic" },
+            },
+        },
+        ["Poltergeist"] = {
+            LvlReq = 1200, Gold = 2500, Exp = 6000, SetType = "Multiple",
+            XPLock = { Level = 3000, Type = "if" },
+            Candy = 100,
+            Drops = {
+                -- Guaranteed    "Halloween Essence"
+                { chance = 1, item = "Halloween Essence" },
+                -- 1/100         "Ghostly Soul"
+                { chance = 100, item = "Ghostly Soul" },
+                -- 1/300         "Vengeful Spirit"  [Exotic]
+                { chance = 300, item = "Vengeful Spirit", lvlReq = 0, rarity = "Exotic" },
+            },
+        },
+        ["Yuletide Ent"] = {
+            LvlReq = 1250, Gold = 600000, Exp = 700000, SetType = "Multiple",
+            Badge = 2642568419358312,
+            Drops = {
+                -- Guaranteed    "Snowflake"  x2500
+                { chance = 1, item = "Snowflake", lvlReq = 0, quantity = 2500 },
+                -- Guaranteed    "Yuletide Bell"
+                { chance = 1, item = "Yuletide Bell" },
+                -- Guaranteed    "Yulewood Log"  x25
+                { chance = 1, item = "Yulewood Log", lvlReq = 0, quantity = 25 },
+                -- 1/10          "Glittering Snow"
+                { chance = 10, item = "Glittering Snow" },
+                -- 1/10          "Aurora Ribbons"
+                { chance = 10, item = "Aurora Ribbons" },
+                -- 1/10          "Scented Candles"
+                { chance = 10, item = "Scented Candles" },
+                -- 1/25          "Sanctified Soul"
+                { chance = 25, item = "Sanctified Soul" },
+                -- 1/25          "Frozen Wreath"
+                { chance = 25, item = "Frozen Wreath" },
+                -- 1/250         "Nature's Grace of Yule Giftings"  (Lvl 1250+)  [Mythical]
+                { chance = 250, item = "Nature's Grace of Yule Giftings", lvlReq = 1250, rarity = "Mythical", quantity = 1 },
+            },
+        },
+        ["Mummy"] = {
+            LvlReq = 1300, Gold = 6000, Exp = 6000, SetType = "Multiple",
+            XPLock = { Level = 3000, Type = "if" },
+            Candy = 70,
+            Drops = {
+                -- 1/15          "Halloween Essence"
+                { chance = 15, item = "Halloween Essence" },
+                -- 1/3000        "Vengeful Spirit"  [Exotic]
+                { chance = 3000, item = "Vengeful Spirit", lvlReq = 0, rarity = "Exotic" },
+            },
+        },
+        ["The Gobbler"] = {
+            LvlReq = 1350, Gold = 500000, Exp = 620000, SetType = "Single",
+            Drops = {
+                -- Guaranteed    "Golden Turkey"
+                { chance = 1, item = "Golden Turkey" },
+                -- Guaranteed    "Turkey Drumstick"
+                { chance = 1, item = "Turkey Drumstick" },
+                -- Guaranteed    "Turkey Drumstick"
+                { chance = 1, item = "Turkey Drumstick" },
+                -- 1/5           "Sweet Potato"
+                { chance = 5, item = "Sweet Potato" },
+                -- 1/5           "Sweet Potato"
+                { chance = 5, item = "Sweet Potato" },
+                -- 1/50          "Boggler Pass"  (Lvl 1350+)  [Legendary]
+                { chance = 50, item = "Boggler Pass", lvlReq = 1350, rarity = "Legendary" },
+                -- 1/50          "Optimal Turkey"  (Lvl 2000+)  [Legendary]
+                { chance = 50, item = "Optimal Turkey", lvlReq = 2000, rarity = "Legendary" },
+                -- 1/75          "Classic Thanksgiving Summoner"  (Lvl 1350+)  [Legendary]
+                { chance = 75, item = "Classic Thanksgiving Summoner", lvlReq = 1350, rarity = "Legendary" },
+                -- 1/100         "Salt"  (Lvl 1350+)  [Mythical]
+                { chance = 100, item = "Salt", lvlReq = 1350, rarity = "Mythical" },
+            },
+        },
+        ["Jittery Jacko"] = {
+            LvlReq = 1350, Gold = 5000, Exp = 7500, SetType = "Multiple",
+            Candy = 200,
+            Drops = {
+                -- Guaranteed    "Halloween Essence"
+                { chance = 1, item = "Halloween Essence" },
+                -- Guaranteed    "Halloween Essence"
+                { chance = 1, item = "Halloween Essence" },
+                -- Guaranteed    "Halloween Essence"
+                { chance = 1, item = "Halloween Essence" },
+                -- 1/50          "Jitter-Jitter Pumpkin"
+                { chance = 50, item = "Jitter-Jitter Pumpkin" },
+                -- 1/100         "Pumpkin Bomber (Vanity)"
+                { chance = 100, item = "Pumpkin Bomber (Vanity)" },
+                -- 1/100         "Jitter Head (Vanity)"
+                { chance = 100, item = "Jitter Head (Vanity)" },
+                -- 1/125         "Jittered Core"  (Lvl 1000+)  [Exotic]
+                { chance = 125, item = "Jittered Core", lvlReq = 1000, rarity = "Exotic", quantity = 1 },
+                -- 1/200         "Cog Trick"  (Lvl 1000+)  [Exotic]
+                { chance = 200, item = "Cog Trick", lvlReq = 1000, rarity = "Exotic", quantity = 1 },
+            },
+        },
+        ["Nightmaric Jacko"] = {
+            LvlReq = 1350, Gold = 5000, Exp = 7500, SetType = "Multiple",
+            Darkcandy = 250,
+            Drops = {
+                -- 1/150         "Jittered Core"  (Lvl 1000+)  [Exotic]
+                { chance = 150, item = "Jittered Core", lvlReq = 1000, rarity = "Exotic" },
+                -- 1/200         "Nightmaric Catalyst"  (Lvl 1000+)  [Exotic]
+                { chance = 200, item = "Nightmaric Catalyst", lvlReq = 1000, rarity = "Exotic", quantity = 1 },
+            },
+        },
+        ["Candy Knight"] = {
+            LvlReq = 4000, Gold = 10000, Exp = 10000, SetType = "Single",
+            Drops = {
+                -- 1/500         "Angry Shard"
+                { chance = 500, item = "Angry Shard" },
+            },
+        },
+        ["Confection Jacko"] = {
+            LvlReq = 4000, Gold = 10000, Exp = 10000, SetType = "Single",
+            Drops = {
+                -- 1/500         "Angry Shard"
+                { chance = 500, item = "Angry Shard" },
+            },
+        },
+        ["Candy Flaron"] = {
+            LvlReq = 4000, Gold = 2500000, Exp = 5000000, SetType = "Single",
+            Drops = {
+                -- Guaranteed    "Candy Trophy"
+                { chance = 1, item = "Candy Trophy" },
+                -- 1/999         "True Flaron's Blades"  (Lvl 1000+)  [Legendary]
+                { chance = 999, item = "True Flaron's Blades", lvlReq = 1000, rarity = "Legendary" },
+            },
+        },
+        ["Candy Jack the Confectionist"] = {
+            LvlReq = 4000, Gold = 1750000, Exp = 1200000, SetType = "Single",
+            Candy = 1000,
+            Drops = {
+                -- Guaranteed    "Corrupted Lollipop"
+                { chance = 1, item = "Corrupted Lollipop" },
+            },
+        },
+        ["Candy Cadet"] = {
+            LvlReq = 4000, Gold = 10000, Exp = 10000, SetType = "Single",
+            Drops = {
+                -- 1/500         "Angry Shard"
+                { chance = 500, item = "Angry Shard" },
+            },
+        },
+        ["Candy Statue"] = {
+            LvlReq = 4000, Gold = 10000, Exp = 10000, SetType = "Single",
+            Drops = {
+                -- 1/500         "Angry Shard"
+                { chance = 500, item = "Angry Shard" },
+            },
+        },
+        ["Candy Raider"] = {
+            LvlReq = 4000, Gold = 10000, Exp = 10000, SetType = "Single",
+            Drops = {
+                -- 1/500         "Angry Shard"
+                { chance = 500, item = "Angry Shard" },
+            },
+        },
+    },
+
+    ItemDropSource = {
+        ["Abyssal Eyes"] = {
+            { mob = "Abyssfisher", chance = 12, lvlReq = 800 },
+        },
+        ["Aequilibrium's Apotheosis"] = {
+            { mob = "Equilibrium Tesseract", chance = 100, lvlReq = 2000 },
+            { mob = "Fusion Paladin", chance = 5000, lvlReq = 2000 },
+            { mob = "Equilibrium Amalgamation", chance = 50000, lvlReq = 2000 },
+            { mob = "Equalized Spirit", chance = 50000, lvlReq = 2000 },
+        },
+        ["Alpha Bow"] = {
+            { mob = "Alpha Ruler", chance = 4, lvlReq = 50 },
+        },
+        ["Alpha Crystal"] = {
+            { mob = "Alpha Ruler", chance = 1, lvlReq = 50 },
+            { mob = "Alpha Destructive Overlord", chance = 2, lvlReq = 120 },
+            { mob = "Alpha Destructive Overlord", chance = 2, lvlReq = 120 },
+            { mob = "Alpha Destructive Overlord", chance = 2, lvlReq = 120 },
+            { mob = "Alpha Ruler", chance = 10, lvlReq = 50 },
+        },
+        ["Alpha's Rage"] = {
+            { mob = "Alpha Destructive Overlord", chance = 3, lvlReq = 120 },
+        },
+        ["Alphite Sniper"] = {
+            { mob = "Alpha Destructive Overlord", chance = 75, lvlReq = 120 },
+        },
+        ["Angelene Armor"] = {
+            { mob = "True Sun God", chance = 100000, lvlReq = 0 },
+            { mob = "Possessed Nun", chance = 100000, lvlReq = 400 },
+        },
+        ["Angry Fungus Cap"] = {
+            { mob = "Angry Fungus", chance = 125, lvlReq = 900 },
+        },
+        ["Angry Shard"] = {
+            { mob = "Candy Cadet", chance = 500, lvlReq = 4000 },
+            { mob = "Chocolate Mutant", chance = 500, lvlReq = 4000 },
+            { mob = "Candy Raider", chance = 500, lvlReq = 4000 },
+            { mob = "Candy Knight", chance = 500, lvlReq = 4000 },
+            { mob = "Candy Statue", chance = 500, lvlReq = 4000 },
+            { mob = "Confection Jacko", chance = 500, lvlReq = 4000 },
+        },
+        ["Arcane Manifestation (Vanity)"] = {
+            { mob = "Fallen Mage", chance = 33, lvlReq = 500 },
+            { mob = "Ascension Mage", chance = 75, lvlReq = 500 },
+        },
+        ["Aurora Ribbons"] = {
+            { mob = "Yuletide Ent", chance = 10, lvlReq = 1250 },
+            { mob = "Aurora Ballista", chance = 33, lvlReq = 15 },
+        },
+        ["Blazing Scale-Burst"] = {
+            { mob = "Oiled Hissler", chance = 50, lvlReq = 0 },
+        },
+        ["Blighted Eyeball"] = {
+            { mob = "Dracula", chance = 444, lvlReq = 1000 },
+        },
+        ["Blood Pact (Vanity)"] = {
+            { mob = "Dracula", chance = 8, lvlReq = 1000 },
+        },
+        ["Bloodletter"] = {
+            { mob = "Dracula", chance = 125, lvlReq = 1000 },
+        },
+        ["Bloodshot Eye"] = {
+            { mob = "Dracula", chance = 20, lvlReq = 1000 },
+            { mob = "Elite Vampire", chance = 125, lvlReq = 700 },
+            { mob = "Vampire", chance = 175, lvlReq = 700 },
+        },
+        ["Bloxy Cola"] = {
+            { mob = "Aqua Reserve", chance = 25, lvlReq = 0 },
+        },
+        ["Blue Cosmic Durag"] = {
+            { mob = "Zay the Galaxy Pear", chance = 2500, lvlReq = 800 },
+        },
+        ["Blueberry Cane"] = {
+            { mob = "Peppermint Mutant", chance = 1, lvlReq = 120 },
+            { mob = "Candy Cane Archer", chance = 10, lvlReq = 100 },
+            { mob = "Candy Cane Knight", chance = 10, lvlReq = 100 },
+        },
+        ["Boggler Pass"] = {
+            { mob = "The Gobbler", chance = 50, lvlReq = 1350 },
+        },
+        ["Borealis Star"] = {
+            { mob = "Grand Aurora Ballista", chance = 1, lvlReq = 15 },
+        },
+        ["Broken Bauble"] = {
+            { mob = "Bobby", chance = 1, lvlReq = 1000 },
+            { mob = "Ornament Pawn", chance = 25, lvlReq = 650 },
+        },
+        ["Candy Blend"] = {
+            { mob = "Chef Cinnarend", chance = 33, lvlReq = 425 },
+        },
+        ["Candy Cane Summoner"] = {
+            { mob = "Chef Cinnarend", chance = 75, lvlReq = 425 },
+        },
+        ["Candy Trophy"] = {
+            { mob = "Candy Flaron", chance = 1, lvlReq = 4000 },
+        },
+        ["Capybara Trick"] = {
+            { mob = "Jack the Master of Scares", chance = 8, lvlReq = 1000 },
+            { mob = "Dracula", chance = 100, lvlReq = 1000 },
+        },
+        ["Champion Emblem"] = {
+            { mob = "King Solomon", chance = 1, lvlReq = 1350 },
+        },
+        ["Champion Fragment"] = {
+            { mob = "Frozen Fountain", chance = 1, lvlReq = 1350 },
+            { mob = "Frozen Fountain", chance = 5, lvlReq = 1350 },
+            { mob = "Triumphant Gladiator", chance = 15, lvlReq = 1350 },
+            { mob = "Royal Mage", chance = 175, lvlReq = 1350 },
+            { mob = "Champ Winner", chance = 175, lvlReq = 1350 },
+            { mob = "Honourable Knight", chance = 175, lvlReq = 1350 },
+            { mob = "Royal Elder", chance = 175, lvlReq = 1350 },
+            { mob = "Golden Statue", chance = 175, lvlReq = 1350 },
+            { mob = "Frozen Fountain", chance = 13554, lvlReq = 1350 },
+            { mob = "Frozen Fountain", chance = 14344, lvlReq = 1350 },
+        },
+        ["Champion's Wake"] = {
+            { mob = "True Flaron", chance = 1, lvlReq = 1000 },
+        },
+        ["Charred Ember"] = {
+            { mob = "Oiled Hissler", chance = 3, lvlReq = 0 },
+        },
+        ["Cinnarend's Gift of Terrifying Confection"] = {
+            { mob = "Chef Cinnarend", chance = 100, lvlReq = 425 },
+        },
+        ["Classic Thanksgiving Summoner"] = {
+            { mob = "The Gobbler", chance = 75, lvlReq = 1350 },
+            { mob = "Classy Turkeyman", chance = 100, lvlReq = 0 },
+            { mob = "Native Turkeyman", chance = 8000, lvlReq = 0 },
+        },
+        ["Cobalium Cube"] = {
+            { mob = "Cobalium Protector", chance = 5, lvlReq = 700 },
+        },
+        ["Cobalium Sphere"] = {
+            { mob = "Cobalium Protector", chance = 5, lvlReq = 700 },
+        },
+        ["Cobra's Grudge"] = {
+            { mob = "Abaddon", chance = 50, lvlReq = 200 },
+        },
+        ["Cog Trick"] = {
+            { mob = "Jack the Master of Scares", chance = 8, lvlReq = 1000 },
+            { mob = "Dracula", chance = 100, lvlReq = 1000 },
+            { mob = "Jittery Jacko", chance = 200, lvlReq = 1350 },
+        },
+        ["Construct of Equilibrium"] = {
+            { mob = "Equilibrium Tesseract", chance = 1, lvlReq = 2000 },
+        },
+        ["Copper Helm"] = {
+            { mob = "Copper Warrior", chance = 33, lvlReq = 30 },
+        },
+        ["Copper Ore"] = {
+            { mob = "Dhurke The Forsaken Golem", chance = 2, lvlReq = 80 },
+            { mob = "Copper Warrior", chance = 4, lvlReq = 30 },
+            { mob = "Dhurke The Forsaken Golem", chance = 5, lvlReq = 80 },
+        },
+        ["Corrupted Cross"] = {
+            { mob = "Corrupted Statue", chance = 75, lvlReq = 1350 },
+        },
+        ["Corrupted Lollipop"] = {
+            { mob = "Candy Jack the Confectionist", chance = 1, lvlReq = 4000 },
+        },
+        ["Cosmic Durag"] = {
+            { mob = "Zay the Galaxy Pear", chance = 1000, lvlReq = 800 },
+        },
+        ["Creepy Mask"] = {
+            { mob = "Ancient Straggler", chance = 3, lvlReq = 800 },
+        },
+        ["Cryllophyll"] = {
+            { mob = "Fallen Mage", chance = 5, lvlReq = 500 },
+            { mob = "Cryllophyll Elite", chance = 15, lvlReq = 250 },
+        },
+        ["Dark Energy Crystal"] = {
+            { mob = "Fallen Mage", chance = 1, lvlReq = 500 },
+        },
+        ["Darkness"] = {
+            { mob = "Abaddon", chance = 33, lvlReq = 200 },
+        },
+        ["Destinium"] = {
+            { mob = "Ascender's Protector", chance = 15, lvlReq = 1300 },
+            { mob = "The Destined", chance = 40, lvlReq = 1300 },
+        },
+        ["Destructive Gearworks"] = {
+            { mob = "Fury Destructive Overlord", chance = 75, lvlReq = 200 },
+        },
+        ["Developer Pearl Clothes"] = {
+            { mob = "Pearl the Omega", chance = 3, lvlReq = 800 },
+        },
+        ["Developer Shades"] = {
+            { mob = "Pearl the Omega", chance = 3, lvlReq = 800 },
+        },
+        ["Developer Trick"] = {
+            { mob = "Jack the Master of Scares", chance = 8, lvlReq = 1000 },
+            { mob = "Dracula", chance = 100, lvlReq = 1000 },
+        },
+        ["Dhurke Fists"] = {
+            { mob = "Dhurke The Forsaken Golem", chance = 33, lvlReq = 80 },
+        },
+        ["Dracula Clothing"] = {
+            { mob = "Dracula", chance = 3, lvlReq = 1000 },
+        },
+        ["Dracula Fangs"] = {
+            { mob = "Diocula", chance = 1, lvlReq = 1350 },
+            { mob = "Diocula", chance = 1, lvlReq = 1350 },
+            { mob = "Diocula", chance = 1, lvlReq = 1350 },
+            { mob = "Dracula", chance = 5, lvlReq = 1000 },
+        },
+        ["Earth Core"] = {
+            { mob = "Earth Nativeman", chance = 3, lvlReq = 0 },
+        },
+        ["Earth Formation"] = {
+            { mob = "Earth Golem", chance = 1, lvlReq = 25 },
+        },
+        ["Earth Scepter"] = {
+            { mob = "Earth Golem", chance = 25, lvlReq = 25 },
+        },
+        ["Earthen Gauntlets"] = {
+            { mob = "Earth Nativeman", chance = 50, lvlReq = 0 },
+        },
+        ["Eldritch Palm"] = {
+            { mob = "Devil Palm", chance = 15, lvlReq = 800 },
+        },
+        ["Emerald Necklace"] = {
+            { mob = "Matt the Ruler of Fedoras", chance = 5, lvlReq = 800 },
+            { mob = "Smooth Criminal", chance = 5, lvlReq = 800 },
+        },
+        ["Empty Present"] = {
+            { mob = "Mimic", chance = 95, lvlReq = 800 },
+            { mob = "Giftwrapped Brawler", chance = 95, lvlReq = 800 },
+            { mob = "Presented Brute", chance = 95, lvlReq = 800 },
+        },
+        ["Empty Space"] = {
+            { mob = "Celia", chance = 1, lvlReq = 1350 },
+            { mob = "Space King", chance = 3, lvlReq = 1000 },
+            { mob = "Planet Giant", chance = 3, lvlReq = 1000 },
+            { mob = "Spatial Extrusion", chance = 10, lvlReq = 1000 },
+        },
+        ["Endarkening Matter"] = {
+            { mob = "Ultrabeast", chance = 10, lvlReq = 1100 },
+            { mob = "Endarkening Warrior", chance = 30, lvlReq = 1100 },
+        },
+        ["Energized Bits"] = {
+            { mob = "Fury Destructive Overlord", chance = 2, lvlReq = 200 },
+            { mob = "Fury Ruler", chance = 2, lvlReq = 20 },
+        },
+        ["Energized Fury Bits"] = {
+            { mob = "Fury Destructive Overlord", chance = 1, lvlReq = 200 },
+        },
+        ["Equalization Energy"] = {
+            { mob = "Equilibrium Tesseract", chance = 1, lvlReq = 2000 },
+            { mob = "Equilibrium Amalgamation", chance = 40, lvlReq = 2000 },
+        },
+        ["Equalized Vessel"] = {
+            { mob = "Equilibrium Tesseract", chance = 1, lvlReq = 2000 },
+            { mob = "Equalized Spirit", chance = 40, lvlReq = 2000 },
+        },
+        ["Equilibrium Prism"] = {
+            { mob = "Equilibrium Tesseract", chance = 75, lvlReq = 2000 },
+        },
+        ["Equilibrium Sovereign"] = {
+            { mob = "Equilibrium Tesseract", chance = 20, lvlReq = 2000 },
+        },
+        ["Fire Crystal"] = {
+            { mob = "Classy Turkeyman", chance = 1, lvlReq = 0 },
+            { mob = "Classy Turkeyman", chance = 1, lvlReq = 0 },
+            { mob = "Native Turkeyman", chance = 1, lvlReq = 0 },
+            { mob = "Classy Turkeyman", chance = 1, lvlReq = 0 },
+            { mob = "Dhurke The Forsaken Golem", chance = 2, lvlReq = 80 },
+            { mob = "Dhurke The Forsaken Golem", chance = 5, lvlReq = 80 },
+            { mob = "Firecrystal Guard", chance = 7, lvlReq = 100 },
+            { mob = "Lava Mob", chance = 10, lvlReq = 80 },
+        },
+        ["Flamekeeper's Skull"] = {
+            { mob = "Abaddon", chance = 1, lvlReq = 200 },
+        },
+        ["Flaron's Blades"] = {
+            { mob = "Flaron", chance = 50, lvlReq = 300 },
+        },
+        ["Fractured Fragment"] = {
+            { mob = "Space King", chance = 33, lvlReq = 1000 },
+        },
+        ["Frozen Wreath"] = {
+            { mob = "Grand Aurora Ballista", chance = 3, lvlReq = 15 },
+            { mob = "Yuletide Ent", chance = 25, lvlReq = 1250 },
+            { mob = "Snow Devil", chance = 45, lvlReq = 15 },
+        },
+        ["Fury Scythe"] = {
+            { mob = "Fury Ruler", chance = 2, lvlReq = 20 },
+        },
+        ["Fusion Plating"] = {
+            { mob = "Fusion Paladin", chance = 2, lvlReq = 2000 },
+        },
+        ["GL1TCH3D FR@GM3NT"] = {
+            { mob = "C@R1UPTGR@Y", chance = 2, lvlReq = 4000 },
+        },
+        ["Galactic Shard"] = {
+            { mob = "Zay the Galaxy Pear", chance = 1, lvlReq = 800 },
+        },
+        ["Galea Irae"] = {
+            { mob = "Fury Destructive Overlord", chance = 100, lvlReq = 200 },
+        },
+        ["Gaming Controller"] = {
+            { mob = "Supreme Gamer", chance = 1, lvlReq = 800 },
+        },
+        ["Ghostly Soul"] = {
+            { mob = "Poltergeist", chance = 100, lvlReq = 1200 },
+            { mob = "Ghost", chance = 250, lvlReq = 1200 },
+        },
+        ["Gigantic Pumpkin"] = {
+            { mob = "Jack the Master of Scares", chance = 1, lvlReq = 1000 },
+            { mob = "Jack the Master of Scares", chance = 10, lvlReq = 1000 },
+        },
+        ["Gingerbread Home"] = {
+            { mob = "Chef Cinnarend", chance = 1, lvlReq = 425 },
+        },
+        ["Glitched Rose"] = {
+            { mob = "Supreme Gamer", chance = 3, lvlReq = 800 },
+        },
+        ["Glitter"] = {
+            { mob = "Glitter Wraith", chance = 10, lvlReq = 650 },
+        },
+        ["Glittering Snow"] = {
+            { mob = "Yuletide Ent", chance = 10, lvlReq = 1250 },
+            { mob = "Snow Devil", chance = 33, lvlReq = 15 },
+        },
+        ["Glory"] = {
+            { mob = "Victory Embelliment", chance = 100, lvlReq = 1350 },
+        },
+        ["Gold Ore"] = {
+            { mob = "Gold Champion", chance = 3, lvlReq = 0 },
+            { mob = "Golden Warrior", chance = 15, lvlReq = 150 },
+        },
+        ["Golden Turkey"] = {
+            { mob = "The Gobbler", chance = 1, lvlReq = 1350 },
+        },
+        ["Granulite"] = {
+            { mob = "Fallen Mage", chance = 5, lvlReq = 500 },
+            { mob = "Granulite Elite", chance = 15, lvlReq = 450 },
+        },
+        ["Green Apple Cane"] = {
+            { mob = "Peppermint Mutant", chance = 1, lvlReq = 120 },
+            { mob = "Candy Cane Archer", chance = 10, lvlReq = 100 },
+            { mob = "Candy Cane Knight", chance = 10, lvlReq = 100 },
+        },
+        ["Hallow Token"] = {
+            { mob = "Jack the Master of Scares", chance = 1, lvlReq = 1000 },
+            { mob = "Jack the Master of Scares", chance = 1, lvlReq = 1000 },
+            { mob = "Jack the Master of Scares", chance = 1, lvlReq = 1000 },
+            { mob = "Jack the Master of Scares", chance = 1, lvlReq = 1000 },
+            { mob = "Jack the Master of Scares", chance = 1, lvlReq = 1000 },
+        },
+        ["Hallow's Grasp"] = {
+            { mob = "Jack the Master of Scares", chance = 50, lvlReq = 1000 },
+        },
+        ["Halloween Essence"] = {
+            { mob = "Jittery Jacko", chance = 1, lvlReq = 1350 },
+            { mob = "Jittery Jacko", chance = 1, lvlReq = 1350 },
+            { mob = "Phantom Raider", chance = 1, lvlReq = 1350 },
+            { mob = "Jittery Jacko", chance = 1, lvlReq = 1350 },
+            { mob = "Diocula", chance = 1, lvlReq = 1350 },
+            { mob = "Fallen Mage", chance = 1, lvlReq = 500 },
+            { mob = "Phantom Raider", chance = 1, lvlReq = 1350 },
+            { mob = "Dracula", chance = 1, lvlReq = 1000 },
+            { mob = "Poltergeist", chance = 1, lvlReq = 1200 },
+            { mob = "Jack the Master of Scares", chance = 1, lvlReq = 1000 },
+            { mob = "Jack the Master of Scares", chance = 1, lvlReq = 1000 },
+            { mob = "Jack the Master of Scares", chance = 1, lvlReq = 1000 },
+            { mob = "Dracula", chance = 5, lvlReq = 1000 },
+            { mob = "Jack the Master of Scares", chance = 5, lvlReq = 1000 },
+            { mob = "Dracula", chance = 5, lvlReq = 1000 },
+            { mob = "Jack the Master of Scares", chance = 5, lvlReq = 1000 },
+            { mob = "Roaming Statue", chance = 15, lvlReq = 1300 },
+            { mob = "Mummy", chance = 15, lvlReq = 1300 },
+            { mob = "Pumpkin Punk", chance = 20, lvlReq = 700 },
+            { mob = "Ghost", chance = 20, lvlReq = 1200 },
+            { mob = "Vampire", chance = 20, lvlReq = 700 },
+            { mob = "Zombie", chance = 25, lvlReq = 80 },
+            { mob = "Possessed Nun", chance = 25, lvlReq = 400 },
+            { mob = "Skeleton", chance = 25, lvlReq = 80 },
+            { mob = "Bloody Priest", chance = 25, lvlReq = 400 },
+        },
+        ["Heal Potion"] = {
+            { mob = "Alpha Ruler", chance = 4, lvlReq = 50 },
+        },
+        ["Heated Energy Core"] = {
+            { mob = "Space King", chance = 1, lvlReq = 1000 },
+            { mob = "Solar Giant", chance = 20, lvlReq = 1300 },
+            { mob = "Solar Minion", chance = 40, lvlReq = 1350 },
+        },
+        ["Hell Tommy Gun"] = {
+            { mob = "Abaddon", chance = 5, lvlReq = 200 },
+            { mob = "Abaddon Minion", chance = 10, lvlReq = 0 },
+            { mob = "TUTORIAL_MOB", chance = 10, lvlReq = 200 },
+        },
+        ["Hemaglobium Cube"] = {
+            { mob = "Hemaglobium Eradicator", chance = 5, lvlReq = 700 },
+        },
+        ["Hemaglobium Sphere"] = {
+            { mob = "Hemaglobium Eradicator", chance = 5, lvlReq = 700 },
+        },
+        ["Herculean Pearl"] = {
+            { mob = "Pearl the Omega", chance = 1, lvlReq = 800 },
+        },
+        ["Hidden Rage"] = {
+            { mob = "Fury Ruler", chance = 20, lvlReq = 20 },
+        },
+        ["Icycle"] = {
+            { mob = "Snow Golem", chance = 1, lvlReq = 40 },
+            { mob = "Snow Golem", chance = 40, lvlReq = 40 },
+        },
+        ["Idol's Heart"] = {
+            { mob = "Celia", chance = 1, lvlReq = 1350 },
+        },
+        ["Incyclite"] = {
+            { mob = "Fallen Mage", chance = 5, lvlReq = 500 },
+            { mob = "Snow Golem", chance = 5, lvlReq = 40 },
+            { mob = "Incyclite Elite", chance = 15, lvlReq = 375 },
+        },
+        ["Invigorite Cube"] = {
+            { mob = "Invigorite Emancipator", chance = 5, lvlReq = 700 },
+        },
+        ["Invigorite Sphere"] = {
+            { mob = "Invigorite Emancipator", chance = 5, lvlReq = 700 },
+        },
+        ["Iron Chunk"] = {
+            { mob = "Dhurke The Forsaken Golem", chance = 2, lvlReq = 80 },
+            { mob = "Dhurke The Forsaken Golem", chance = 5, lvlReq = 80 },
+            { mob = "Iron Mob", chance = 7, lvlReq = 60 },
+        },
+        ["Iron Helm"] = {
+            { mob = "Iron Mob", chance = 33, lvlReq = 60 },
+        },
+        ["Jack's Wrath V2"] = {
+            { mob = "Jack the Master of Scares", chance = 44, lvlReq = 1000 },
+        },
+        ["Jitter Head (Vanity)"] = {
+            { mob = "Jittery Jacko", chance = 100, lvlReq = 1350 },
+        },
+        ["Jitter-Jitter Pumpkin"] = {
+            { mob = "Jittery Jacko", chance = 50, lvlReq = 1350 },
+        },
+        ["Jittered Core"] = {
+            { mob = "Jack the Master of Scares", chance = 40, lvlReq = 1000 },
+            { mob = "Jittery Jacko", chance = 125, lvlReq = 1350 },
+            { mob = "Nightmaric Jacko", chance = 150, lvlReq = 1350 },
+        },
+        ["Jolly Helper's Presence"] = {
+            { mob = "Santa's Helper", chance = 1, lvlReq = 0 },
+        },
+        ["Last Prism"] = {
+            { mob = "Pearl the Omega", chance = 2500, lvlReq = 800 },
+        },
+        ["Lava Helm"] = {
+            { mob = "Firecrystal Guard", chance = 33, lvlReq = 100 },
+            { mob = "Lava Mob", chance = 45, lvlReq = 80 },
+        },
+        ["Lightning Bolt"] = {
+            { mob = "Discharge", chance = 3, lvlReq = 0 },
+            { mob = "Uncharged", chance = 3, lvlReq = 0 },
+        },
+        ["Lightning Hammer"] = {
+            { mob = "Voltage", chance = 25, lvlReq = 25 },
+        },
+        ["Maelstrom"] = {
+            { mob = "Wind Spirit", chance = 50, lvlReq = 0 },
+        },
+        ["Magic Book"] = {
+            { mob = "Fallen Mage", chance = 1, lvlReq = 500 },
+            { mob = "Ascension Mage", chance = 4, lvlReq = 500 },
+        },
+        ["Matt's Clothes"] = {
+            { mob = "Matt the Ruler of Fedoras", chance = 5, lvlReq = 800 },
+            { mob = "Smooth Criminal", chance = 5, lvlReq = 800 },
+        },
+        ["Matt's Katana"] = {
+            { mob = "Smooth Criminal", chance = 250, lvlReq = 800 },
+            { mob = "Matt the Ruler of Fedoras", chance = 2500, lvlReq = 800 },
+        },
+        ["Matt's Presence"] = {
+            { mob = "Fedora Minion", chance = 16, lvlReq = 800 },
+        },
+        ["Matt's Spear"] = {
+            { mob = "Matt the Ruler of Fedoras", chance = 50, lvlReq = 800 },
+            { mob = "Smooth Criminal", chance = 50, lvlReq = 800 },
+        },
+        ["Mega Alpha Crystal"] = {
+            { mob = "Alpha Destructive Overlord", chance = 1, lvlReq = 120 },
+        },
+        ["Melted Sugar"] = {
+            { mob = "Peppermint Mutant", chance = 10, lvlReq = 120 },
+        },
+        ["Memory Fragment"] = {
+            { mob = "Ascender's Protector", chance = 8, lvlReq = 1300 },
+            { mob = "The Destined", chance = 25, lvlReq = 1300 },
+        },
+        ["Mercurite Crystal"] = {
+            { mob = "Dhurke The Forsaken Golem", chance = 1, lvlReq = 80 },
+            { mob = "Mercurite Minion", chance = 3, lvlReq = 0 },
+        },
+        ["Mercurite Helm"] = {
+            { mob = "Mercurite Minion", chance = 25, lvlReq = 0 },
+        },
+        ["Mixed Energy Crystal"] = {
+            { mob = "Flaron", chance = 1, lvlReq = 300 },
+            { mob = "Flaron", chance = 3, lvlReq = 300 },
+            { mob = "Flaron", chance = 3, lvlReq = 300 },
+        },
+        ["Mixed Ore"] = {
+            { mob = "Dhurke The Forsaken Golem", chance = 5, lvlReq = 80 },
+            { mob = "Dhurke The Forsaken Golem", chance = 10, lvlReq = 80 },
+            { mob = "Purple Dhurke Jr.", chance = 999999, lvlReq = 80 },
+            { mob = "Red Dhurke Jr.", chance = 999999, lvlReq = 80 },
+        },
+        ["Mixed Potion"] = {
+            { mob = "Flaron", chance = 7, lvlReq = 300 },
+        },
+        ["Nature's Grace of Yule Giftings"] = {
+            { mob = "Yuletide Ent", chance = 250, lvlReq = 1250 },
+        },
+        ["Nebula Piercer"] = {
+            { mob = "Zay the Galaxy Pear", chance = 50, lvlReq = 800 },
+        },
+        ["Necromancer's Shard"] = {
+            { mob = "Ascension Mage", chance = 1, lvlReq = 500 },
+            { mob = "Fallen Mage", chance = 1, lvlReq = 500 },
+        },
+        ["Neptune's Tear"] = {
+            { mob = "Neptune", chance = 1, lvlReq = 25 },
+        },
+        ["Nightmaric Catalyst"] = {
+            { mob = "Nightmaric Jacko", chance = 200, lvlReq = 1350 },
+        },
+        ["Nightmaric Soup"] = {
+            { mob = "Jack the Master of Scares", chance = 150, lvlReq = 1000 },
+        },
+        ["Normal Fungus Cap"] = {
+            { mob = "Normal Fungus", chance = 125, lvlReq = 900 },
+        },
+        ["Ocean Spellbook"] = {
+            { mob = "Pearl the Omega", chance = 5, lvlReq = 800 },
+        },
+        ["Oceanic Disintegrator"] = {
+            { mob = "Pearl the Omega", chance = 125, lvlReq = 800 },
+        },
+        ["Old Crown"] = {
+            { mob = "Victory Embelliment", chance = 3, lvlReq = 1350 },
+        },
+        ["Optimal Turkey"] = {
+            { mob = "The Gobbler", chance = 50, lvlReq = 1350 },
+        },
+        ["Pearl's Fedora (Vanity)"] = {
+            { mob = "Pearl the Omega", chance = 3, lvlReq = 800 },
+        },
+        ["Pearl's OG Scythe"] = {
+            { mob = "Pearl the Omega", chance = 1000, lvlReq = 800 },
+        },
+        ["Pearl's Presence"] = {
+            { mob = "Pearl Minion", chance = 16, lvlReq = 800 },
+        },
+        ["Peppermint Cane"] = {
+            { mob = "Peppermint Mutant", chance = 1, lvlReq = 120 },
+            { mob = "Candy Cane Archer", chance = 10, lvlReq = 100 },
+            { mob = "Candy Cane Knight", chance = 10, lvlReq = 100 },
+        },
+        ["Peppermint Core"] = {
+            { mob = "Peppermint Mutant", chance = 25, lvlReq = 120 },
+        },
+        ["Peppermint Wheel"] = {
+            { mob = "Peppermint Mutant", chance = 1, lvlReq = 120 },
+        },
+        ["Permafrost Blade"] = {
+            { mob = "Uriah the Snowflake Conductor", chance = 50, lvlReq = 800 },
+        },
+        ["Phantom Orb"] = {
+            { mob = "Phantom Raider", chance = 20, lvlReq = 1350 },
+        },
+        ["Phantomic Force"] = {
+            { mob = "Phantom Raider", chance = 150, lvlReq = 1350 },
+        },
+        ["Piled Air"] = {
+            { mob = "Wind Amalgamation", chance = 1, lvlReq = 25 },
+        },
+        ["Piping Bag"] = {
+            { mob = "Chef Cinnarend", chance = 33, lvlReq = 425 },
+        },
+        ["Planet Sphere"] = {
+            { mob = "Celia", chance = 1, lvlReq = 1350 },
+            { mob = "Planet Giant", chance = 3, lvlReq = 1000 },
+            { mob = "Space King", chance = 3, lvlReq = 1000 },
+            { mob = "Planet Minion", chance = 10, lvlReq = 1000 },
+        },
+        ["Plastic Bits"] = {
+            { mob = "Mercurite Minion", chance = 2, lvlReq = 0 },
+            { mob = "Gingerbread House", chance = 3, lvlReq = 0 },
+            { mob = "Uncharged", chance = 25, lvlReq = 0 },
+            { mob = "Aqua Reserve", chance = 25, lvlReq = 0 },
+            { mob = "Wind Spirit", chance = 25, lvlReq = 0 },
+            { mob = "Oiled Hissler", chance = 25, lvlReq = 0 },
+            { mob = "Earth Nativeman", chance = 25, lvlReq = 0 },
+            { mob = "Discharge", chance = 25, lvlReq = 0 },
+        },
+        ["Powercell"] = {
+            { mob = "Space King", chance = 3, lvlReq = 1000 },
+        },
+        ["Pressurized Air"] = {
+            { mob = "Wind Spirit", chance = 3, lvlReq = 0 },
+        },
+        ["Pumpkin Bomber (Vanity)"] = {
+            { mob = "Jittery Jacko", chance = 100, lvlReq = 1350 },
+        },
+        ["Pumpkin Candy"] = {
+            { mob = "Pumpkin Punk", chance = 30, lvlReq = 700 },
+        },
+        ["Pumpkin Head"] = {
+            { mob = "Pumpkin Punk", chance = 200, lvlReq = 700 },
+        },
+        ["Pumpkin Spice"] = {
+            { mob = "Pumpkin Punk", chance = 20, lvlReq = 700 },
+        },
+        ["Purpulite Ball"] = {
+            { mob = "Dhurke The Forsaken Golem", chance = 2, lvlReq = 80 },
+            { mob = "Purpulite Giant", chance = 3, lvlReq = 0 },
+            { mob = "Purpulite Mob", chance = 4, lvlReq = 15 },
+            { mob = "Dhurke The Forsaken Golem", chance = 5, lvlReq = 80 },
+        },
+        ["Purpulite Helm"] = {
+            { mob = "Purpulite Mob", chance = 30, lvlReq = 15 },
+        },
+        ["Rage Potion"] = {
+            { mob = "Fury Ruler", chance = 2, lvlReq = 20 },
+        },
+        ["Rainbow Chunk"] = {
+            { mob = "Rainbow Zack", chance = 1, lvlReq = 800 },
+        },
+        ["Rainbow Flute"] = {
+            { mob = "Rainbow Zack", chance = 3, lvlReq = 800 },
+        },
+        ["Riptide"] = {
+            { mob = "Neptune", chance = 25, lvlReq = 25 },
+        },
+        ["Rotten Flesh"] = {
+            { mob = "Fallen Mage", chance = 25, lvlReq = 500 },
+        },
+        ["Royal Sword"] = {
+            { mob = "Flaron", chance = 33, lvlReq = 300 },
+        },
+        ["Salt"] = {
+            { mob = "The Gobbler", chance = 100, lvlReq = 1350 },
+            { mob = "King Solomon", chance = 125, lvlReq = 1350 },
+            { mob = "Jack the Master of Scares", chance = 200, lvlReq = 1000 },
+        },
+        ["Sanctified Soul"] = {
+            { mob = "Grand Aurora Ballista", chance = 3, lvlReq = 15 },
+            { mob = "Yuletide Ent", chance = 25, lvlReq = 1250 },
+            { mob = "Winter Spirit", chance = 45, lvlReq = 15 },
+        },
+        ["Sapphire Necklace (Vanity)"] = {
+            { mob = "Pearl the Omega", chance = 3, lvlReq = 800 },
+        },
+        ["Scented Candles"] = {
+            { mob = "Yuletide Ent", chance = 10, lvlReq = 1250 },
+            { mob = "Winter Spirit", chance = 33, lvlReq = 15 },
+        },
+        ["Serpent's Wrath"] = {
+            { mob = "Fire Serpent", chance = 50, lvlReq = 25 },
+        },
+        ["Serpentine Scale"] = {
+            { mob = "Fire Serpent", chance = 1, lvlReq = 25 },
+        },
+        ["Shadow Invitation"] = {
+            { mob = "Jack the Master of Scares", chance = 1, lvlReq = 1000 },
+        },
+        ["Silver Branch"] = {
+            { mob = "Bobby", chance = 1, lvlReq = 1000 },
+            { mob = "Ornament Pawn", chance = 20, lvlReq = 650 },
+            { mob = "Restless Tinsel", chance = 20, lvlReq = 650 },
+            { mob = "Glitter Wraith", chance = 20, lvlReq = 650 },
+        },
+        ["Silver Rock"] = {
+            { mob = "Silver Golem", chance = 10, lvlReq = 120 },
+        },
+        ["Skeletal Skull"] = {
+            { mob = "Fallen Mage", chance = 25, lvlReq = 500 },
+        },
+        ["Sky Burst"] = {
+            { mob = "Sky Servant", chance = 200, lvlReq = 600 },
+        },
+        ["Sky Plate"] = {
+            { mob = "Skylord", chance = 3, lvlReq = 0 },
+            { mob = "Sky Servant", chance = 20, lvlReq = 600 },
+        },
+        ["Skyfall"] = {
+            { mob = "Sky Servant", chance = 200, lvlReq = 600 },
+        },
+        ["Skyplate Armor"] = {
+            { mob = "Sky Servant", chance = 350, lvlReq = 600 },
+        },
+        ["Slime"] = {
+            { mob = "Matt the Ruler of Fedoras", chance = 1, lvlReq = 800 },
+            { mob = "Smooth Criminal", chance = 1, lvlReq = 800 },
+        },
+        ["Smushed Mush"] = {
+            { mob = "Angry Fungus", chance = 40, lvlReq = 900 },
+            { mob = "Normal Fungus", chance = 40, lvlReq = 900 },
+        },
+        ["Snowflake"] = {
+            { mob = "Grand Aurora Ballista", chance = 1, lvlReq = 15 },
+            { mob = "Snow Golem", chance = 1, lvlReq = 40 },
+            { mob = "Chef Cinnarend", chance = 1, lvlReq = 425 },
+            { mob = "Yuletide Ent", chance = 1, lvlReq = 1250 },
+            { mob = "Peppermint Mutant", chance = 1, lvlReq = 120 },
+            { mob = "Cosmic Brownie Pest", chance = 1, lvlReq = 400 },
+            { mob = "Bobby", chance = 1, lvlReq = 1000 },
+            { mob = "Winter Spirit", chance = 4, lvlReq = 15 },
+            { mob = "Snow Devil", chance = 4, lvlReq = 15 },
+            { mob = "Aurora Ballista", chance = 4, lvlReq = 15 },
+            { mob = "Angry Snowman", chance = 5, lvlReq = 15 },
+            { mob = "Cool Snowman", chance = 5, lvlReq = 15 },
+            { mob = "Candy Cane Knight", chance = 5, lvlReq = 100 },
+            { mob = "Candy Cane Archer", chance = 5, lvlReq = 100 },
+            { mob = "Presented Brute", chance = 8, lvlReq = 800 },
+            { mob = "Restless Tinsel", chance = 10, lvlReq = 650 },
+            { mob = "Mimic", chance = 10, lvlReq = 800 },
+            { mob = "Candy Coated Pest", chance = 10, lvlReq = 400 },
+            { mob = "Ornament Pawn", chance = 10, lvlReq = 650 },
+            { mob = "Giftwrapped Brawler", chance = 10, lvlReq = 800 },
+            { mob = "Glitter Wraith", chance = 10, lvlReq = 650 },
+            { mob = "Kamikaze Snowman", chance = 1000, lvlReq = 15 },
+        },
+        ["Snowman Piece"] = {
+            { mob = "Snow Golem", chance = 4, lvlReq = 40 },
+            { mob = "Cool Snowman", chance = 20, lvlReq = 15 },
+            { mob = "Angry Snowman", chance = 20, lvlReq = 15 },
+            { mob = "Kamikaze Snowman", chance = 1000, lvlReq = 15 },
+        },
+        ["Solar Stone"] = {
+            { mob = "Celia", chance = 25, lvlReq = 1350 },
+        },
+        ["Solar Storm (Vanity)"] = {
+            { mob = "Solar Minion", chance = 1000, lvlReq = 1350 },
+            { mob = "Solar Giant", chance = 1000, lvlReq = 1300 },
+        },
+        ["Space King Crown"] = {
+            { mob = "Space King", chance = 4, lvlReq = 1000 },
+        },
+        ["Star Matrix"] = {
+            { mob = "Celia", chance = 2, lvlReq = 1350 },
+            { mob = "Celia", chance = 2, lvlReq = 1350 },
+            { mob = "Celia", chance = 2, lvlReq = 1350 },
+            { mob = "Space King", chance = 12, lvlReq = 1000 },
+            { mob = "Ultra Starmob", chance = 80, lvlReq = 1350 },
+            { mob = "Shining Star", chance = 100, lvlReq = 1000 },
+        },
+        ["Stocking"] = {
+            { mob = "Mimic", chance = 25, lvlReq = 800 },
+            { mob = "Giftwrapped Brawler", chance = 25, lvlReq = 800 },
+            { mob = "Presented Brute", chance = 25, lvlReq = 800 },
+        },
+        ["Storm Threat"] = {
+            { mob = "Discharge", chance = 50, lvlReq = 0 },
+            { mob = "Uncharged", chance = 50, lvlReq = 0 },
+        },
+        ["Supreme's Clothes"] = {
+            { mob = "Supreme Gamer", chance = 3, lvlReq = 800 },
+        },
+        ["Supreme's Presence"] = {
+            { mob = "Gaming Minion", chance = 16, lvlReq = 800 },
+        },
+        ["Supreme's SSniper"] = {
+            { mob = "Supreme Gamer", chance = 50, lvlReq = 800 },
+        },
+        ["Sweet Potato"] = {
+            { mob = "Classy Turkeyman", chance = 1, lvlReq = 0 },
+            { mob = "The Gobbler", chance = 5, lvlReq = 1350 },
+            { mob = "The Gobbler", chance = 5, lvlReq = 1350 },
+            { mob = "Native Turkeyman", chance = 40, lvlReq = 0 },
+        },
+        ["Terrifying Soup"] = {
+            { mob = "Jack the Master of Scares", chance = 500, lvlReq = 1000 },
+        },
+        ["The Blue Moon"] = {
+            { mob = "Celia", chance = 50, lvlReq = 1350 },
+        },
+        ["The Galaxy's Embrace"] = {
+            { mob = "Space King", chance = 150, lvlReq = 1000 },
+        },
+        ["The King's Terror"] = {
+            { mob = "King Solomon", chance = 33, lvlReq = 1350 },
+        },
+        ["The Overloader"] = {
+            { mob = "Jack the Master of Scares", chance = 33, lvlReq = 1000 },
+        },
+        ["The Planet Annihilator"] = {
+            { mob = "Space King", chance = 25, lvlReq = 1000 },
+        },
+        ["The Revenant"] = {
+            { mob = "Fallen Mage", chance = 100, lvlReq = 500 },
+            { mob = "Ascension Mage", chance = 150, lvlReq = 500 },
+        },
+        ["The Scourge of Fury"] = {
+            { mob = "Fury Destructive Overlord", chance = 3, lvlReq = 200 },
+        },
+        ["The Victor's Prestige"] = {
+            { mob = "Victory Embelliment", chance = 10, lvlReq = 1350 },
+        },
+        ["Thunderous Glaive"] = {
+            { mob = "Voltage", chance = 5, lvlReq = 25 },
+        },
+        ["Tinsel"] = {
+            { mob = "Restless Tinsel", chance = 8, lvlReq = 650 },
+        },
+        ["True Alpha Bow"] = {
+            { mob = "Alpha Ruler", chance = 25, lvlReq = 50 },
+        },
+        ["True Flaron's Blades"] = {
+            { mob = "True Flaron", chance = 100, lvlReq = 1000 },
+            { mob = "Candy Flaron", chance = 999, lvlReq = 4000 },
+        },
+        ["Turkey Drumstick"] = {
+            { mob = "The Gobbler", chance = 1, lvlReq = 1350 },
+            { mob = "The Gobbler", chance = 1, lvlReq = 1350 },
+            { mob = "Classy Turkeyman", chance = 1, lvlReq = 0 },
+            { mob = "Turkor 500", chance = 3, lvlReq = 0 },
+            { mob = "Native Turkeyman", chance = 20, lvlReq = 0 },
+            { mob = "Turkor 23", chance = 50, lvlReq = 0 },
+        },
+        ["Umbral Skin"] = {
+            { mob = "Diocula", chance = 10, lvlReq = 1350 },
+            { mob = "Umbral Monstrosity", chance = 250, lvlReq = 1350 },
+        },
+        ["Unique Snowflake"] = {
+            { mob = "Uriah the Snowflake Conductor", chance = 1, lvlReq = 800 },
+        },
+        ["Uriah's Clothes"] = {
+            { mob = "Uriah the Snowflake Conductor", chance = 3, lvlReq = 800 },
+        },
+        ["Uriah's Presence"] = {
+            { mob = "Snowflake Conductor Minion", chance = 16, lvlReq = 800 },
+        },
+        ["Vampire Blood"] = {
+            { mob = "Dracula", chance = 15, lvlReq = 1000 },
+        },
+        ["Vampire Clothing"] = {
+            { mob = "Vampire", chance = 250, lvlReq = 700 },
+        },
+        ["Vampire Slayer"] = {
+            { mob = "Dracula", chance = 8, lvlReq = 1000 },
+        },
+        ["Vampiric Bow"] = {
+            { mob = "Dracula", chance = 8, lvlReq = 1000 },
+        },
+        ["Vampiric Grimoire"] = {
+            { mob = "Dracula", chance = 8, lvlReq = 1000 },
+        },
+        ["Vengeful Spirit"] = {
+            { mob = "Jack the Master of Scares", chance = 125, lvlReq = 1000 },
+            { mob = "Poltergeist", chance = 300, lvlReq = 1200 },
+            { mob = "Dracula", chance = 500, lvlReq = 1000 },
+            { mob = "Roaming Statue", chance = 3000, lvlReq = 1300 },
+            { mob = "Mummy", chance = 3000, lvlReq = 1300 },
+            { mob = "Ghost", chance = 3500, lvlReq = 1200 },
+            { mob = "Pumpkin Punk", chance = 4000, lvlReq = 700 },
+            { mob = "Vampire", chance = 4000, lvlReq = 700 },
+            { mob = "Bloody Priest", chance = 4500, lvlReq = 400 },
+            { mob = "Possessed Nun", chance = 4500, lvlReq = 400 },
+            { mob = "Skeleton", chance = 5000, lvlReq = 80 },
+            { mob = "Zombie", chance = 5000, lvlReq = 80 },
+        },
+        ["Victergy"] = {
+            { mob = "Victory Embelliment", chance = 1, lvlReq = 1350 },
+            { mob = "Victory Embelliment", chance = 1, lvlReq = 1350 },
+            { mob = "Victory Embelliment", chance = 1, lvlReq = 1350 },
+            { mob = "Victory Warrior", chance = 20, lvlReq = 900 },
+            { mob = "Victory King", chance = 20, lvlReq = 900 },
+        },
+        ["Victorious Trophy"] = {
+            { mob = "Victory Embelliment", chance = 1, lvlReq = 1350 },
+        },
+        ["Void Claws"] = {
+            { mob = "Ancient Straggler", chance = 1000, lvlReq = 800 },
+            { mob = "Devil Palm", chance = 1000, lvlReq = 800 },
+            { mob = "Abyssfisher", chance = 1000, lvlReq = 800 },
+        },
+        ["Voltage Charge"] = {
+            { mob = "Voltage", chance = 1, lvlReq = 25 },
+        },
+        ["Water Drop"] = {
+            { mob = "Aqua Reserve", chance = 3, lvlReq = 0 },
+        },
+        ["Whirlpool Summoner"] = {
+            { mob = "Aqua Reserve", chance = 50, lvlReq = 0 },
+        },
+        ["Wind Horn"] = {
+            { mob = "Wind Amalgamation", chance = 25, lvlReq = 25 },
+        },
+        ["Wrapping Paper"] = {
+            { mob = "Mimic", chance = 40, lvlReq = 800 },
+            { mob = "Giftwrapped Brawler", chance = 40, lvlReq = 800 },
+            { mob = "Presented Brute", chance = 40, lvlReq = 800 },
+        },
+        ["Yuletide Bell"] = {
+            { mob = "Yuletide Ent", chance = 1, lvlReq = 1250 },
+        },
+        ["Yulewood Log"] = {
+            { mob = "Grand Aurora Ballista", chance = 1, lvlReq = 15 },
+            { mob = "Yuletide Ent", chance = 1, lvlReq = 1250 },
+            { mob = "Winter Spirit", chance = 8, lvlReq = 15 },
+            { mob = "Snow Devil", chance = 8, lvlReq = 15 },
+            { mob = "Aurora Ballista", chance = 8, lvlReq = 15 },
+        },
+        ["Zack's Clothes"] = {
+            { mob = "Rainbow Zack", chance = 3, lvlReq = 800 },
+        },
+        ["Zack's Presence"] = {
+            { mob = "Rainbow Minion", chance = 16, lvlReq = 800 },
+        },
+        ["Zack's Rainbow Harp"] = {
+            { mob = "Rainbow Zack", chance = 12, lvlReq = 800 },
+        },
+        ["Zay's Armor"] = {
+            { mob = "Zay the Galaxy Pear", chance = 50, lvlReq = 800 },
+        },
+        ["Zay's Presence"] = {
+            { mob = "Galaxy Minion", chance = 16, lvlReq = 800 },
+        },
+    },
+
+}
