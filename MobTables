@@ -485,6 +485,26 @@ return {
                 { chance = 150, item = "Phantomic Force", lvlReq = 1000, rarity = "Exotic", quantity = 1 },
             },
         },
+
+        ["Equilibrium Tesseract"] = {
+            LvlReq = 2000, Gold = 2000000, Exp = 2000000, SetType = "Multiple",
+            RemoveDropOnDeath = true,
+            Badge = 279338889511658,
+            Drops = {
+                -- Guaranteed    "Construct of Equilibrium"
+                { chance = 1, item = "Construct of Equilibrium" },
+                -- Guaranteed    "Equalized Vessel"  x2
+                { chance = 1, item = "Equalized Vessel", lvlReq = 0, quantity = 2 },
+                -- Guaranteed    "Equalization Energy"  x2
+                { chance = 1, item = "Equalization Energy", lvlReq = 0, quantity = 2 },
+                -- 1/20          "Equilibrium Sovereign"  (Lvl 2000+)  [Rare]
+                { chance = 20, item = "Equilibrium Sovereign", lvlReq = 2000, rarity = "Rare" },
+                -- 1/75          "Equilibrium Prism"  (Lvl 2000+)  [Legendary]
+                { chance = 75, item = "Equilibrium Prism", lvlReq = 2000, rarity = "Legendary", quantity = 1 },
+                -- 1/100         "Aequilibrium's Apotheosis"  (Lvl 2000+)  [Mythical]
+                { chance = 100, item = "Aequilibrium's Apotheosis", lvlReq = 2000, rarity = "Mythical" },
+            },
+		},
     },
 
     EnemyDropTables = {
@@ -1112,25 +1132,6 @@ return {
                 { chance = 50000, item = "Aequilibrium's Apotheosis", lvlReq = 0, rarity = "Mythical" },
             },
         },
-        ["Equilibrium Tesseract"] = {
-            LvlReq = 2000, Gold = 2000000, Exp = 2000000, SetType = "Multiple",
-            RemoveDropOnDeath = true,
-            Badge = 279338889511658,
-            Drops = {
-                -- Guaranteed    "Construct of Equilibrium"
-                { chance = 1, item = "Construct of Equilibrium" },
-                -- Guaranteed    "Equalized Vessel"  x2
-                { chance = 1, item = "Equalized Vessel", lvlReq = 0, quantity = 2 },
-                -- Guaranteed    "Equalization Energy"  x2
-                { chance = 1, item = "Equalization Energy", lvlReq = 0, quantity = 2 },
-                -- 1/20          "Equilibrium Sovereign"  (Lvl 2000+)  [Rare]
-                { chance = 20, item = "Equilibrium Sovereign", lvlReq = 2000, rarity = "Rare" },
-                -- 1/75          "Equilibrium Prism"  (Lvl 2000+)  [Legendary]
-                { chance = 75, item = "Equilibrium Prism", lvlReq = 2000, rarity = "Legendary", quantity = 1 },
-                -- 1/100         "Aequilibrium's Apotheosis"  (Lvl 2000+)  [Mythical]
-                { chance = 100, item = "Aequilibrium's Apotheosis", lvlReq = 2000, rarity = "Mythical" },
-            },
-        },
         ["Fusion Paladin"] = {
             LvlReq = 2000, Gold = 10000, Exp = 10000, SetType = "Multiple",
             XPLock = { Level = 2000, Type = "pow" },
@@ -1188,9 +1189,9 @@ return {
 		["Solar Giant"] = "Solar Mines",
 		["Solar Minion"] = "Solar Mines",
 		["Ultra Starmob"] = "Solar Mines",
-		[""] = "",
-		[""] = "",
-		[""] = "",
+		["Equilibrium Amalgamation"] = "",
+		["Fusion Paladin"] = "",
+		["Equalized Spirit"] = "",
 	},
 
     EventDropTables = {
