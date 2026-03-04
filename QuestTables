@@ -147,7 +147,7 @@ return {
         ["Boom, Treasure Gatherer"] = {
             Title = "The power of Treasure!",
             Requirements = {
-                ["UnlockTerrorChests"] = ?,
+                ["UnlockTerrorChests"] = 1,
             },
             Rewards = {
                 ["Shadowy Treasure"] = 1,
@@ -272,7 +272,7 @@ return {
         ["Kianami Star Topper"] = {
             Title = "Light up the night sky!",
             Requirements = {
-                ["CollectStarSnippets"] = ?,
+                ["CollectStarSnippets"] = 5,
             },
             Rewards = {
                 ["Star Topper"] = 1,
