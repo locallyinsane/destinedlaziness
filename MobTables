@@ -1189,9 +1189,9 @@ return {
 		["Solar Giant"] = "Solar Mines",
 		["Solar Minion"] = "Solar Mines",
 		["Ultra Starmob"] = "Solar Mines",
-		["Equilibrium Amalgamation"] = "",
-		["Fusion Paladin"] = "",
-		["Equalized Spirit"] = "",
+		["Equilibrium Amalgamation"] = "Fusion Palace",
+		["Fusion Paladin"] = "Fusion Palace",
+		["Equalized Spirit"] = "Fusion Palace",
 	},
 
     EventDropTables = {
