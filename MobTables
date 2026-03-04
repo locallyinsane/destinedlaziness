@@ -1153,6 +1153,10 @@ return {
         },
     },
 	
+	BossLocations = {
+		["Abaddon"] = "Evil Island"
+	},
+
 	EnemyLocations = {
 		["Mercurite Minion"] = "Mercurite Mines",
 		["Purpulite Mob"] = "Purpulite Sewers",
