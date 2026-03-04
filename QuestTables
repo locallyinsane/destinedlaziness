@@ -483,15 +483,15 @@ return {
     },
 
 	QuestNPCLocations = {
-		["Cleansed Being"] = "Ascensia Isle",
-		["Angel"] = "Ascensia Isle",
-		["Demon"] = "Ascensia Isle",
-		["Embodiment of Evil"] = "Ascensia Isle",
-		["Shady Gentleman"] = "Ascensia Isle",
+		["Cleansed Being"] = "Pure Island",
+		["Angel"] = "Pure Island",
+		["Demon"] = "Evil Island",
+		["Embodiment of Evil"] = "Evil Island",
+		["Shady Gentleman"] = "Evil Island",
 		["Unknown King"] = "Portal Room",
 		["Faze, the Memorable"] = "nil",
 		["Pearl the Storyteller"] = "Admin Tower",
-		["Void Overseer"] = "Ascensia Isle",
+		["Void Overseer"] = "Evil Island",
 		["Loyal Starman"] = "Space Mines",
 	}
 }
