@@ -866,7 +866,7 @@ local function StartBossFight(bossName)
     end
     if padBase then
         RootPart.CFrame = padBase.CFrame + Vector3.new(0, 4, 0)
-        task.wait(1.5)
+        task.wait(0.4)
     end
 
     -- Button path varies by boss type:
@@ -900,7 +900,7 @@ local function StartBossFight(bossName)
 
     Notify("heading in", "starting fight with " .. bossName, 4)
     fireclickdetector(cd)
-    task.wait(3)
+    task.wait(2)
     return true
 end
 
