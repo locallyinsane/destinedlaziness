@@ -94,6 +94,8 @@ local DodgeLoopActive      = false
 local FarmDodgeReady       = false
 local FarmFromScratch      = false
 local ActiveFromScratch    = false
+local CurrentSourceType    = nil  -- "enemy" | "boss" | "quest" — set by FarmMaterial
+local CurrentSourceName    = nil  -- the enemy/boss/quest name currently being farmed
 
 -- ============================================================
 -- ENEMY FARM STATE
@@ -1300,9 +1302,11 @@ local function FarmMaterial(matName, needed, sourceType, sourceName)
     if not tonumber(needed) then return false end
     needed = tonumber(needed)
 
-    FarmTargetName = sourceName
-    FarmStartInv   = GetInventory()
-    local startHave = FarmStartInv[matName] or 0
+    FarmTargetName    = sourceName
+    CurrentSourceType = sourceType
+    CurrentSourceName = sourceName
+    FarmStartInv      = GetInventory()
+    local startHave   = FarmStartInv[matName] or 0
 
     Notify("on it", ("need %dx %s from %s"):format(needed, matName, sourceName), 5)
 
@@ -1315,9 +1319,11 @@ local function FarmMaterial(matName, needed, sourceType, sourceName)
 
         if gained >= needed then
             Notify("got it", ("+%dx %s — moving on"):format(gained, matName), 5)
-            FarmTargetName = nil
-            CurrentTarget  = nil
-            FarmDodgeReady = false
+            FarmTargetName    = nil
+            CurrentTarget     = nil
+            FarmDodgeReady    = false
+            CurrentSourceType = nil
+            CurrentSourceName = nil
             return true
         end
 
@@ -1536,7 +1542,11 @@ local function FarmMaterial(matName, needed, sourceType, sourceName)
         task.wait(0.5)
     end
 
-    FarmTargetName = nil; CurrentTarget = nil; FarmDodgeReady = false
+    FarmTargetName    = nil
+    CurrentTarget     = nil
+    FarmDodgeReady    = false
+    CurrentSourceType = nil
+    CurrentSourceName = nil
     return false
 end
 
@@ -1723,6 +1733,8 @@ local function StopFarm()
     ActiveFromScratch = false
     IsEmergency       = false
     IsRespawning      = false
+    CurrentSourceType = nil
+    CurrentSourceName = nil
     StopAutoFire()
     Deactivate()
     Notify("farm stopped", "called it off, back to normal", 3)
@@ -2094,6 +2106,22 @@ LocalPlayer.CharacterAdded:Connect(function(newChar)
     task.wait(0.5)
     StartAutoFire()
 
+    -- Teleport back to wherever we were farming before death
+    if CurrentSourceType == "enemy" then
+        Notify("respawned", "heading back to " .. tostring(CurrentSourceName), 4)
+        TeleportToEnemyIsland(CurrentSourceName)
+        task.wait(1)
+    elseif CurrentSourceType == "boss" then
+        Notify("respawned", "heading back to boss fight", 4)
+        TeleportToLocation("Portal Room")
+        task.wait(1)
+    elseif FarmActive or EnemyFarmActive then
+        -- Generic fallback — go to portal room so the farm loop
+        -- can re-navigate from a known good position
+        TeleportToLocation("Portal Room")
+        task.wait(1)
+    end
+
     -- Re-activate dodge so farm loops resume in the right position
     ActivateForFarm()
 
@@ -2238,6 +2266,8 @@ local function StopEnemyFarm()
     FarmDodgeReady      = false
     IsEmergency         = false
     IsRespawning        = false
+    CurrentSourceType   = nil
+    CurrentSourceName   = nil
     Humanoid.AutoRotate = true
     StopAutoFire()
     Deactivate()
