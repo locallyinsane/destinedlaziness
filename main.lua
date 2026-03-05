@@ -514,7 +514,7 @@ local function TeleportToLocation(locationName)
     if not ok then
         warn(("[TeleportToLocation] failed for '%s': %s"):format(locationName, tostring(err)))
     end
-    task.wait(0.5)
+    task.wait(0.35)
     return ok
 end
 
@@ -539,7 +539,7 @@ local function TeleportToEnemyIsland(enemyName)
     if islandName == "Void Mines" then
         Notify("void mines", "heading to Evil Island first", 4)
         TeleportToLocation("Evil Island")
-        task.wait(2)
+        task.wait(1.25)
         local ok, err = pcall(function()
             local voidTele = Workspace:WaitForChild("Ascension Trial Maps")
                 :WaitForChild("Ascensia Isles")
@@ -574,7 +574,7 @@ local function TeleportToEnemyIsland(enemyName)
         return false
     end
 
-    task.wait(0.5)
+    task.wait(0.35)
     return true
 end
 
@@ -616,7 +616,7 @@ local function KillAndWait(model, onDeath)
         task.wait(0.2)
     end
     if confirmedDead then
-        task.wait(2)
+        task.wait(1.25)
     end
     return confirmedDead
 end
@@ -707,7 +707,7 @@ local function StartDodgeTargetLoop()
                     SafeZoneVisual.CFrame = CFrame.new(SafeZoneCenter)
                 end
             end
-            task.wait(0.05)
+            task.wait(0.025)
         end
     end)
 end
@@ -898,7 +898,7 @@ local function StartBossFight(bossName)
 
     if not cd then return false end
 
-    Notify("heading in", "starting fight with " .. bossName, 4)
+    Notify("heading in", "starting fight with " .. bossName, 1)
     fireclickdetector(cd)
     task.wait(2)
     return true
