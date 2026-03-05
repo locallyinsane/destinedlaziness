@@ -869,10 +869,33 @@ local function StartBossFight(bossName)
         task.wait(1.5)
     end
 
-    local button = pad:FindFirstChild("Button")
-    if not button then return false end
+    -- Button path varies by boss type:
+    -- Admin Island: pad.Portal.Button.ClickDetector
+    -- Others:       pad.Button.ClickDetector
+    local button = nil
+    local cd     = nil
 
-    local cd = button:FindFirstChild("ClickDetector")
+    local portal = pad:FindFirstChild("Portal")
+    if portal then
+        local portalButton = portal:FindFirstChild("Button")
+        if portalButton then
+            button = portalButton
+            cd     = portalButton:FindFirstChild("ClickDetector")
+        end
+    end
+
+    if not cd then
+        button = pad:FindFirstChild("Button")
+        if button then
+            cd = button:FindFirstChild("ClickDetector")
+        end
+    end
+
+    if not cd then
+        -- last resort: search all descendants
+        cd = pad:FindFirstChildWhichIsA("ClickDetector", true)
+    end
+
     if not cd then return false end
 
     Notify("heading in", "starting fight with " .. bossName, 4)
