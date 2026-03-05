@@ -1882,6 +1882,31 @@ local function AF_StartTool(tool)
         AF_StartPotionLoop(tool)
     end
 
+    -- ── The Galaxy's Embrace: uses its own ClickEvent remote ──────────────────
+    if tool.Name == "The Galaxy's Embrace" then
+        local clickEvent = tool:FindFirstChild("ClickEvent")
+        if not clickEvent then
+            autoFireThreads[tool] = nil
+            return
+        end
+        task.spawn(function()
+            while AutoFireActive and AF_IsInCharacter(tool) do
+                local pos = RootPart.Position
+                pcall(function()
+                    clickEvent:FireServer(
+                        vector.create(pos.X, pos.Y, pos.Z),
+                        "attack1"
+                    )
+                end)
+                local cd = AF_GetCooldown(tool, 0.5)
+                task.wait(cd)
+            end
+            autoFireThreads[tool] = nil
+        end)
+        return
+    end
+    -- ─────────────────────────────────────────────────────────────────────────
+
     task.spawn(function()
         local remote    = tool:FindFirstChildOfClass("RemoteEvent")
         local isNsystem = tool:GetAttribute("nsystem")
