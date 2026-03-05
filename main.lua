@@ -1524,7 +1524,6 @@ local function FarmMaterial(matName, needed, sourceType, sourceName)
                 Notify("cleared", ("got all the %s we needed, resetting"):format(matName), 4)
                 SoftReset()
                 TeleportToLocation("Portal Room")
-                task.wait(2)
                 if FarmActive then ActivateForFarm() end
             end
 
@@ -2206,8 +2205,6 @@ local function StartEnemyFarm()
             -- BOSS PATH
             -- ------------------------------------------------
             if isBoss then
-                TeleportToLocation("Portal Room")
-                task.wait(1)
                 local ok = StartBossFight(EnemyFarmTargetName)
                 if not ok then task.wait(3); continue end
 
