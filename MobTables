@@ -1155,9 +1155,9 @@ return {
     },
 	
 	BossLocations = {
-		["Abaddon"] = "Evil Island"
+		["Abaddon"] = "Evil Island",
 		["Pearl the Omega"] = "Admin Island",
-		["Smooth Criminal"] = Admin Island,
+		["Smooth Criminal"] = "Admin Island",
 	},
 
 	EnemyLocations = {
