@@ -74,8 +74,8 @@ local BulletData     = {}
 local Connections    = {}
 local RenderConn     = nil
 local IsDodging      = false
-local IsEmergency    = false -- true while player is in low-health flee mode
-local IsRespawning   = false -- true while waiting for character to fully reload after death
+local IsEmergency    = false
+local IsRespawning   = false
 
 local VisualFolder = Workspace:FindFirstChild("__AutoDodgeVisuals")
     or Instance.new("Folder", Workspace)
@@ -94,8 +94,8 @@ local DodgeLoopActive      = false
 local FarmDodgeReady       = false
 local FarmFromScratch      = false
 local ActiveFromScratch    = false
-local CurrentSourceType    = nil  -- "enemy" | "boss" | "quest" — set by FarmMaterial
-local CurrentSourceName    = nil  -- the enemy/boss/quest name currently being farmed
+local CurrentSourceType    = nil
+local CurrentSourceName    = nil
 
 -- ============================================================
 -- ENEMY FARM STATE
@@ -111,7 +111,7 @@ local function GetDodgeTarget()
     local MobFolder = Workspace:FindFirstChild("MobFolder")
     if not MobFolder then return nil end
     local best, bestDist = nil, math.huge
-    local refPos = RootPart.Position  -- always measure from where the player actually is
+    local refPos = RootPart.Position
     for _, obj in ipairs(MobFolder:GetDescendants()) do
         if obj:IsA("BasePart") and obj.Name == "HumanoidRootPart" then
             local model = obj.Parent
@@ -130,8 +130,6 @@ local function GetDodgeTarget()
     return best
 end
 
--- Returns true if `name` matches the current FarmTargetName,
--- which may be a plain string OR a table of strings.
 local function IsValidFarmTarget(name)
     if not FarmTargetName then return false end
     if type(FarmTargetName) == "string" then
@@ -170,8 +168,6 @@ local function GetFarmTarget()
     return nil
 end
 
--- Returns a list of all enemy names that share the same island as `enemyName`
--- AND appear in EnemyDropTables (i.e. are farmable regular enemies).
 local function GetCoLocationEnemies(enemyName)
     local island = EnemyLocations[enemyName]
     if not island or island == "" then return { enemyName } end
@@ -185,7 +181,6 @@ local function GetCoLocationEnemies(enemyName)
     return group
 end
 
--- Returns true if at least one alive mob matching primaryName exists in MobFolder.
 local function PrimaryTargetExists(primaryName)
     local MobFolder = Workspace:FindFirstChild("MobFolder")
     if not MobFolder then return false end
@@ -202,7 +197,6 @@ local function PrimaryTargetExists(primaryName)
     return false
 end
 
--- Searches MobFolder for any alive mob whose name is in the provided name list.
 local function GetAnyTargetFromList(nameList)
     local MobFolder = Workspace:FindFirstChild("MobFolder")
     if not MobFolder then return nil end
@@ -462,7 +456,6 @@ local function StartRenderLock()
         RootPart.AssemblyLinearVelocity  = Vector3.zero
         RootPart.AssemblyAngularVelocity = Vector3.zero
         if IsEmergency then
-            -- hold the emergency flee position, don't rotate toward target
             RootPart.CFrame = CFrame.new(lockPos)
             return
         end
@@ -483,7 +476,6 @@ local function StopRenderLock()
 end
 
 -- ============================================================
--- ============================================================
 -- FREEZE / UNFREEZE
 -- ============================================================
 local function FreezePlayer()
@@ -499,7 +491,6 @@ end
 -- ============================================================
 -- TELEPORT HELPERS
 -- ============================================================
-
 local function TeleportToLocation(locationName)
     local ok, err = pcall(function()
         local frame = LocalPlayer.PlayerGui.GuiShop.TeleportersMainFrame.TeleportersFrame
@@ -535,7 +526,6 @@ local function TeleportToEnemyIsland(enemyName)
         return false
     end
 
-    -- Void Mines requires teleporting to Evil Island first, then touching the Void Teleporter
     if islandName == "Void Mines" then
         Notify("void mines", "heading to Evil Island first", 4)
         TeleportToLocation("Evil Island")
@@ -639,7 +629,7 @@ local function ReturnAfterBoss(bossName)
 end
 
 -- ============================================================
--- SOFT RESET (respawn without full deactivate)
+-- SOFT RESET
 -- ============================================================
 local function SoftReset()
     IsActive = false
@@ -654,8 +644,6 @@ local function SoftReset()
     task.wait(0.5)
 end
 
--- Forward declare auto-fire and farm entry points so Deactivate/Activate
--- can reference them before the full definitions appear below.
 local StartAutoFire
 local StopAutoFire
 local ActivateForFarm
@@ -755,9 +743,6 @@ local function Activate()
     if IsActive then return end
     IsActive = true
     StartAutoFire()
-    -- Don't teleport yet — StartDodgeTargetLoop will find the nearest mob
-    -- and UpdateSafeZoneCenter will set SafeZoneCenter once we have a target.
-    -- Until then, lock the player at their current position.
     LockedPosition = RootPart.Position
     RefreshSafeZoneVisual()
     FreezePlayer()
@@ -767,7 +752,6 @@ local function Activate()
     StartDodgeLoop()
 end
 
--- Define ActivateForFarm (and assign to the forward-declared upvalue)
 ActivateForFarm = function()
     if IsActive then return end
     IsActive       = true
@@ -958,7 +942,6 @@ end
 -- DROP SOURCE FINDER
 -- ============================================================
 local function FindDropSource(itemName)
-    -- Quest rewards take priority
     for questName, data in pairs(Quests) do
         if data.Rewards then
             for rewardName in pairs(data.Rewards) do
@@ -1002,7 +985,6 @@ end
 -- ============================================================
 -- QUEST SOURCE HELPERS
 -- ============================================================
-
 local function GetQuestRequirements(questName)
     local q = Quests[questName]
     return q and q.Requirements or nil
@@ -1021,7 +1003,6 @@ local function TeleportToQuestNPC(questName)
     end
 
     local npcModel = nil
-
     local npcsFolder = Workspace:FindFirstChild("NPCs")
     if npcsFolder then
         npcModel = npcsFolder:FindFirstChild(questName)
@@ -1083,7 +1064,7 @@ end
 -- ============================================================
 local EXP_QUEST_ENEMY = "Fury Destructive Overlord"
 local EXP_QUEST_KILLS = 2
-local GOLD_FARM_BOSS = "Alpha Destructive Overlord"
+local GOLD_FARM_BOSS  = "Alpha Destructive Overlord"
 
 local function FindBestGoldBoss(goldNeeded)
     local data = BossDropTables[GOLD_FARM_BOSS]
@@ -1171,7 +1152,6 @@ local function DoQuest(questName)
                         if FarmActive then ActivateForFarm() end
                     end
                     task.wait(1)
-
                 else
                     FarmTargetName = srcName
                     local tpOk = TeleportToEnemyIsland(srcName)
@@ -1227,7 +1207,6 @@ local function DoQuest(questName)
         end
     end
 
-    -- Handle remaining gold shortfall
     if goldRequired > 0 and goldEarned < goldRequired then
         local stillNeed = goldRequired - goldEarned
         local goldBoss, goldPerBossKill, killsNeeded = FindBestGoldBoss(stillNeed)
@@ -1311,7 +1290,6 @@ local function FarmMaterial(matName, needed, sourceType, sourceName)
     Notify("on it", ("need %dx %s from %s"):format(needed, matName, sourceName), 5)
 
     while FarmActive do
-        -- Pause all farm activity while the character is respawning
         if IsRespawning then task.wait(0.2); continue end
 
         local inv    = GetInventory()
@@ -1327,7 +1305,6 @@ local function FarmMaterial(matName, needed, sourceType, sourceName)
             return true
         end
 
-        -- BOSS PATH
         if sourceType == "boss" then
             FarmDodgeReady      = false
             CurrentTarget       = nil
@@ -1352,17 +1329,12 @@ local function FarmMaterial(matName, needed, sourceType, sourceName)
             if killed then
                 ReturnAfterBoss(sourceName)
                 SoftReset()
-
                 local tool = LocalPlayer.Backpack:FindFirstChild("Solar Beacon")
-                if tool then
-                    tool.Parent = Workspace[LocalPlayer.Name]
-                end
-
+                if tool then tool.Parent = Workspace[LocalPlayer.Name] end
                 if FarmActive then ActivateForFarm() end
             end
             task.wait(1)
 
-        -- REGULAR ENEMY PATH
         elseif sourceType == "enemy" then
             local tpOk = TeleportToEnemyIsland(sourceName)
             if not tpOk then
@@ -1384,16 +1356,11 @@ local function FarmMaterial(matName, needed, sourceType, sourceName)
                     RootPart.CFrame = CFrame.new(start:Lerp(goal, t))
                     RootPart.AssemblyLinearVelocity  = Vector3.zero
                     RootPart.AssemblyAngularVelocity = Vector3.zero
-                    if alpha >= 1 then
-                        stepConn:Disconnect()
-                    end
+                    if alpha >= 1 then stepConn:Disconnect() end
                 end)
                 while stepConn.Connected do task.wait(0.05) end
             end
 
-            -- Periodic inventory checker: every 15 seconds refresh how much
-            -- of the material we actually have so drops that landed mid-fight
-            -- are counted immediately and the loop exits as soon as we're done.
             local invCheckDone = false
             local lastInvCheck = tick()
             task.spawn(function()
@@ -1414,7 +1381,6 @@ local function FarmMaterial(matName, needed, sourceType, sourceName)
                 end
             end)
 
-            -- Build the full co-location list once so filler lookup is cheap.
             local coLocationGroup = GetCoLocationEnemies(sourceName)
             local hasFillers      = #coLocationGroup > 1
 
@@ -1430,22 +1396,15 @@ local function FarmMaterial(matName, needed, sourceType, sourceName)
                 LockedPosition      = nil
                 Humanoid.AutoRotate = true
 
-                -- Check if the primary target is currently alive.
                 local primaryUp = PrimaryTargetExists(sourceName)
 
                 if not primaryUp and hasFillers then
-                    -- Swap FarmTargetName to the full co-location group so that
-                    -- GetFarmTarget, StartFarmTargetLoop, and the safe zone all
-                    -- behave exactly as if the filler were the real target.
                     FarmTargetName = coLocationGroup
                     Notify("filling time", ("no %s up — farming co-location mobs"):format(sourceName), 3)
 
-                    -- Keep killing co-location mobs until the primary respawns.
                     while FarmActive and not invCheckDone do
-                        -- As soon as the primary is back, break out and let the
-                        -- outer loop handle it with FarmTargetName restored.
                         if PrimaryTargetExists(sourceName) then
-                            Notify("primary spawned", (sourceName .. " is up — switching back"):format(), 3)
+                            Notify("primary spawned", sourceName .. " is up — switching back", 3)
                             break
                         end
 
@@ -1459,7 +1418,6 @@ local function FarmMaterial(matName, needed, sourceType, sourceName)
                         task.wait(0.5)
                         if not IsActive and FarmActive then ActivateForFarm() end
 
-                        -- Kill the filler but bail early if the primary spawns.
                         local fillerDead = false
                         task.spawn(function()
                             KillAndWait(fillerEnemy)
@@ -1467,7 +1425,7 @@ local function FarmMaterial(matName, needed, sourceType, sourceName)
                         end)
                         while not fillerDead and FarmActive do
                             if PrimaryTargetExists(sourceName) then
-                                Notify("primary spawned", (sourceName .. " is up — switching back"):format(), 3)
+                                Notify("primary spawned", sourceName .. " is up — switching back", 3)
                                 break
                             end
                             task.wait(0.5)
@@ -1480,7 +1438,6 @@ local function FarmMaterial(matName, needed, sourceType, sourceName)
                         task.wait(0.3)
                     end
 
-                    -- Restore FarmTargetName to primary before continuing.
                     FarmTargetName = sourceName
                     FarmDodgeReady = false
                     CurrentTarget  = nil
@@ -1489,7 +1446,6 @@ local function FarmMaterial(matName, needed, sourceType, sourceName)
                     continue
                 end
 
-                -- Normal primary-target kill path.
                 local searchStart = tick()
                 local enemy       = nil
                 while tick() - searchStart < 15 do
@@ -1518,7 +1474,7 @@ local function FarmMaterial(matName, needed, sourceType, sourceName)
                 task.wait(0.5)
             end
 
-            invCheckDone = true -- stop the background checker if loop exited naturally
+            invCheckDone = true
 
             if FarmActive then
                 Notify("cleared", ("got all the %s we needed, resetting"):format(matName), 4)
@@ -1527,12 +1483,9 @@ local function FarmMaterial(matName, needed, sourceType, sourceName)
                 if FarmActive then ActivateForFarm() end
             end
 
-        -- QUEST PATH
         elseif sourceType == "quest" then
             local ok = DoQuest(sourceName)
-            if not ok then
-                task.wait(3)
-            end
+            if not ok then task.wait(3) end
 
         else
             FarmTargetName = nil; CurrentTarget = nil; FarmDodgeReady = false
@@ -1553,15 +1506,10 @@ end
 -- ============================================================
 -- CRAFTING PHASE
 -- ============================================================
-
 local function CraftItem(itemName, qty)
     qty = math.max(1, math.floor(tonumber(qty) or 1))
     local ok, err = pcall(function()
-        local args = {
-            "Purchase",
-            itemName,
-            qty,
-        }
+        local args = { "Purchase", itemName, qty }
         Workspace:WaitForChild("Remote"):WaitForChild("ProtectFunction"):InvokeServer(unpack(args))
     end)
     if not ok then
@@ -1586,8 +1534,8 @@ local function BuildCraftQueue(itemName, qty, inv)
 
         local recipe = CraftableItems[name]
         if not recipe then
-            local have  = math.floor(simInv[name] or 0)
-            local used  = math.min(have, needed)
+            local have = math.floor(simInv[name] or 0)
+            local used = math.min(have, needed)
             simInv[name] = have - used
             visited[name] = nil
             return
@@ -1605,15 +1553,12 @@ local function BuildCraftQueue(itemName, qty, inv)
                     end
                 end
             end
-
             table.insert(order, { name = name, qty = toCraft })
-
             simInv[name] = (simInv[name] or 0) + toCraft
         end
 
         local nowHave = math.floor(simInv[name] or 0)
         simInv[name]  = math.max(0, nowHave - needed)
-
         visited[name] = nil
     end
 
@@ -1623,13 +1568,10 @@ end
 
 local function RunCraftingPhase(itemName, qty)
     Notify("crafting time!", ("building %s x%d now"):format(itemName, qty), 5)
-
     TeleportToLocation("Portal Room")
     task.wait(1)
 
-    local inv   = GetInventory()
-    -- Zero out the target item so BuildCraftQueue always crafts it,
-    -- even if the player already owns one (or more) of it.
+    local inv = GetInventory()
     inv[itemName] = 0
     local queue = BuildCraftQueue(itemName, qty, inv)
 
@@ -1662,11 +1604,10 @@ local function RunFarm(itemName)
         Notify("huh?", itemName .. " isn't a craftable item", 6)
         return
     end
-    local skipped = {}  -- materials with no drop source, ignored for the rest of this run
+    local skipped = {}
     while FarmActive do
         if IsRespawning then task.wait(0.2); continue end
         local missing = GetMissingMaterials(itemName, TargetItemQty)
-        -- Remove anything we've already decided to skip
         for mat in pairs(skipped) do missing[mat] = nil end
         local any = false
         for _ in pairs(missing) do any = true; break end
@@ -1741,29 +1682,153 @@ local function StopFarm()
 end
 
 -- ============================================================
--- TEXT PREDICTION HELPER
+-- PREDICTIVE TEXT HELPERS
 -- ============================================================
-local function GetItemSuggestions(query)
-    if query == "" then return {} end
-    local lq = query:lower()
-    local exact, startsWith, contains = {}, {}, {}
+local function GetAllCraftableNames()
+    local names = {}
     for name in pairs(CraftableItems) do
-        local ln = name:lower()
-        if ln == lq then
-            table.insert(exact, name)
-        elseif ln:sub(1, #lq) == lq then
-            table.insert(startsWith, name)
-        elseif ln:find(lq, 1, true) then
-            table.insert(contains, name)
+        table.insert(names, name)
+    end
+    return names
+end
+
+local function GetAllEnemyNames()
+    local names = {}
+    local seen  = {}
+    for name in pairs(EnemyDropTables) do
+        if not seen[name] then
+            seen[name] = true
+            table.insert(names, name)
         end
     end
-    local results = {}
-    for _, v in ipairs(exact)      do table.insert(results, v) end
-    for _, v in ipairs(startsWith) do table.insert(results, v) end
-    for _, v in ipairs(contains)   do table.insert(results, v) end
-    local out = {}
-    for i = 1, math.min(3, #results) do out[i] = results[i] end
-    return out
+    for name in pairs(BossDropTables) do
+        if not seen[name] then
+            seen[name] = true
+            table.insert(names, name)
+        end
+    end
+    for name in pairs(BossLocations) do
+        if not seen[name] then
+            seen[name] = true
+            table.insert(names, name)
+        end
+    end
+    return names
+end
+
+-- Returns the single best prediction for a typed query against a name list.
+-- Returns nil if the query is empty, already an exact match, or no match exists.
+local function GetBestPrediction(query, nameList)
+    if query == "" then return nil end
+    local lq = query:lower()
+    -- Exact match — don't try to predict further
+    for _, name in ipairs(nameList) do
+        if name:lower() == lq then return nil end
+    end
+    -- Prefer names whose lowercase form starts with the query
+    for _, name in ipairs(nameList) do
+        if name:lower():sub(1, #lq) == lq then return name end
+    end
+    -- Fall back to substring match
+    for _, name in ipairs(nameList) do
+        if name:lower():find(lq, 1, true) then return name end
+    end
+    return nil
+end
+
+-- ============================================================
+-- PREDICTIVE INPUT BUILDER
+-- ============================================================
+-- Creates a styled input frame with a ghost-text prediction label inside a
+-- given parent Frame.  nameListFn is called once to build the completion list.
+-- onConfirm(text) is called when the user presses Enter or clicks away with text.
+local function CreatePredictiveInput(parent, placeholderText, nameListFn, onConfirm)
+    local nameList = nameListFn()
+
+    -- Outer container
+    local container = Instance.new("Frame")
+    container.Name              = "PredictiveInput_" .. placeholderText
+    container.Size              = UDim2.new(1, -16, 0, 36)
+    container.Position          = UDim2.new(0, 8, 0, 0)
+    container.BackgroundColor3  = Color3.fromRGB(40, 40, 40)
+    container.BorderSizePixel   = 0
+    container.ClipsDescendants  = true
+    container.Parent            = parent
+    Instance.new("UICorner", container).CornerRadius = UDim.new(0, 6)
+
+    -- Ghost label (shows full predicted name in gray)
+    local ghostLabel = Instance.new("TextLabel")
+    ghostLabel.Name                   = "Ghost"
+    ghostLabel.Size                   = UDim2.new(1, -10, 1, 0)
+    ghostLabel.Position               = UDim2.new(0, 10, 0, 0)
+    ghostLabel.BackgroundTransparency = 1
+    ghostLabel.TextColor3             = Color3.fromRGB(110, 110, 110)
+    ghostLabel.TextSize               = 14
+    ghostLabel.Font                   = Enum.Font.GothamMedium
+    ghostLabel.Text                   = ""
+    ghostLabel.TextXAlignment         = Enum.TextXAlignment.Left
+    ghostLabel.TextTruncate           = Enum.TextTruncate.AtEnd
+    ghostLabel.ZIndex                 = 2
+    ghostLabel.Parent                 = container
+
+    -- Actual TextBox on top
+    local textBox = Instance.new("TextBox")
+    textBox.Name                   = "Input"
+    textBox.Size                   = UDim2.new(1, -10, 1, 0)
+    textBox.Position               = UDim2.new(0, 10, 0, 0)
+    textBox.BackgroundTransparency = 1
+    textBox.TextColor3             = Color3.fromRGB(255, 255, 255)
+    textBox.PlaceholderText        = placeholderText
+    textBox.PlaceholderColor3      = Color3.fromRGB(100, 100, 100)
+    textBox.TextSize               = 14
+    textBox.Font                   = Enum.Font.GothamMedium
+    textBox.Text                   = ""
+    textBox.ClearTextOnFocus       = false
+    textBox.TextXAlignment         = Enum.TextXAlignment.Left
+    textBox.TextTruncate           = Enum.TextTruncate.AtEnd
+    textBox.ZIndex                 = 3
+    textBox.BackgroundColor3       = Color3.fromRGB(0, 0, 0)  -- needed for transparency
+    textBox.Parent                 = container
+
+    local currentPrediction = nil
+
+    local function UpdateGhost(typed)
+        currentPrediction = GetBestPrediction(typed, nameList)
+        if currentPrediction and typed ~= "" then
+            ghostLabel.Text = currentPrediction
+        else
+            ghostLabel.Text = ""
+        end
+    end
+
+    local function Confirm(text)
+        local trimmed = text:match("^%s*(.-)%s*$")
+        if trimmed == "" then return end
+        textBox.Text    = trimmed
+        ghostLabel.Text = ""
+        onConfirm(trimmed)
+    end
+
+    -- Update ghost every time the typed text changes
+    textBox:GetPropertyChangedSignal("Text"):Connect(function()
+        UpdateGhost(textBox.Text)
+    end)
+
+    -- Enter key: autocomplete if there's a prediction, otherwise confirm as-is
+    textBox.FocusLost:Connect(function(enterPressed)
+        if enterPressed then
+            if currentPrediction and textBox.Text ~= "" then
+                -- Only autocomplete if the typed text isn't already the full name
+                if textBox.Text:lower() ~= currentPrediction:lower() then
+                    textBox.Text = currentPrediction
+                end
+            end
+            Confirm(textBox.Text)
+        end
+        ghostLabel.Text = currentPrediction and textBox.Text ~= "" and currentPrediction or ""
+    end)
+
+    return container, textBox
 end
 
 -- ============================================================
@@ -1775,7 +1840,7 @@ pcall(function()
 end)
 
 local AutoFireActive  = false
-local UseAbilities    = true  -- when false, only M1 is fired; Q/E/R/F abilities are skipped
+local UseAbilities    = true
 local autoFireThreads = {}
 
 local function AF_GetCooldown(tool, default)
@@ -1851,6 +1916,8 @@ local function AF_StartPotionLoop(tool)
     end)
 end
 
+local AF_KeybindOrder = { "M1", "Q", "E", "R", "F" }
+
 local function AF_FireMode(tool, remote, modeName, keybind)
     local pos = RootPart.Position
     if remote then
@@ -1871,8 +1938,6 @@ local function AF_FireMode(tool, remote, modeName, keybind)
         InputEvent:FireServer(tool, modeName, pos, true)
     end
 end
-
-local AF_KeybindOrder = { "M1", "Q", "E", "R", "F" }
 
 local function AF_IsFlamethrower(tool)
     return tool:FindFirstChild("ShootUnion") ~= nil
@@ -2034,41 +2099,6 @@ StopAutoFire = function()
     end
     autoFireThreads = {}
 end
--- Equip every backpack item by moving it into the character, then start firing.
-StartAutoFire = function()
-    if AutoFireActive then return end
-    AutoFireActive = true
-    autoFireThreads = {}
-
-    for _, tool in ipairs(LocalPlayer.Backpack:GetChildren()) do
-        if tool:IsA("Tool") then
-            tool.Parent = Character
-        end
-    end
-
-    for _, tool in ipairs(Character:GetChildren()) do
-        if tool:IsA("Tool") then
-            AF_StartTool(tool)
-        end
-    end
-
-    local conn
-    conn = Character.ChildAdded:Connect(function(child)
-        if AutoFireActive and child:IsA("Tool") then
-            AF_StartTool(child)
-        end
-    end)
-    autoFireThreads["__conn"] = conn
-end
-
-StopAutoFire = function()
-    if not AutoFireActive then return end
-    AutoFireActive = false
-    if autoFireThreads["__conn"] then
-        autoFireThreads["__conn"]:Disconnect()
-    end
-    autoFireThreads = {}
-end
 
 -- ============================================================
 -- HEALTH MONITOR
@@ -2090,22 +2120,15 @@ local function StartHealthMonitor()
         local maxHp = Humanoid.MaxHealth
         if maxHp <= 0 then return end
         if newHealth / maxHp < 0.30 then
-            -- Set flag immediately so target loops stop overwriting LockedPosition
             IsEmergency = true
-            -- Do the actual flee work in a separate thread so this callback
-            -- never yields (avoiding signal-callback re-entrancy issues)
             task.spawn(function()
                 Notify("low health!", "fleeing to safety to heal", 4)
-
-                -- Fly up 700 studs from current position
                 local safePos = RootPart.Position + Vector3.new(0, 700, 0)
                 LockedPosition = safePos
                 RootPart.CFrame = CFrame.new(safePos)
                 RootPart.AssemblyLinearVelocity  = Vector3.zero
                 RootPart.AssemblyAngularVelocity = Vector3.zero
 
-                -- Keep re-asserting the position every tick so nothing can drag
-                -- the player back down while waiting to heal
                 local holdConn
                 holdConn = RunService.Heartbeat:Connect(function()
                     if not IsEmergency then holdConn:Disconnect(); return end
@@ -2115,13 +2138,11 @@ local function StartHealthMonitor()
                     RootPart.AssemblyAngularVelocity = Vector3.zero
                 end)
 
-                -- Wait until health recovers to at least 85%
                 repeat task.wait(0.5) until
                     not (IsActive or FarmActive or EnemyFarmActive)
                     or (Humanoid.Health / Humanoid.MaxHealth) >= 0.85
 
                 holdConn:Disconnect()
-
                 if IsActive or FarmActive or EnemyFarmActive then
                     Notify("health ok", "back to fighting", 3)
                 end
@@ -2135,29 +2156,23 @@ end
 -- RESPAWN
 -- ============================================================
 LocalPlayer.CharacterAdded:Connect(function(newChar)
-    -- Halt all farm loops immediately so they don't use stale refs
     IsRespawning = true
     IsEmergency  = false
     StopHealthMonitor()
     StopRenderLock()
 
-    -- Update character refs as soon as the new body parts exist
     Character = newChar
     RootPart  = newChar:WaitForChild("HumanoidRootPart")
     Humanoid  = newChar:WaitForChild("Humanoid")
 
-    -- If no toggle was on there's nothing to resume
     if not FarmActive and not EnemyFarmActive then
         IsRespawning = false
         StartHealthMonitor()
         return
     end
 
-    -- Wait for the character to fully load and for Roblox to place it
-    -- at the correct spawn position before we do anything
     task.wait(2)
 
-    -- Clean up any leftover dodge state from before death
     IsActive       = false
     FarmDodgeReady = false
     IsDodging      = false
@@ -2167,12 +2182,10 @@ LocalPlayer.CharacterAdded:Connect(function(newChar)
     for b in pairs(BulletData) do UnregisterBullet(b) end; BulletData = {}
     if SafeZoneVisual then SafeZoneVisual:Destroy(); SafeZoneVisual = nil end
 
-    -- Restart autofire with the new character's tools
     StopAutoFire()
     task.wait(0.5)
     StartAutoFire()
 
-    -- Teleport back to wherever we were farming before death
     if CurrentSourceType == "enemy" then
         Notify("respawned", "heading back to " .. tostring(CurrentSourceName), 4)
         TeleportToEnemyIsland(CurrentSourceName)
@@ -2182,22 +2195,15 @@ LocalPlayer.CharacterAdded:Connect(function(newChar)
         TeleportToLocation("Portal Room")
         task.wait(1)
     elseif FarmActive or EnemyFarmActive then
-        -- Generic fallback — go to portal room so the farm loop
-        -- can re-navigate from a known good position
         TeleportToLocation("Portal Room")
         task.wait(1)
     end
 
-    -- Re-activate dodge so farm loops resume in the right position
     ActivateForFarm()
-
-    -- Only now let the farm loops proceed
     IsRespawning = false
-
     StartHealthMonitor()
 end)
 
--- Start the health monitor for the initial character load
 StartHealthMonitor()
 
 -- ============================================================
@@ -2212,12 +2218,8 @@ local function StartEnemyFarm()
     EnemyFarmActive = true
     FarmTargetName  = EnemyFarmTargetName
 
-    -- Determine if the target is a boss or a regular enemy.
     local isBoss = BossDropTables[EnemyFarmTargetName] ~= nil or BossLocations[EnemyFarmTargetName] ~= nil
 
-    -- For regular enemies, find all enemies that share the same island.
-    -- This lets us kill any available mob on that island rather than waiting
-    -- for one specific name to respawn.
     local coGroup = {}
     if not isBoss then
         coGroup = GetCoLocationEnemies(EnemyFarmTargetName)
@@ -2232,7 +2234,6 @@ local function StartEnemyFarm()
 
     Notify("enemy farm started", "killing " .. EnemyFarmTargetName .. " repeatedly", 4)
 
-    -- Boot up the same dodge/render infrastructure used by AutoFarm
     if not IsActive then ActivateForFarm() end
 
     task.spawn(function()
@@ -2242,9 +2243,6 @@ local function StartEnemyFarm()
             LockedPosition      = nil
             Humanoid.AutoRotate = true
 
-            -- ------------------------------------------------
-            -- BOSS PATH
-            -- ------------------------------------------------
             if isBoss then
                 TeleportToLocation("Portal Room")
                 task.wait(1)
@@ -2254,8 +2252,6 @@ local function StartEnemyFarm()
                 local boss = WaitForBoss(EnemyFarmTargetName, 30)
                 if not boss then task.wait(3); continue end
 
-                -- Set CurrentTarget BEFORE activating so StartFarmTargetLoop
-                -- picks it up and drives the safe-zone tracking automatically.
                 TeleportToTarget(boss)
                 task.wait(0.5)
                 if not IsActive and EnemyFarmActive then ActivateForFarm() end
@@ -2280,12 +2276,7 @@ local function StartEnemyFarm()
                 end
                 task.wait(1)
 
-            -- ------------------------------------------------
-            -- REGULAR ENEMY PATH
-            -- ------------------------------------------------
             else
-                -- Teleport using the primary enemy's island (all co-located
-                -- enemies share it, so one teleport covers the whole group).
                 local tpOk = TeleportToEnemyIsland(EnemyFarmTargetName)
                 if not tpOk then
                     warn(("[EnemyFarm] no island for '%s', attempting anyway"):format(EnemyFarmTargetName))
@@ -2300,13 +2291,11 @@ local function StartEnemyFarm()
                 end
 
                 if not enemy then
-                    Notify("looking...", ("can't find any target, reteleporting"):format(EnemyFarmTargetName), 3)
+                    Notify("looking...", "can't find any target, reteleporting", 3)
                     task.wait(2)
                     continue
                 end
 
-                -- Set CurrentTarget BEFORE activating so StartFarmTargetLoop
-                -- picks it up and drives the safe-zone tracking automatically.
                 TeleportToTarget(enemy)
                 task.wait(0.5)
                 if not IsActive and EnemyFarmActive then ActivateForFarm() end
@@ -2340,7 +2329,35 @@ local function StopEnemyFarm()
     Notify("enemy farm stopped", "back to normal", 3)
 end
 
+-- ============================================================
+-- TEXT PREDICTION HELPER (legacy, used by "did you mean?" notify)
+-- ============================================================
+local function GetItemSuggestions(query)
+    if query == "" then return {} end
+    local lq = query:lower()
+    local exact, startsWith, contains = {}, {}, {}
+    for name in pairs(CraftableItems) do
+        local ln = name:lower()
+        if ln == lq then
+            table.insert(exact, name)
+        elseif ln:sub(1, #lq) == lq then
+            table.insert(startsWith, name)
+        elseif ln:find(lq, 1, true) then
+            table.insert(contains, name)
+        end
+    end
+    local results = {}
+    for _, v in ipairs(exact)      do table.insert(results, v) end
+    for _, v in ipairs(startsWith) do table.insert(results, v) end
+    for _, v in ipairs(contains)   do table.insert(results, v) end
+    local out = {}
+    for i = 1, math.min(3, #results) do out[i] = results[i] end
+    return out
+end
 
+-- ============================================================
+-- RAYFIELD WINDOW
+-- ============================================================
 local Window = Rayfield:CreateWindow({
     Name                = "destined laziness",
     LoadingTitle        = "hang on...",
@@ -2350,7 +2367,9 @@ local Window = Rayfield:CreateWindow({
     KeySystem           = false,
 })
 
--- ---- DODGE TAB ----
+-- ============================================================
+-- DODGE TAB
+-- ============================================================
 local DodgeTab = Window:CreateTab("AutoDodge", 4483362458)
 DodgeTab:CreateToggle({
     Name = "lock onto nearest enemy", CurrentValue = false, Flag = "DodgeToggle",
@@ -2362,30 +2381,18 @@ DodgeTab:CreateDivider()
 DodgeTab:CreateSlider({
     Name = "safe zone width", Range = {10, 200}, Increment = 1,
     CurrentValue = Config.SafeZoneWidth, Flag = "SafeZoneWidth",
-    Callback = function(v)
-        Config.SafeZoneWidth = v
-        RefreshSafeZoneVisual()
-    end
+    Callback = function(v) Config.SafeZoneWidth = v; RefreshSafeZoneVisual() end
 })
-
 DodgeTab:CreateSlider({
     Name = "safe zone height", Range = {5, 100}, Increment = 1,
     CurrentValue = Config.SafeZoneHeight, Flag = "SafeZoneHeight",
-    Callback = function(v)
-        Config.SafeZoneHeight = v
-        RefreshSafeZoneVisual()
-    end
+    Callback = function(v) Config.SafeZoneHeight = v; RefreshSafeZoneVisual() end
 })
-
 DodgeTab:CreateSlider({
     Name = "safe zone depth", Range = {10, 200}, Increment = 1,
     CurrentValue = Config.SafeZoneDepth, Flag = "SafeZoneDepth",
-    Callback = function(v)
-        Config.SafeZoneDepth = v
-        RefreshSafeZoneVisual()
-    end
+    Callback = function(v) Config.SafeZoneDepth = v; RefreshSafeZoneVisual() end
 })
-
 DodgeTab:CreateSlider({
     Name = "safe zone y offset", Range = {0, 50}, Increment = 1,
     CurrentValue = Config.SafeZoneYOffset, Flag = "SafeZoneYOffset",
@@ -2396,26 +2403,55 @@ DodgeTab:CreateSlider({
     end
 })
 
--- ---- FARM TAB ----
+-- ============================================================
+-- FARM TAB
+-- ============================================================
 local FarmTab = Window:CreateTab("AutoFarm", 4483362458)
 
-local ItemInput = FarmTab:CreateInput({
-    Name = "target item", CurrentValue = "", PlaceholderText = "e.g. Fury Ruler Sword", NumbersOnly = false,
-    Callback = function(v)
-        TargetItemName = v
-        if v == "" then return end
-        if CraftableItems[v] then
-            Notify("item locked in", v, 3)
+-- ---- Target item predictive input ----
+-- We get the internal Rayfield tab frame so we can inject our custom widget.
+-- Rayfield tabs are ScreenGui > Frame children; we use a Section as an anchor.
+local itemSection = FarmTab:CreateSection("target item")
+
+task.defer(function()
+    -- Find the Rayfield ScreenGui
+    local rayfieldGui = LocalPlayer.PlayerGui:FindFirstChild("Rayfield")
+    if not rayfieldGui then return end
+
+    -- Locate the section we just created by its label text
+    local function FindSectionFrame(labelText)
+        for _, obj in ipairs(rayfieldGui:GetDescendants()) do
+            if obj:IsA("TextLabel") and obj.Text == labelText then
+                return obj.Parent
+            end
+        end
+        return nil
+    end
+
+    -- Give Rayfield a frame to render into
+    local sectionFrame = FindSectionFrame("target item")
+    if not sectionFrame then return end
+
+    -- Inject a small spacer so the input sits below the section label
+    local spacer = Instance.new("Frame")
+    spacer.Size              = UDim2.new(1, 0, 0, 44)
+    spacer.BackgroundTransparency = 1
+    spacer.Parent            = sectionFrame
+
+    CreatePredictiveInput(spacer, "e.g. Fury Ruler Sword", GetAllCraftableNames, function(text)
+        TargetItemName = text
+        if CraftableItems[text] then
+            Notify("item locked in", text, 3)
         else
-            local suggestions = GetItemSuggestions(v)
+            local suggestions = GetItemSuggestions(text)
             if #suggestions > 0 then
                 Notify("did you mean?", table.concat(suggestions, "\n"), 6)
             else
-                Notify("not found", v .. " isn't in the crafting list", 5)
+                Notify("not found", text .. " isn't in the crafting list", 5)
             end
         end
-    end
-})
+    end)
+end)
 
 FarmTab:CreateInput({
     Name = "how many?", CurrentValue = "1", PlaceholderText = "1", NumbersOnly = true,
@@ -2434,12 +2470,10 @@ FarmTab:CreateToggle({
     Name = "use abilities (Q/E/R/F)", CurrentValue = true, Flag = "UseAbilitiesToggle",
     Callback = function(v) UseAbilities = v end
 })
-
 FarmTab:CreateToggle({
     Name = "start autofarm", CurrentValue = false, Flag = "FarmToggle",
     Callback = function(v) if v then StartFarm() else StopFarm() end end
 })
-
 FarmTab:CreateToggle({
     Name = "farm from scratch (ignore existing inventory)", CurrentValue = false, Flag = "FarmFromScratchToggle",
     Callback = function(v)
@@ -2501,15 +2535,37 @@ end })
 
 FarmTab:CreateDivider()
 
-FarmTab:CreateInput({
-    Name = "enemy to farm", CurrentValue = "", PlaceholderText = "e.g. Fury Destructive Overlord", NumbersOnly = false,
-    Callback = function(v)
-        EnemyFarmTargetName = v
-        if v ~= "" then
-            Notify("enemy set", "will farm: " .. v, 3)
+-- ---- Enemy farm predictive input ----
+local enemySection = FarmTab:CreateSection("enemy to farm")
+
+task.defer(function()
+    local rayfieldGui = LocalPlayer.PlayerGui:FindFirstChild("Rayfield")
+    if not rayfieldGui then return end
+
+    local function FindSectionFrame(labelText)
+        for _, obj in ipairs(rayfieldGui:GetDescendants()) do
+            if obj:IsA("TextLabel") and obj.Text == labelText then
+                return obj.Parent
+            end
         end
+        return nil
     end
-})
+
+    local sectionFrame = FindSectionFrame("enemy to farm")
+    if not sectionFrame then return end
+
+    local spacer = Instance.new("Frame")
+    spacer.Size                   = UDim2.new(1, 0, 0, 44)
+    spacer.BackgroundTransparency = 1
+    spacer.Parent                 = sectionFrame
+
+    CreatePredictiveInput(spacer, "e.g. Fury Destructive Overlord", GetAllEnemyNames, function(text)
+        EnemyFarmTargetName = text
+        if text ~= "" then
+            Notify("enemy set", "will farm: " .. text, 3)
+        end
+    end)
+end)
 
 FarmTab:CreateToggle({
     Name = "autofarm enemy", CurrentValue = false, Flag = "EnemyFarmToggle",
