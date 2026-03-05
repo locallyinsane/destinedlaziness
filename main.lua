@@ -75,6 +75,7 @@ local Connections    = {}
 local RenderConn     = nil
 local IsDodging      = false
 local IsEmergency    = false -- true while player is in low-health flee mode
+local IsRespawning   = false -- true while waiting for character to fully reload after death
 
 local VisualFolder = Workspace:FindFirstChild("__AutoDodgeVisuals")
     or Instance.new("Folder", Workspace)
@@ -1306,6 +1307,9 @@ local function FarmMaterial(matName, needed, sourceType, sourceName)
     Notify("on it", ("need %dx %s from %s"):format(needed, matName, sourceName), 5)
 
     while FarmActive do
+        -- Pause all farm activity while the character is respawning
+        if IsRespawning then task.wait(0.2); continue end
+
         local inv    = GetInventory()
         local gained = math.max(0, (inv[matName] or 0) - startHave)
 
@@ -1409,6 +1413,8 @@ local function FarmMaterial(matName, needed, sourceType, sourceName)
             local hasFillers      = #coLocationGroup > 1
 
             while FarmActive and not invCheckDone do
+                if IsRespawning then task.wait(0.2); continue end
+
                 local invCheck  = GetInventory()
                 local gainedNow = math.max(0, (invCheck[matName] or 0) - startHave)
                 if gainedNow >= needed then break end
@@ -1648,6 +1654,7 @@ local function RunFarm(itemName)
     end
     local skipped = {}  -- materials with no drop source, ignored for the rest of this run
     while FarmActive do
+        if IsRespawning then task.wait(0.2); continue end
         local missing = GetMissingMaterials(itemName, TargetItemQty)
         -- Remove anything we've already decided to skip
         for mat in pairs(skipped) do missing[mat] = nil end
@@ -1715,6 +1722,7 @@ local function StopFarm()
     FarmDodgeReady    = false
     ActiveFromScratch = false
     IsEmergency       = false
+    IsRespawning      = false
     StopAutoFire()
     Deactivate()
     Notify("farm stopped", "called it off, back to normal", 3)
@@ -2049,36 +2057,48 @@ end
 -- RESPAWN
 -- ============================================================
 LocalPlayer.CharacterAdded:Connect(function(newChar)
-    -- Always restore health monitor on death regardless of which mode is active,
-    -- then re-initialise if any toggle is still on.
+    -- Halt all farm loops immediately so they don't use stale refs
+    IsRespawning = true
+    IsEmergency  = false
     StopHealthMonitor()
+    StopRenderLock()
 
-    if not IsActive and not FarmActive and not EnemyFarmActive then return end
+    -- Update character refs as soon as the new body parts exist
     Character = newChar
     RootPart  = newChar:WaitForChild("HumanoidRootPart")
     Humanoid  = newChar:WaitForChild("Humanoid")
-    IsEmergency = false
 
-    if IsActive then
-        IsActive       = false
-        FarmDodgeReady = false
-        StopRenderLock()
-        for _, c in ipairs(Connections) do c:Disconnect() end; Connections = {}
-        for b in pairs(BulletData) do UnregisterBullet(b) end; BulletData = {}
-        if SafeZoneVisual then SafeZoneVisual:Destroy(); SafeZoneVisual = nil end
-        LockedPosition = nil
-        task.wait(0.1)
-        if FarmActive then ActivateForFarm()
-        elseif EnemyFarmActive then ActivateForFarm()
-        else Activate() end
+    -- If no toggle was on there's nothing to resume
+    if not FarmActive and not EnemyFarmActive then
+        IsRespawning = false
+        StartHealthMonitor()
+        return
     end
 
-    -- Re-equip all backpack items and restart auto-fire after respawn.
-    if FarmActive or EnemyFarmActive or IsActive then
-        task.wait(1) -- let the character fully load
-        StopAutoFire()
-        StartAutoFire()
-    end
+    -- Wait for the character to fully load and for Roblox to place it
+    -- at the correct spawn position before we do anything
+    task.wait(2)
+
+    -- Clean up any leftover dodge state from before death
+    IsActive       = false
+    FarmDodgeReady = false
+    IsDodging      = false
+    LockedPosition = nil
+    CurrentTarget  = nil
+    for _, c in ipairs(Connections) do c:Disconnect() end; Connections = {}
+    for b in pairs(BulletData) do UnregisterBullet(b) end; BulletData = {}
+    if SafeZoneVisual then SafeZoneVisual:Destroy(); SafeZoneVisual = nil end
+
+    -- Restart autofire with the new character's tools
+    StopAutoFire()
+    task.wait(0.5)
+    StartAutoFire()
+
+    -- Re-activate dodge so farm loops resume in the right position
+    ActivateForFarm()
+
+    -- Only now let the farm loops proceed
+    IsRespawning = false
 
     StartHealthMonitor()
 end)
@@ -2217,6 +2237,7 @@ local function StopEnemyFarm()
     CurrentTarget       = nil
     FarmDodgeReady      = false
     IsEmergency         = false
+    IsRespawning        = false
     Humanoid.AutoRotate = true
     StopAutoFire()
     Deactivate()
