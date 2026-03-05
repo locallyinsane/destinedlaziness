@@ -1894,7 +1894,7 @@ local function AF_StartTool(tool)
                 local pos = RootPart.Position
                 pcall(function()
                     clickEvent:FireServer(
-                        vector.create(pos.X, pos.Y, pos.Z),
+                        Vector3.new(pos.X, pos.Y, pos.Z),
                         "attack1"
                     )
                 end)
