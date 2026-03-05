@@ -1874,6 +1874,10 @@ end
 
 local AF_KeybindOrder = { "M1", "Q", "E", "R", "F" }
 
+local function AF_IsFlamethrower(tool)
+    return tool:FindFirstChild("ShootUnion") ~= nil
+end
+
 local function AF_StartTool(tool)
     if autoFireThreads[tool] then return end
     autoFireThreads[tool] = true
@@ -1885,6 +1889,7 @@ local function AF_StartTool(tool)
     task.spawn(function()
         local remote    = tool:FindFirstChildOfClass("RemoteEvent")
         local isNsystem = tool:GetAttribute("nsystem")
+        local isFlame   = AF_IsFlamethrower(tool)
 
         if not remote and not isNsystem then
             autoFireThreads[tool] = nil
@@ -1893,17 +1898,31 @@ local function AF_StartTool(tool)
 
         local modes = AF_GetModes(tool)
 
+        -- FLAMETHROWER: hold M1 down for the entire kill, never send stopAttack mid-fight
+        if isFlame and remote then
+            local pos = RootPart.Position
+            AF_FireWithRemote(remote, AF_GetAttackName(tool), pos)   -- hold down
+            while AutoFireActive and AF_IsInCharacter(tool) do
+                -- re-assert the hold every tick in case the server drops it
+                local cd = AF_GetCooldown(tool, 0.1)
+                task.wait(cd)
+                if not AutoFireActive or not AF_IsInCharacter(tool) then break end
+                AF_FireWithRemote(remote, AF_GetAttackName(tool), RootPart.Position)
+            end
+            AF_StopWithRemote(remote, RootPart.Position)             -- release only when done
+            autoFireThreads[tool] = nil
+            return
+        end
+
         while AutoFireActive and AF_IsInCharacter(tool) do
             local cd = AF_GetCooldown(tool, 0.5)
 
             if remote then
-                -- M1 hold
                 local pos = RootPart.Position
                 AF_FireWithRemote(remote, AF_GetAttackName(tool), pos)
                 task.wait(cd)
                 AF_StopWithRemote(remote, RootPart.Position)
 
-                -- fire each ability mode if the tool has them and abilities are enabled
                 if UseAbilities and modes then
                     for i = 2, #modes do
                         if not AutoFireActive or not AF_IsInCharacter(tool) then break end
@@ -1916,7 +1935,6 @@ local function AF_StartTool(tool)
                 end
 
             elseif isNsystem then
-                -- M1
                 local pos = RootPart.Position
                 if modes and modes[1] then
                     InputEvent:FireServer(tool, modes[1], pos)
@@ -1930,7 +1948,6 @@ local function AF_StartTool(tool)
                     InputEvent:FireServer(tool, nil, pos, true)
                 end
 
-                -- fire each ability mode if abilities are enabled
                 if UseAbilities and modes then
                     for i = 2, #modes do
                         if not AutoFireActive or not AF_IsInCharacter(tool) then break end
@@ -1943,16 +1960,15 @@ local function AF_StartTool(tool)
             task.wait(0.05)
         end
 
-        -- cleanup stop signals
+        -- cleanup
         if remote then
             AF_StopWithRemote(remote, RootPart.Position)
             if modes then
                 for i = 2, #modes do
                     local keybind = AF_KeybindOrder[i]
                     if keybind then
-                        local stopName = "stopAttack" .. keybind
                         remote:FireServer(
-                            { key = keybind, attack = stopName },
+                            { key = keybind, attack = "stopAttack" .. keybind },
                             { MouseBehavior = "Default", MousePos = vector.create(RootPart.Position.X, RootPart.Position.Y, RootPart.Position.Z) }
                         )
                     end
