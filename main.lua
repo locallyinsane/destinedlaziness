@@ -1448,7 +1448,7 @@ local function FarmMaterial(matName, needed, sourceType, sourceName)
             local lastInvCheck = tick()
             task.spawn(function()
                 while FarmActive and not invCheckDone do
-                    task.wait(15)
+                    task.wait(8)
                     if not FarmActive or invCheckDone then break end
                     local freshInv    = GetInventory()
                     local freshGained = math.max(0, (freshInv[matName] or 0) - startHave)
