@@ -812,12 +812,20 @@ local function StartBossFight(bossName)
             end
         end
     elseif bossLocation == "Admin Island" then
-        -- Admin Island bosses use workspace.BossTransports
-        -- named: [FirstWord] Boss Transporter
-        -- e.g. "Pearl the Omega" -> "Pearl Boss Transporter"
-        local bossTransports = Workspace:FindFirstChild("BossTransports")
+        -- workspace["Ascension Trial Maps"]["Admin Tower Island"].BossTransports["[FirstWord] Boss Transporter"]
+        local trialMaps = Workspace:FindFirstChild("Ascension Trial Maps")
+        if not trialMaps then
+            Notify("hm", "Ascension Trial Maps not found", 5)
+            return false
+        end
+        local adminIsland = trialMaps:FindFirstChild("Admin Tower Island")
+        if not adminIsland then
+            Notify("hm", "Admin Tower Island not found", 5)
+            return false
+        end
+        local bossTransports = adminIsland:FindFirstChild("BossTransports")
         if not bossTransports then
-            Notify("hm", "BossTransports folder not found", 5)
+            Notify("hm", "BossTransports not found in Admin Tower Island", 5)
             return false
         end
         local firstName = bossName:match("^(%S+)")
