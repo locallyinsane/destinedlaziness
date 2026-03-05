@@ -1900,6 +1900,7 @@ local function AF_StartTool(tool)
 
         -- FLAMETHROWER: nsystem + ShootUnion — hold M1, never release mid-fight
         if isFlame and isNsystem then
+            local cd = AF_GetCooldown(tool, 0.1)
             local pos = RootPart.Position
             if modes and modes[1] then
                 InputEvent:FireServer(tool, modes[1], pos)
@@ -1908,7 +1909,7 @@ local function AF_StartTool(tool)
             end
 
             while AutoFireActive and AF_IsInCharacter(tool) do
-                task.wait(0.05)
+                task.wait(cd)
                 local currentPos = RootPart.Position
                 if modes and modes[1] then
                     InputEvent:FireServer(tool, modes[1], currentPos)
@@ -1932,13 +1933,11 @@ local function AF_StartTool(tool)
             local cd = AF_GetCooldown(tool, 0.5)
 
             if remote then
-                -- M1 hold
                 local pos = RootPart.Position
                 AF_FireWithRemote(remote, AF_GetAttackName(tool), pos)
                 task.wait(cd)
                 AF_StopWithRemote(remote, RootPart.Position)
 
-                -- fire each ability mode if the tool has them and abilities are enabled
                 if UseAbilities and modes then
                     for i = 2, #modes do
                         if not AutoFireActive or not AF_IsInCharacter(tool) then break end
@@ -1951,7 +1950,6 @@ local function AF_StartTool(tool)
                 end
 
             elseif isNsystem then
-                -- M1
                 local pos = RootPart.Position
                 if modes and modes[1] then
                     InputEvent:FireServer(tool, modes[1], pos)
@@ -1965,7 +1963,6 @@ local function AF_StartTool(tool)
                     InputEvent:FireServer(tool, nil, pos, true)
                 end
 
-                -- fire each ability mode if abilities are enabled
                 if UseAbilities and modes then
                     for i = 2, #modes do
                         if not AutoFireActive or not AF_IsInCharacter(tool) then break end
@@ -2001,6 +1998,41 @@ local function AF_StartTool(tool)
 
         autoFireThreads[tool] = nil
     end)
+end
+
+StartAutoFire = function()
+    if AutoFireActive then return end
+    AutoFireActive = true
+    autoFireThreads = {}
+
+    for _, tool in ipairs(LocalPlayer.Backpack:GetChildren()) do
+        if tool:IsA("Tool") then
+            tool.Parent = Character
+        end
+    end
+
+    for _, tool in ipairs(Character:GetChildren()) do
+        if tool:IsA("Tool") then
+            AF_StartTool(tool)
+        end
+    end
+
+    local conn
+    conn = Character.ChildAdded:Connect(function(child)
+        if AutoFireActive and child:IsA("Tool") then
+            AF_StartTool(child)
+        end
+    end)
+    autoFireThreads["__conn"] = conn
+end
+
+StopAutoFire = function()
+    if not AutoFireActive then return end
+    AutoFireActive = false
+    if autoFireThreads["__conn"] then
+        autoFireThreads["__conn"]:Disconnect()
+    end
+    autoFireThreads = {}
 end
 -- Equip every backpack item by moving it into the character, then start firing.
 StartAutoFire = function()
