@@ -1524,6 +1524,7 @@ local function FarmMaterial(matName, needed, sourceType, sourceName)
                 Notify("cleared", ("got all the %s we needed, resetting"):format(matName), 4)
                 SoftReset()
                 TeleportToLocation("Portal Room")
+                task.wait(2)
                 if FarmActive then ActivateForFarm() end
             end
 
