@@ -94,7 +94,7 @@ local DodgeLoopActive      = false
 local FarmDodgeReady       = false
 local FarmFromScratch      = false
 local ActiveFromScratch    = false
-local CurrentSourceType    = nil  -- "enemy" | "boss" | "quest" — set by FarmMaterial
+local CurrentSourceType    = nil  -- "enemy" | "boss" | "quest" � set by FarmMaterial
 local CurrentSourceName    = nil  -- the enemy/boss/quest name currently being farmed
 
 -- ============================================================
@@ -292,13 +292,14 @@ local function IsInUnsafeRegion(pos)
     return false
 end
 
-local function FindSafePosition()
-    local function IsClear(pos)
-        for bullet in pairs(BulletData) do
-            if bullet.Parent and IsPointInBullet(pos, bullet) then return false end
-        end
-        return true
+local function IsClear(pos)
+    for bullet in pairs(BulletData) do
+        if bullet.Parent and IsPointInBullet(pos, bullet) then return false end
     end
+    return true
+end
+
+local function FindSafePosition()
     local hW = Config.SafeZoneWidth  / 2
     local hH = Config.SafeZoneHeight / 2
     local hD = Config.SafeZoneDepth  / 2
@@ -321,6 +322,22 @@ local function FindSafePosition()
             local flat = Vector3.new(c.X - SafeZoneCenter.X, 0, c.Z - SafeZoneCenter.Z)
             if flat.Magnitude <= Config.MaxTeleportRadius and IsClear(c) then return c end
         end
+    end
+    return nil
+end
+
+-- Like FindSafePosition but searches around a given center point instead of
+-- SafeZoneCenter. Used during emergency flee where the player is high in the
+-- air far from the normal safe zone.
+local function FindSafePositionAround(center)
+    local radius = 60
+    for _ = 1, 80 do
+        local c = Vector3.new(
+            center.X + (math.random() * 2 - 1) * radius,
+            center.Y + (math.random() * 2 - 1) * radius,
+            center.Z + (math.random() * 2 - 1) * radius
+        )
+        if IsClear(c) then return c end
     end
     return nil
 end
@@ -425,14 +442,24 @@ local function MoveTo(pos)
 end
 
 local function DodgeIfNeeded()
-    if not IsActive or IsDodging or IsEmergency then return end
+    if not IsActive or IsDodging then return end
     if FarmActive and not FarmDodgeReady then return end
     if EnemyFarmActive and not FarmDodgeReady then return end
+    -- No target yet means nothing is shooting at us; don't touch the player's position.
+    if not IsTargetAlive(CurrentTarget) then return end
     IsDodging = true
     local checkPos = LockedPosition or RootPart.Position
-    if IsInUnsafeRegion(checkPos) or not IsInsideSafeZone(checkPos) then
-        local safe = FindSafePosition()
-        if safe then MoveTo(safe) end
+
+    if IsEmergency then
+        -- Emergency mode: the climb loop moves the player every 0.5s which is
+        -- enough to outrun most attacks. Nothing extra needed here.
+        IsDodging = false
+        return
+    else
+        if IsInUnsafeRegion(checkPos) or not IsInsideSafeZone(checkPos) then
+            local safe = FindSafePosition()
+            if safe then MoveTo(safe) end
+        end
     end
     IsDodging = false
 end
@@ -458,6 +485,10 @@ local function StartRenderLock()
         if not IsActive then return end
         if FarmActive and not FarmDodgeReady then return end
         if EnemyFarmActive and not FarmDodgeReady then return end
+        -- Don't touch the player's position until we have a live target.
+        -- Without this, the render lock freezes the player at 0,0,0 (the
+        -- uninitialized SafeZoneCenter) before any enemies have spawned.
+        if not IsEmergency and not IsTargetAlive(CurrentTarget) then return end
         local lockPos = LockedPosition or RootPart.Position
         RootPart.AssemblyLinearVelocity  = Vector3.zero
         RootPart.AssemblyAngularVelocity = Vector3.zero
@@ -522,7 +553,7 @@ local function TeleportToEnemyIsland(enemyName)
     local islandName = EnemyLocations[enemyName]
 
     if islandName == nil then
-        local msg = ("no island mapped for '%s' — skipping teleport"):format(enemyName)
+        local msg = ("no island mapped for '%s' � skipping teleport"):format(enemyName)
         warn("[AutoFarm] " .. msg)
         Notify("no island found", msg, 5)
         return false
@@ -693,18 +724,26 @@ local function StartDodgeTargetLoop()
                 if not IsTargetAlive(CurrentTarget) then
                     CurrentTarget = GetDodgeTarget()
                     if CurrentTarget then
+                        -- Only teleport and update zone when we actually found a target.
+                        -- Without this guard, SafeZoneCenter is still Vector3(0,0,0) and
+                        -- the render lock would instantly teleport the player there.
                         UpdateSafeZoneCenter()
                         LockedPosition  = SafeZoneCenter
                         RootPart.CFrame = CFrame.new(SafeZoneCenter)
                         Humanoid.AutoRotate = false
                     end
+                    -- No target found yet: leave LockedPosition at the player's
+                    -- current position so they stay put until enemies spawn.
                 else
                     UpdateSafeZoneCenter()
                     LockedPosition = SafeZoneCenter
                 end
                 if SafeZoneVisual then
                     SafeZoneVisual.Size   = Vector3.new(Config.SafeZoneWidth, Config.SafeZoneHeight, Config.SafeZoneDepth)
-                    SafeZoneVisual.CFrame = CFrame.new(SafeZoneCenter)
+                    -- Only show the visual where a target actually is
+                    if CurrentTarget then
+                        SafeZoneVisual.CFrame = CFrame.new(SafeZoneCenter)
+                    end
                 end
             end
             task.wait(0.025)
@@ -755,10 +794,11 @@ local function Activate()
     if IsActive then return end
     IsActive = true
     StartAutoFire()
-    -- Don't teleport yet — StartDodgeTargetLoop will find the nearest mob
-    -- and UpdateSafeZoneCenter will set SafeZoneCenter once we have a target.
-    -- Until then, lock the player at their current position.
-    LockedPosition = RootPart.Position
+    -- Lock the player at their current position until a target is found.
+    -- Also seed SafeZoneCenter here so it is never Vector3(0,0,0) if anything
+    -- reads it before the first enemy spawns.
+    LockedPosition  = RootPart.Position
+    SafeZoneCenter  = RootPart.Position
     RefreshSafeZoneVisual()
     FreezePlayer()
     StartRenderLock()
@@ -1284,7 +1324,7 @@ local function DoQuest(questName)
         if not goldBoss then
             Notify("gold farming", ("need %d more gold but no suitable boss found"):format(stillNeed), 5)
         else
-            Notify("gold farming", ("need %d more gold — killing %dx %s (%d/kill)"):format(
+            Notify("gold farming", ("need %d more gold � killing %dx %s (%d/kill)"):format(
                 stillNeed, killsNeeded, goldBoss, goldPerBossKill), 5)
             local killed = 0
             while FarmActive and killed < killsNeeded do
@@ -1368,7 +1408,7 @@ local function FarmMaterial(matName, needed, sourceType, sourceName)
         local gained = math.max(0, (inv[matName] or 0) - startHave)
 
         if gained >= needed then
-            Notify("got it", ("+%dx %s — moving on"):format(gained, matName), 5)
+            Notify("got it", ("+%dx %s � moving on"):format(gained, matName), 5)
             FarmTargetName    = nil
             CurrentTarget     = nil
             FarmDodgeReady    = false
@@ -1453,7 +1493,7 @@ local function FarmMaterial(matName, needed, sourceType, sourceName)
                     local freshInv    = GetInventory()
                     local freshGained = math.max(0, (freshInv[matName] or 0) - startHave)
                     if freshGained >= needed then
-                        Notify("got it", ("+%dx %s — moving on"):format(freshGained, matName), 5)
+                        Notify("got it", ("+%dx %s � moving on"):format(freshGained, matName), 5)
                         invCheckDone = true
                     else
                         local stillNeed = needed - freshGained
@@ -1488,14 +1528,14 @@ local function FarmMaterial(matName, needed, sourceType, sourceName)
                     -- GetFarmTarget, StartFarmTargetLoop, and the safe zone all
                     -- behave exactly as if the filler were the real target.
                     FarmTargetName = coLocationGroup
-                    Notify("filling time", ("no %s up — farming co-location mobs"):format(sourceName), 3)
+                    Notify("filling time", ("no %s up � farming co-location mobs"):format(sourceName), 3)
 
                     -- Keep killing co-location mobs until the primary respawns.
                     while FarmActive and not invCheckDone do
                         -- As soon as the primary is back, break out and let the
                         -- outer loop handle it with FarmTargetName restored.
                         if PrimaryTargetExists(sourceName) then
-                            Notify("primary spawned", (sourceName .. " is up — switching back"):format(), 3)
+                            Notify("primary spawned", (sourceName .. " is up � switching back"):format(), 3)
                             break
                         end
 
@@ -1517,7 +1557,7 @@ local function FarmMaterial(matName, needed, sourceType, sourceName)
                         end)
                         while not fillerDead and FarmActive do
                             if PrimaryTargetExists(sourceName) then
-                                Notify("primary spawned", (sourceName .. " is up — switching back"):format(), 3)
+                                Notify("primary spawned", (sourceName .. " is up � switching back"):format(), 3)
                                 break
                             end
                             task.wait(0.5)
@@ -1684,7 +1724,7 @@ local function RunCraftingPhase(itemName, qty)
     local queue = BuildCraftQueue(itemName, qty, inv)
 
     if #queue == 0 then
-        Notify("nothing to craft?", "queue was empty — maybe you already have it!", 5)
+        Notify("nothing to craft?", "queue was empty � maybe you already have it!", 5)
         return
     end
 
@@ -1701,7 +1741,7 @@ local function RunCraftingPhase(itemName, qty)
         end
     end
 
-    Notify("all done!", ("%s x%d crafted — enjoy!"):format(itemName, qty), 8)
+    Notify("all done!", ("%s x%d crafted � enjoy!"):format(itemName, qty), 8)
 end
 
 -- ============================================================
@@ -1820,13 +1860,17 @@ end
 -- AUTO FIRE SYSTEM
 -- ============================================================
 local WeaponStats = nil
-pcall(function()
-    WeaponStats = require(ReplicatedStorage:WaitForChild("WeaponStats"))
+local ok_ws, err_ws = pcall(function()
+    WeaponStats = require(ReplicatedStorage:WaitForChild("WeaponStats", 5))
 end)
+if not ok_ws or not WeaponStats then
+    warn("[AF] WeaponStats failed to load: " .. tostring(err_ws) .. " -- using hardcoded attack names")
+end
 
-local AutoFireActive  = false
-local UseAbilities    = true  -- when false, only M1 is fired; Q/E/R/F abilities are skipped
-local autoFireThreads = {}
+local AutoFireActive       = false
+local UseAbilities         = true  -- when false, only M1 is fired; Q/E/R/F abilities are skipped
+local autoFireThreads      = {}
+local StandaloneFireActive = false  -- true when the standalone "use all weapons" toggle is on
 
 local function AF_GetCooldown(tool, default)
     local cd = tool:FindFirstChild("Cooldowns")
@@ -1853,40 +1897,153 @@ local function AF_GetModes(tool)
     return nil
 end
 
+-- Cache of discovered M1 attack names, seeded with known weapons.
+-- New weapons are auto-discovered at runtime and added here so the scan
+-- only happens once per weapon per session.
+local AF_AttackNameCache = {
+    ["Abyssrender"]        = "Cleave",
+    ["Crimson Deadeye"]    = "Deadshot",
+    ["Pearl's OG Scythe"]  = "AttackM1",
+    ["Judgement"]          = "Sinful Banish",
+}
+
+-- Scans a tool's LocalScript/ModuleScript constants using getconstants()
+-- (executor API) to find the M1 attack name string. This avoids reading
+-- .Source which executors block with a scheduler error.
+local function AF_ScanScriptForAttackName(tool)
+    if not getconstants then return nil end
+    -- Known attack name suffixes/patterns to reject
+    local rejectPatterns = { "^stop", "^Add", "^Remove", "^Play", "^Motor", "^Idle" }
+    for _, obj in ipairs(tool:GetDescendants()) do
+        if obj:IsA("LocalScript") or obj:IsA("ModuleScript") then
+            local ok, consts = pcall(getconstants, obj)
+            if ok and consts then
+                -- Walk every string constant in the script bytecode.
+                -- The M1 attack name will appear as a plain string constant,
+                -- is typically 3-30 chars, starts with a capital letter,
+                -- contains only letters/spaces, and is NOT a lifecycle keyword.
+                for _, v in ipairs(consts) do
+                    if type(v) == "string"
+                        and #v >= 3 and #v <= 40
+                        and v:match("^%u[%a%s]+$")  -- starts uppercase, letters+spaces only
+                        and v ~= "stopAttack"
+                    then
+                        local rejected = false
+                        for _, pat in ipairs(rejectPatterns) do
+                            if v:find(pat) then rejected = true; break end
+                        end
+                        if not rejected then
+                            return v
+                        end
+                    end
+                end
+            end
+        end
+    end
+    return nil
+end
 local function AF_GetAttackName(tool)
-    return tool:GetAttribute("M1")
+    -- 1. Return cached result immediately (avoids re-scanning every cycle)
+    if AF_AttackNameCache[tool.Name] then
+        return AF_AttackNameCache[tool.Name]
+    end
+
+    -- 2. Tool attribute set at runtime (NewBoomSystem weapons)
+    local fromAttr = tool:GetAttribute("M1")
         or tool:GetAttribute("Q")
         or tool:GetAttribute("E")
         or tool:GetAttribute("R")
-        or "Slash"
+    if fromAttr then
+        AF_AttackNameCache[tool.Name] = fromAttr
+        return fromAttr
+    end
+
+    -- 3. WeaponStats module
+    if WeaponStats and WeaponStats.WeaponStats[tool.Name] then
+        local stats = WeaponStats.WeaponStats[tool.Name]
+        if stats.Modes and stats.Modes[1] and stats.Modes[1][1] then
+            local name = stats.Modes[1][1]
+            AF_AttackNameCache[tool.Name] = name
+            return name
+        end
+    end
+
+    -- 4. Configuration module inside the tool
+    local cfg = tool:FindFirstChild("Configuration")
+    if cfg then
+        local ok, result = pcall(require, cfg)
+        if ok and type(result) == "table" then
+            local m1 = result.M1 or result.AttackM1 or result.Attack
+            if m1 then
+                AF_AttackNameCache[tool.Name] = m1
+                return m1
+            end
+        end
+    end
+
+    -- 5. Scan script bytecode constants via getconstants() (executor API, no .Source needed)
+    local scanned = AF_ScanScriptForAttackName(tool)
+    if scanned then
+        warn("[AF] '" .. tool.Name .. "' attack name auto-discovered: " .. scanned)
+        AF_AttackNameCache[tool.Name] = scanned
+        return scanned
+    end
+
+    -- 6. Give up - warn so the name can be added to the cache manually
+    warn("[AF] Unknown attack name for '" .. tool.Name .. "' - add it to AF_AttackNameCache")
+    AF_AttackNameCache[tool.Name] = "Slash"
+    return "Slash"
 end
 
 local function AF_IsInCharacter(tool)
-    return tool.Parent == Character
+    -- Roblox only lets one tool be "held" at a time; the rest get moved back
+    -- to Backpack automatically. Keep firing as long as the tool still belongs
+    -- to this player in any capacity (character OR backpack).
+    return tool.Parent == Character or tool.Parent == LocalPlayer.Backpack
 end
 
-local function AF_FireWithRemote(remote, attackName, pos)
+-- Returns the current target's HumanoidRootPart position, or the player's
+-- own position as a fallback. All weapon fire functions use this so attacks
+-- are always aimed at the enemy rather than at the player's feet.
+local function AF_GetAimPos()
+    if CurrentTarget then
+        local root = CurrentTarget:FindFirstChild("HumanoidRootPart")
+        if root then return root.Position end
+    end
+    return RootPart.Position
+end
+
+-- Returns the current MouseBehavior name the same way the real client does,
+-- so the server receives the value it actually expects.
+local function AF_MouseBehavior()
+    local ok, name = pcall(function()
+        return game:GetService("UserInputService").MouseBehavior.Name
+    end)
+    return (ok and name) or "Default"
+end
+
+local function AF_FireWithRemote(remote, attackName, pos, includeMouseBehavior)
     remote:FireServer(
         { key = "M1", attack = attackName },
-        { MouseBehavior = "Default", MousePos = vector.create(pos.X, pos.Y, pos.Z) }
+        { MouseBehavior = AF_MouseBehavior(), MousePos = vector.create(pos.X, pos.Y, pos.Z) }
     )
 end
 
-local function AF_StopWithRemote(remote, pos)
+local function AF_StopWithRemote(remote, pos, includeMouseBehavior)
     remote:FireServer(
         { key = "M1", attack = "stopAttack" },
-        { MouseBehavior = "Default", MousePos = vector.create(pos.X, pos.Y, pos.Z) }
+        { MouseBehavior = AF_MouseBehavior(), MousePos = vector.create(pos.X, pos.Y, pos.Z) }
     )
 end
 
 local function AF_UsePotion(tool)
     local remote = tool:FindFirstChildOfClass("RemoteEvent")
     if remote then
-        AF_FireWithRemote(remote, AF_GetAttackName(tool), RootPart.Position)
+        AF_FireWithRemote(remote, AF_GetAttackName(tool), AF_GetAimPos())
     elseif tool:GetAttribute("nsystem") then
         local modes = AF_GetModes(tool)
         local mode = modes and modes[1] or nil
-        InputEvent:FireServer(tool, mode, RootPart.Position)
+        InputEvent:FireServer(tool, mode, AF_GetAimPos())
     end
 end
 
@@ -1902,18 +2059,19 @@ local function AF_StartPotionLoop(tool)
 end
 
 local function AF_FireMode(tool, remote, modeName, keybind)
-    local pos = RootPart.Position
+    local pos = AF_GetAimPos()
+    local mb  = AF_MouseBehavior()
     if remote then
         local attackName = tool:GetAttribute(keybind) or modeName
         remote:FireServer(
             { key = keybind, attack = attackName },
-            { MouseBehavior = "Default", MousePos = vector.create(pos.X, pos.Y, pos.Z) }
+            { MouseBehavior = mb, MousePos = vector.create(pos.X, pos.Y, pos.Z) }
         )
         task.wait(0.05)
         local stopName = keybind == "M1" and "stopAttack" or ("stopAttack" .. keybind)
         remote:FireServer(
             { key = keybind, attack = stopName },
-            { MouseBehavior = "Default", MousePos = vector.create(pos.X, pos.Y, pos.Z) }
+            { MouseBehavior = mb, MousePos = vector.create(pos.X, pos.Y, pos.Z) }
         )
     else
         InputEvent:FireServer(tool, modeName, pos)
@@ -1932,7 +2090,7 @@ local function AF_StartTool(tool)
         AF_StartPotionLoop(tool)
     end
 
-    -- ── The Galaxy's Embrace: uses its own ClickEvent remote ──────────────────
+    -- -- The Galaxy's Embrace: uses its own ClickEvent remote ------------------
     if tool.Name == "The Galaxy's Embrace" then
         local clickEvent = tool:FindFirstChild("ClickEvent")
         if not clickEvent then
@@ -1941,7 +2099,17 @@ local function AF_StartTool(tool)
         end
         task.spawn(function()
             while AutoFireActive and AF_IsInCharacter(tool) do
-                local pos = RootPart.Position
+                if not StandaloneFireActive then
+                    if not IsTargetAlive(CurrentTarget) or not FarmDodgeReady then
+                        task.wait(0.1)
+                        continue
+                    end
+                end
+                if tool.Parent ~= Character then
+                    tool.Parent = Character
+                    task.wait(0.05)
+                end
+                local pos = AF_GetAimPos()
                 pcall(function()
                     clickEvent:FireServer(
                         Vector3.new(pos.X, pos.Y, pos.Z),
@@ -1955,87 +2123,119 @@ local function AF_StartTool(tool)
         end)
         return
     end
-    -- ─────────────────────────────────────────────────────────────────────────
+    -- -------------------------------------------------------------------------
 
     task.spawn(function()
-        local remote    = tool:FindFirstChildOfClass("RemoteEvent")
+        local isNewBoom = tool:GetAttribute("NewBoomSystem") ~= nil
         local isNsystem = tool:GetAttribute("nsystem")
+        local remote    = tool:FindFirstChild("AttackEvent")
+                       or tool:FindFirstChild("Event")
+                       or (isNewBoom and tool:FindFirstChildOfClass("RemoteEvent"))
+                       or nil
+
+        -- DEBUG
+        print(("[AF] '"..tool.Name.."' isNewBoom="..tostring(isNewBoom).." isNsystem="..tostring(isNsystem).." remote="..tostring(remote and remote.Name or "NIL")))
+        for _, c in ipairs(tool:GetChildren()) do
+            if c:IsA("RemoteEvent") then print(("[AF]   child remote: "..c.Name)) end
+        end
 
         if not remote and not isNsystem then
+            print(("[AF] SKIP '"..tool.Name.."' - no remote and not nsystem"))
             autoFireThreads[tool] = nil
             return
         end
 
         local modes = AF_GetModes(tool)
+        print(("[AF] '"..tool.Name.."' modes="..(modes and #modes or 0).." attackName="..AF_GetAttackName(tool)))
 
         while AutoFireActive and AF_IsInCharacter(tool) do
+            -- In standalone mode we fire immediately without needing a farm target.
+            -- In farm/dodge mode we wait until we are positioned at a live target.
+            if not StandaloneFireActive then
+                if not IsTargetAlive(CurrentTarget) or not FarmDodgeReady then
+                    task.wait(0.1)
+                    continue
+                end
+            end
+
             local cd = AF_GetCooldown(tool, 0.5)
 
-            if remote then
-                -- M1 hold
-                local pos = RootPart.Position
-                AF_FireWithRemote(remote, AF_GetAttackName(tool), pos)
-                task.wait(cd)
-                AF_StopWithRemote(remote, RootPart.Position)
+            -- Always make sure the tool is in the character before firing;
+            -- Roblox moves it back to Backpack when another tool is equipped.
+            if tool.Parent ~= Character then
+                tool.Parent = Character
+                task.wait(0.05)
+            end
 
-                -- fire each ability mode if the tool has them and abilities are enabled
-                if UseAbilities and modes then
+            if remote then
+                local pos = AF_GetAimPos()
+                local attackName = AF_GetAttackName(tool)
+                print(("[AF] FIRE '"..tool.Name.."' attack='"..attackName.."' remote='"..remote.Name.."' pos="..tostring(pos)))
+                AF_FireWithRemote(remote, attackName, pos, isNewBoom)
+                task.wait(0.05)
+                AF_StopWithRemote(remote, AF_GetAimPos(), isNewBoom)
+
+                -- Only fire abilities for true NewBoomSystem weapons.
+                -- Custom-script weapons use non-standard keybinds (Z/X/C etc.)
+                -- that we can't generically replicate, so we skip them.
+                if isNewBoom and UseAbilities and modes then
                     for i = 2, #modes do
                         if not AutoFireActive or not AF_IsInCharacter(tool) then break end
                         local keybind = AF_KeybindOrder[i]
                         if keybind and tool:GetAttribute(keybind) then
                             AF_FireMode(tool, remote, modes[i], keybind)
-                            task.wait(cd)
                         end
                     end
                 end
 
             elseif isNsystem then
-                -- M1
-                local pos = RootPart.Position
+                -- M1 start, tiny gap, then stop
+                local pos = AF_GetAimPos()
                 if modes and modes[1] then
                     InputEvent:FireServer(tool, modes[1], pos)
                 else
                     InputEvent:FireServer(tool, nil, pos)
                 end
-                task.wait(cd)
+                task.wait(0.05)
                 if modes and modes[1] then
                     InputEvent:FireServer(tool, modes[1], pos, true)
                 else
                     InputEvent:FireServer(tool, nil, pos, true)
                 end
 
-                -- fire each ability mode if abilities are enabled
+                -- Fire abilities back-to-back immediately after M1
                 if UseAbilities and modes then
                     for i = 2, #modes do
                         if not AutoFireActive or not AF_IsInCharacter(tool) then break end
                         AF_FireMode(tool, nil, modes[i], AF_KeybindOrder[i])
-                        task.wait(cd)
                     end
                 end
             end
 
-            task.wait(0.05)
+            -- Only wait the cooldown once per full attack cycle
+            task.wait(cd)
         end
 
         -- cleanup stop signals
         if remote then
-            AF_StopWithRemote(remote, RootPart.Position)
-            if modes then
+            AF_StopWithRemote(remote, AF_GetAimPos(), isNewBoom)
+            if isNewBoom and modes then
                 for i = 2, #modes do
                     local keybind = AF_KeybindOrder[i]
                     if keybind then
                         local stopName = "stopAttack" .. keybind
+                        local p = AF_GetAimPos()
+                        local mb = AF_MouseBehavior()
                         remote:FireServer(
                             { key = keybind, attack = stopName },
-                            { MouseBehavior = "Default", MousePos = vector.create(RootPart.Position.X, RootPart.Position.Y, RootPart.Position.Z) }
+                            { MouseBehavior = mb, MousePos = vector.create(p.X, p.Y, p.Z) }
                         )
                     end
                 end
             end
         elseif isNsystem and modes then
             for i = 1, #modes do
-                InputEvent:FireServer(tool, modes[i], RootPart.Position, true)
+                InputEvent:FireServer(tool, modes[i], AF_GetAimPos(), true)
             end
         end
 
@@ -2049,14 +2249,17 @@ StartAutoFire = function()
     AutoFireActive = true
     autoFireThreads = {}
 
+    print("[AF] StartAutoFire called")
     for _, tool in ipairs(LocalPlayer.Backpack:GetChildren()) do
         if tool:IsA("Tool") then
+            print("[AF] equipping from backpack: "..tool.Name)
             tool.Parent = Character
         end
     end
 
     for _, tool in ipairs(Character:GetChildren()) do
         if tool:IsA("Tool") then
+            print("[AF] starting tool: "..tool.Name)
             AF_StartTool(tool)
         end
     end
@@ -2077,6 +2280,26 @@ StopAutoFire = function()
         autoFireThreads["__conn"]:Disconnect()
     end
     autoFireThreads = {}
+end
+
+-- ============================================================
+-- STANDALONE FIRE (no farming, just use all weapons)
+-- ============================================================
+local function StartStandaloneFire()
+    if StandaloneFireActive then return end
+    StandaloneFireActive = true
+    StartAutoFire()
+    Notify("weapons active", "firing all weapons", 3)
+end
+
+local function StopStandaloneFire()
+    if not StandaloneFireActive then return end
+    StandaloneFireActive = false
+    -- Only stop AutoFire if farming isn't also running
+    if not FarmActive and not EnemyFarmActive and not IsActive then
+        StopAutoFire()
+    end
+    Notify("weapons stopped", "all weapons holstered", 3)
 end
 
 -- ============================================================
@@ -2104,37 +2327,43 @@ local function StartHealthMonitor()
             -- Do the actual flee work in a separate thread so this callback
             -- never yields (avoiding signal-callback re-entrancy issues)
             task.spawn(function()
-                Notify("low health!", "fleeing to safety to heal", 4)
+                Notify("low health!", "fleeing upward to heal", 4)
 
-                -- Fly up 700 studs from current position
-                local safePos = RootPart.Position + Vector3.new(0, 700, 0)
-                LockedPosition = safePos
-                RootPart.CFrame = CFrame.new(safePos)
+                -- Save the position we fled from so we can return after healing
+                local returnPos = LockedPosition or RootPart.Position
+
+                -- Initial burst: jump 150 studs immediately for quick safety
+                local burstPos = RootPart.Position + Vector3.new(0, 150, 0)
+                LockedPosition = burstPos
+                RootPart.CFrame = CFrame.new(burstPos)
                 RootPart.AssemblyLinearVelocity  = Vector3.zero
                 RootPart.AssemblyAngularVelocity = Vector3.zero
+                task.wait(0.5)
 
-                -- Keep re-asserting the position every tick so nothing can drag
-                -- the player back down while waiting to heal
-                local holdConn
-                holdConn = RunService.Heartbeat:Connect(function()
-                    if not IsEmergency then holdConn:Disconnect(); return end
-                    LockedPosition = safePos
-                    RootPart.CFrame = CFrame.new(safePos)
+                -- Then climb 20 studs every 0.5s until health recovers to 85%.
+                -- Moving continuously means attacks can't track a stationary target.
+                while IsEmergency and (IsActive or FarmActive or EnemyFarmActive) do
+                    if (Humanoid.Health / Humanoid.MaxHealth) >= 0.85 then
+                        break
+                    end
+                    local nextPos = RootPart.Position + Vector3.new(0, 100, 0)
+                    LockedPosition = nextPos
+                    RootPart.CFrame = CFrame.new(nextPos)
                     RootPart.AssemblyLinearVelocity  = Vector3.zero
                     RootPart.AssemblyAngularVelocity = Vector3.zero
-                end)
+                    task.wait(0.5)
+                end
 
-                -- Wait until health recovers to at least 85%
-                repeat task.wait(0.5) until
-                    not (IsActive or FarmActive or EnemyFarmActive)
-                    or (Humanoid.Health / Humanoid.MaxHealth) >= 0.85
-
-                holdConn:Disconnect()
+                IsEmergency = false
 
                 if IsActive or FarmActive or EnemyFarmActive then
-                    Notify("health ok", "back to fighting", 3)
+                    Notify("health ok", "teleporting back to fight", 3)
+                    -- Return to the pre-flee position so targeting resumes correctly
+                    LockedPosition = returnPos
+                    RootPart.CFrame = CFrame.new(returnPos)
+                    RootPart.AssemblyLinearVelocity  = Vector3.zero
+                    RootPart.AssemblyAngularVelocity = Vector3.zero
                 end
-                IsEmergency = false
             end)
         end
     end)
@@ -2144,7 +2373,13 @@ end
 -- RESPAWN
 -- ============================================================
 LocalPlayer.CharacterAdded:Connect(function(newChar)
-    -- Halt all farm loops immediately so they don't use stale refs
+    -- Snapshot which toggles were on BEFORE we clear any state
+    local wasDodgeActive     = IsActive
+    local wasFarmActive      = FarmActive
+    local wasEnemyFarmActive = EnemyFarmActive
+    local wasStandalone      = StandaloneFireActive
+
+    -- Halt all loops immediately so they don't use stale refs
     IsRespawning = true
     IsEmergency  = false
     StopHealthMonitor()
@@ -2156,7 +2391,7 @@ LocalPlayer.CharacterAdded:Connect(function(newChar)
     Humanoid  = newChar:WaitForChild("Humanoid")
 
     -- If no toggle was on there's nothing to resume
-    if not FarmActive and not EnemyFarmActive then
+    if not wasDodgeActive and not wasFarmActive and not wasEnemyFarmActive and not wasStandalone then
         IsRespawning = false
         StartHealthMonitor()
         return
@@ -2166,7 +2401,7 @@ LocalPlayer.CharacterAdded:Connect(function(newChar)
     -- at the correct spawn position before we do anything
     task.wait(2)
 
-    -- Clean up any leftover dodge state from before death
+    -- Clean up any leftover state from before death
     IsActive       = false
     FarmDodgeReady = false
     IsDodging      = false
@@ -2190,15 +2425,18 @@ LocalPlayer.CharacterAdded:Connect(function(newChar)
         Notify("respawned", "heading back to boss fight", 4)
         TeleportToLocation("Portal Room")
         task.wait(1)
-    elseif FarmActive or EnemyFarmActive then
-        -- Generic fallback — go to portal room so the farm loop
-        -- can re-navigate from a known good position
+    elseif wasFarmActive or wasEnemyFarmActive then
         TeleportToLocation("Portal Room")
         task.wait(1)
     end
 
-    -- Re-activate dodge so farm loops resume in the right position
-    ActivateForFarm()
+    -- Re-activate the appropriate systems based on what was on before death
+    if wasFarmActive or wasEnemyFarmActive then
+        ActivateForFarm()
+    elseif wasDodgeActive then
+        -- Pure auto-dodge was on: restart it directly
+        Activate()
+    end
 
     -- Only now let the farm loops proceed
     IsRespawning = false
@@ -2359,6 +2597,14 @@ local Window = Rayfield:CreateWindow({
 
 -- ---- DODGE TAB ----
 local DodgeTab = Window:CreateTab("AutoDodge", 4483362458)
+
+DodgeTab:CreateToggle({
+    Name = "use all weapons", CurrentValue = false, Flag = "StandaloneFireToggle",
+    Callback = function(v) if v then StartStandaloneFire() else StopStandaloneFire() end end
+})
+
+DodgeTab:CreateDivider()
+
 DodgeTab:CreateToggle({
     Name = "lock onto nearest enemy", CurrentValue = false, Flag = "DodgeToggle",
     Callback = function(v) if v then Activate() else Deactivate() end end
@@ -2526,8 +2772,9 @@ FarmTab:CreateToggle({
 Rayfield:OnUnload(function()
     StopFarm()
     StopEnemyFarm()
+    StopStandaloneFire()
     Deactivate()
     if VisualFolder and VisualFolder.Parent then VisualFolder:Destroy() end
 end)
 
-print("[autofarm] loaded — good luck out there")
+print("[autofarm] loaded � good luck out there")
